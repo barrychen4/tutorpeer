@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		771631651AE5D2BB000947FB /* TPLandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771631641AE5D2BB000947FB /* TPLandingViewController.m */; };
+		771631681AE5DCFA000947FB /* TPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771631671AE5DCFA000947FB /* TPLoginViewController.m */; };
+		7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */; };
 		9F59BEF41AE42324007DAD1C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F59BEF31AE42324007DAD1C /* main.m */; };
 		9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F59BEF61AE42324007DAD1C /* AppDelegate.m */; };
-		9F59BEFA1AE42324007DAD1C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F59BEF91AE42324007DAD1C /* ViewController.m */; };
 		9F59BEFF1AE42324007DAD1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F59BEFE1AE42324007DAD1C /* Images.xcassets */; };
 		9FD22B181AE42DC40043C696 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FD22B171AE42DC40043C696 /* LaunchScreen.xib */; };
 		9FD22B1A1AE42E600043C696 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD22B191AE42E600043C696 /* Parse.framework */; };
@@ -28,13 +30,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		771631631AE5D2BB000947FB /* TPLandingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLandingViewController.h; sourceTree = "<group>"; };
+		771631641AE5D2BB000947FB /* TPLandingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLandingViewController.m; sourceTree = "<group>"; };
+		771631661AE5DCFA000947FB /* TPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLoginViewController.h; sourceTree = "<group>"; };
+		771631671AE5DCFA000947FB /* TPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLoginViewController.m; sourceTree = "<group>"; };
+		771631691AE5DD0D000947FB /* TPSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSignUpViewController.h; sourceTree = "<group>"; };
+		7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSignUpViewController.m; sourceTree = "<group>"; };
 		9F59BEEE1AE42324007DAD1C /* TutorPeer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TutorPeer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F59BEF21AE42324007DAD1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F59BEF31AE42324007DAD1C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9F59BEF51AE42324007DAD1C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9F59BEF61AE42324007DAD1C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9F59BEF81AE42324007DAD1C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9F59BEF91AE42324007DAD1C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9F59BEFE1AE42324007DAD1C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9FD22B171AE42DC40043C696 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		9FD22B191AE42E600043C696 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -76,6 +82,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		771631601AE5D1A4000947FB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		771631611AE5D1A9000947FB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				771631631AE5D2BB000947FB /* TPLandingViewController.h */,
+				771631641AE5D2BB000947FB /* TPLandingViewController.m */,
+				771631661AE5DCFA000947FB /* TPLoginViewController.h */,
+				771631671AE5DCFA000947FB /* TPLoginViewController.m */,
+				771631691AE5DD0D000947FB /* TPSignUpViewController.h */,
+				7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		771631621AE5D1B0000947FB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		9F59BEE51AE42324007DAD1C = {
 			isa = PBXGroup;
 			children = (
@@ -96,10 +129,11 @@
 		9F59BEF01AE42324007DAD1C /* TutorPeer */ = {
 			isa = PBXGroup;
 			children = (
+				771631621AE5D1B0000947FB /* Controller */,
+				771631611AE5D1A9000947FB /* View */,
+				771631601AE5D1A4000947FB /* Model */,
 				9F59BEF51AE42324007DAD1C /* AppDelegate.h */,
 				9F59BEF61AE42324007DAD1C /* AppDelegate.m */,
-				9F59BEF81AE42324007DAD1C /* ViewController.h */,
-				9F59BEF91AE42324007DAD1C /* ViewController.m */,
 				9FD22B171AE42DC40043C696 /* LaunchScreen.xib */,
 				9F59BEFE1AE42324007DAD1C /* Images.xcassets */,
 				9F59BEF11AE42324007DAD1C /* Supporting Files */,
@@ -206,8 +240,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F59BEFA1AE42324007DAD1C /* ViewController.m in Sources */,
+				771631651AE5D2BB000947FB /* TPLandingViewController.m in Sources */,
+				7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */,
 				9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */,
+				771631681AE5DCFA000947FB /* TPLoginViewController.m in Sources */,
 				9F59BEF41AE42324007DAD1C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,6 +347,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -328,6 +365,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
