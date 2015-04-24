@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TPLoginViewController : UIViewController
+@interface TPLoginViewController : UIViewController <UITextFieldDelegate>
+
+@property (strong, nonatomic) UILabel *titleLabel;
 
 @end
