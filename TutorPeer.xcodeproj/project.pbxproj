@@ -10,6 +10,9 @@
 		771631651AE5D2BB000947FB /* TPLandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771631641AE5D2BB000947FB /* TPLandingViewController.m */; };
 		771631681AE5DCFA000947FB /* TPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771631671AE5DCFA000947FB /* TPLoginViewController.m */; };
 		7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */; };
+		777273F01AE9D4F3007EDB1A /* TPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 777273EF1AE9D4F3007EDB1A /* TPUser.m */; };
+		777273F31AE9D616007EDB1A /* TPTutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 777273F21AE9D616007EDB1A /* TPTutor.m */; };
+		777273F61AE9D626007EDB1A /* TPTutee.m in Sources */ = {isa = PBXBuildFile; fileRef = 777273F51AE9D626007EDB1A /* TPTutee.m */; };
 		9F59BEF41AE42324007DAD1C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F59BEF31AE42324007DAD1C /* main.m */; };
 		9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F59BEF61AE42324007DAD1C /* AppDelegate.m */; };
 		9F59BEFF1AE42324007DAD1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F59BEFE1AE42324007DAD1C /* Images.xcassets */; };
@@ -36,6 +39,12 @@
 		771631671AE5DCFA000947FB /* TPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLoginViewController.m; sourceTree = "<group>"; };
 		771631691AE5DD0D000947FB /* TPSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSignUpViewController.h; sourceTree = "<group>"; };
 		7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSignUpViewController.m; sourceTree = "<group>"; };
+		777273EE1AE9D4F3007EDB1A /* TPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPUser.h; sourceTree = "<group>"; };
+		777273EF1AE9D4F3007EDB1A /* TPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPUser.m; sourceTree = "<group>"; };
+		777273F11AE9D616007EDB1A /* TPTutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTutor.h; sourceTree = "<group>"; };
+		777273F21AE9D616007EDB1A /* TPTutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTutor.m; sourceTree = "<group>"; };
+		777273F41AE9D626007EDB1A /* TPTutee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTutee.h; sourceTree = "<group>"; };
+		777273F51AE9D626007EDB1A /* TPTutee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTutee.m; sourceTree = "<group>"; };
 		9F59BEEE1AE42324007DAD1C /* TutorPeer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TutorPeer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F59BEF21AE42324007DAD1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F59BEF31AE42324007DAD1C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -85,6 +94,12 @@
 		771631601AE5D1A4000947FB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				777273EE1AE9D4F3007EDB1A /* TPUser.h */,
+				777273EF1AE9D4F3007EDB1A /* TPUser.m */,
+				777273F11AE9D616007EDB1A /* TPTutor.h */,
+				777273F21AE9D616007EDB1A /* TPTutor.m */,
+				777273F41AE9D626007EDB1A /* TPTutee.h */,
+				777273F51AE9D626007EDB1A /* TPTutee.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -244,7 +259,10 @@
 				7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */,
 				9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */,
 				771631681AE5DCFA000947FB /* TPLoginViewController.m in Sources */,
+				777273F01AE9D4F3007EDB1A /* TPUser.m in Sources */,
+				777273F31AE9D616007EDB1A /* TPTutor.m in Sources */,
 				9F59BEF41AE42324007DAD1C /* main.m in Sources */,
+				777273F61AE9D626007EDB1A /* TPTutee.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
