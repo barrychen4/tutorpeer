@@ -43,4 +43,20 @@
     }];
 }
 
+- (void)loginWithUsername:(NSString *)username password:(NSString *)password
+{
+    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
+        if (user) {
+            NSLog(@"Succesful login!");
+        } else {
+            NSLog(@"Failed login");
+        }
+    }];
+}
+
+- (void)logout
+{
+    [PFUser logOut];
+}
+
 @end
