@@ -10,6 +10,7 @@
 		771631651AE5D2BB000947FB /* TPLandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771631641AE5D2BB000947FB /* TPLandingViewController.m */; };
 		771631681AE5DCFA000947FB /* TPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771631671AE5DCFA000947FB /* TPLoginViewController.m */; };
 		7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */; };
+		771BEB881AEB0D530025DDCE /* TPAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 771BEB871AEB0D530025DDCE /* TPAuthenticationManager.m */; };
 		777273F01AE9D4F3007EDB1A /* TPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 777273EF1AE9D4F3007EDB1A /* TPUser.m */; };
 		777273F31AE9D616007EDB1A /* TPTutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 777273F21AE9D616007EDB1A /* TPTutor.m */; };
 		777273F61AE9D626007EDB1A /* TPTutee.m in Sources */ = {isa = PBXBuildFile; fileRef = 777273F51AE9D626007EDB1A /* TPTutee.m */; };
@@ -39,6 +40,8 @@
 		771631671AE5DCFA000947FB /* TPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLoginViewController.m; sourceTree = "<group>"; };
 		771631691AE5DD0D000947FB /* TPSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSignUpViewController.h; sourceTree = "<group>"; };
 		7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSignUpViewController.m; sourceTree = "<group>"; };
+		771BEB861AEB0D530025DDCE /* TPAuthenticationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPAuthenticationManager.h; sourceTree = "<group>"; };
+		771BEB871AEB0D530025DDCE /* TPAuthenticationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPAuthenticationManager.m; sourceTree = "<group>"; };
 		777273EE1AE9D4F3007EDB1A /* TPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPUser.h; sourceTree = "<group>"; };
 		777273EF1AE9D4F3007EDB1A /* TPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPUser.m; sourceTree = "<group>"; };
 		777273F11AE9D616007EDB1A /* TPTutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTutor.h; sourceTree = "<group>"; };
@@ -124,6 +127,15 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		771BEB851AEB0D310025DDCE /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				771BEB861AEB0D530025DDCE /* TPAuthenticationManager.h */,
+				771BEB871AEB0D530025DDCE /* TPAuthenticationManager.m */,
+			);
+			name = Singleton;
+			sourceTree = "<group>";
+		};
 		9F59BEE51AE42324007DAD1C = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +156,7 @@
 		9F59BEF01AE42324007DAD1C /* TutorPeer */ = {
 			isa = PBXGroup;
 			children = (
+				771BEB851AEB0D310025DDCE /* Singleton */,
 				771631621AE5D1B0000947FB /* Controller */,
 				771631611AE5D1A9000947FB /* View */,
 				771631601AE5D1A4000947FB /* Model */,
@@ -261,6 +274,7 @@
 				771631681AE5DCFA000947FB /* TPLoginViewController.m in Sources */,
 				777273F01AE9D4F3007EDB1A /* TPUser.m in Sources */,
 				777273F31AE9D616007EDB1A /* TPTutor.m in Sources */,
+				771BEB881AEB0D530025DDCE /* TPAuthenticationManager.m in Sources */,
 				9F59BEF41AE42324007DAD1C /* main.m in Sources */,
 				777273F61AE9D626007EDB1A /* TPTutee.m in Sources */,
 			);
