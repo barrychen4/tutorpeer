@@ -9,7 +9,7 @@
 #import "TPLoginViewController.h"
 #import "TPAuthenticationManager.h"
 #import "TPInboxViewController.h"
-#import "TPCourseViewController.h"
+#import "TPCourseListViewController.h"
 #import "TPProfileViewController.h"
 
 @interface TPLoginViewController ()
@@ -111,7 +111,7 @@
         if (result) {
             NSLog(@"Logged in!");
             UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
-            UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseViewController alloc] init]];
+            UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseListViewController alloc] init]];
             UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[[TPProfileViewController alloc] init]];
             
             inboxViewController.title = @"Inbox";

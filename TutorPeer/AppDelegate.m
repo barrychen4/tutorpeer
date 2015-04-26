@@ -7,9 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
 #import <Parse/Parse.h>
 #import "TPLandingViewController.h"
+#import "TPInboxViewController.h"
+#import "TPCourseListViewController.h"
+#import "TPProfileViewController.h"
 
 @interface AppDelegate ()
 
@@ -26,9 +28,25 @@
                   clientKey:@"hqMGjaVFPYIUkO2322TgIoI10fGyiv8qvcOqurTg"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    TPLandingViewController *landingVc = [[TPLandingViewController alloc] init];
+//    TPLandingViewController *landingVc = [[TPLandingViewController alloc] init];
+//    
+//    self.navigationController = [[UINavigationController alloc] initWithRootViewController:landingVc];
     
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:landingVc];
+    // Begin skip to tab bar code
+    UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
+    UINavigationController *courseListViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseListViewController alloc] init]];
+    UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[[TPProfileViewController alloc] init]];
+    
+    inboxViewController.title = @"Inbox";
+    courseListViewController.title = @"Courses";
+    profileViewController.title = @"Profile";
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[inboxViewController, courseListViewController, profileViewController];
+    
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+    
+    // End skip to tab bar code
     
     self.window.rootViewController = self.navigationController;
     

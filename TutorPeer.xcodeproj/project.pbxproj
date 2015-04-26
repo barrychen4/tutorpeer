@@ -18,8 +18,12 @@
 		9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F59BEF61AE42324007DAD1C /* AppDelegate.m */; };
 		9F59BEFF1AE42324007DAD1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F59BEFE1AE42324007DAD1C /* Images.xcassets */; };
 		9F9DCF7E1AED64E50066CFF9 /* TPInboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DCF7D1AED64E50066CFF9 /* TPInboxViewController.m */; };
-		9F9DCF811AED64F50066CFF9 /* TPCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DCF801AED64F50066CFF9 /* TPCourseViewController.m */; };
+		9F9DCF811AED64F50066CFF9 /* TPCourseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DCF801AED64F50066CFF9 /* TPCourseListViewController.m */; };
 		9F9DCF841AED64FF0066CFF9 /* TPProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DCF831AED64FF0066CFF9 /* TPProfileViewController.m */; };
+		9F9DCF871AED74FB0066CFF9 /* TPCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DCF861AED74FB0066CFF9 /* TPCourseViewController.m */; };
+		9F9DCF8A1AED760B0066CFF9 /* TPCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DCF891AED760B0066CFF9 /* TPCourseView.m */; };
+		9F9DCF8D1AED768D0066CFF9 /* TPProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DCF8C1AED768D0066CFF9 /* TPProfileView.m */; };
+		9F9DCF901AED76950066CFF9 /* TPInboxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DCF8F1AED76950066CFF9 /* TPInboxView.m */; };
 		9FD22B181AE42DC40043C696 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FD22B171AE42DC40043C696 /* LaunchScreen.xib */; };
 		9FD22B1A1AE42E600043C696 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD22B191AE42E600043C696 /* Parse.framework */; };
 		9FD22B1C1AE42E7B0043C696 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD22B1B1AE42E7B0043C696 /* Bolts.framework */; };
@@ -59,10 +63,18 @@
 		9F59BEFE1AE42324007DAD1C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9F9DCF7C1AED64E50066CFF9 /* TPInboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPInboxViewController.h; sourceTree = "<group>"; };
 		9F9DCF7D1AED64E50066CFF9 /* TPInboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPInboxViewController.m; sourceTree = "<group>"; };
-		9F9DCF7F1AED64F50066CFF9 /* TPCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCourseViewController.h; sourceTree = "<group>"; };
-		9F9DCF801AED64F50066CFF9 /* TPCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCourseViewController.m; sourceTree = "<group>"; };
+		9F9DCF7F1AED64F50066CFF9 /* TPCourseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCourseListViewController.h; sourceTree = "<group>"; };
+		9F9DCF801AED64F50066CFF9 /* TPCourseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCourseListViewController.m; sourceTree = "<group>"; };
 		9F9DCF821AED64FF0066CFF9 /* TPProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProfileViewController.h; sourceTree = "<group>"; };
 		9F9DCF831AED64FF0066CFF9 /* TPProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProfileViewController.m; sourceTree = "<group>"; };
+		9F9DCF851AED74FB0066CFF9 /* TPCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCourseViewController.h; sourceTree = "<group>"; };
+		9F9DCF861AED74FB0066CFF9 /* TPCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCourseViewController.m; sourceTree = "<group>"; };
+		9F9DCF881AED760B0066CFF9 /* TPCourseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCourseView.h; sourceTree = "<group>"; };
+		9F9DCF891AED760B0066CFF9 /* TPCourseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCourseView.m; sourceTree = "<group>"; };
+		9F9DCF8B1AED768D0066CFF9 /* TPProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProfileView.h; sourceTree = "<group>"; };
+		9F9DCF8C1AED768D0066CFF9 /* TPProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProfileView.m; sourceTree = "<group>"; };
+		9F9DCF8E1AED76950066CFF9 /* TPInboxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPInboxView.h; sourceTree = "<group>"; };
+		9F9DCF8F1AED76950066CFF9 /* TPInboxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPInboxView.m; sourceTree = "<group>"; };
 		9FD22B171AE42DC40043C696 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		9FD22B191AE42E600043C696 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9FD22B1B1AE42E7B0043C696 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -119,6 +131,12 @@
 		771631611AE5D1A9000947FB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9F9DCF8E1AED76950066CFF9 /* TPInboxView.h */,
+				9F9DCF8F1AED76950066CFF9 /* TPInboxView.m */,
+				9F9DCF881AED760B0066CFF9 /* TPCourseView.h */,
+				9F9DCF891AED760B0066CFF9 /* TPCourseView.m */,
+				9F9DCF8B1AED768D0066CFF9 /* TPProfileView.h */,
+				9F9DCF8C1AED768D0066CFF9 /* TPProfileView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -134,8 +152,10 @@
 				7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */,
 				9F9DCF7C1AED64E50066CFF9 /* TPInboxViewController.h */,
 				9F9DCF7D1AED64E50066CFF9 /* TPInboxViewController.m */,
-				9F9DCF7F1AED64F50066CFF9 /* TPCourseViewController.h */,
-				9F9DCF801AED64F50066CFF9 /* TPCourseViewController.m */,
+				9F9DCF7F1AED64F50066CFF9 /* TPCourseListViewController.h */,
+				9F9DCF801AED64F50066CFF9 /* TPCourseListViewController.m */,
+				9F9DCF851AED74FB0066CFF9 /* TPCourseViewController.h */,
+				9F9DCF861AED74FB0066CFF9 /* TPCourseViewController.m */,
 				9F9DCF821AED64FF0066CFF9 /* TPProfileViewController.h */,
 				9F9DCF831AED64FF0066CFF9 /* TPProfileViewController.m */,
 			);
@@ -283,12 +303,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F9DCF811AED64F50066CFF9 /* TPCourseViewController.m in Sources */,
+				9F9DCF871AED74FB0066CFF9 /* TPCourseViewController.m in Sources */,
+				9F9DCF811AED64F50066CFF9 /* TPCourseListViewController.m in Sources */,
 				771631651AE5D2BB000947FB /* TPLandingViewController.m in Sources */,
+				9F9DCF8A1AED760B0066CFF9 /* TPCourseView.m in Sources */,
 				7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */,
 				9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */,
 				9F9DCF7E1AED64E50066CFF9 /* TPInboxViewController.m in Sources */,
+				9F9DCF901AED76950066CFF9 /* TPInboxView.m in Sources */,
 				771631681AE5DCFA000947FB /* TPLoginViewController.m in Sources */,
+				9F9DCF8D1AED768D0066CFF9 /* TPProfileView.m in Sources */,
 				777273F01AE9D4F3007EDB1A /* TPUser.m in Sources */,
 				777273F31AE9D616007EDB1A /* TPTutor.m in Sources */,
 				9F9DCF841AED64FF0066CFF9 /* TPProfileViewController.m in Sources */,

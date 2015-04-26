@@ -7,6 +7,7 @@
 //
 
 #import "TPProfileViewController.h"
+#import "TPProfileView.h"
 
 @interface TPProfileViewController ()
 
@@ -17,10 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Profile";
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+    self.view = [[TPProfileView alloc] initWithFrame:self.view.frame];
 }
 
 @end

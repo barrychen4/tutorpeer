@@ -1,5 +1,5 @@
 //
-//  TPInboxViewController.h
+//  TPProfileView.h
 //  TutorPeer
 //
 //  Created by Ethan Yu on 4/26/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TPInboxViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface TPProfileView : UIView
 
 @end
