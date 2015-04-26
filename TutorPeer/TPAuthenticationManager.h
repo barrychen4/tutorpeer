@@ -15,6 +15,6 @@
 - (void)signUpWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email firstName:(NSString *)firstName
                   lastName:(NSString *)lastName;
 
-- (void)loginWithUsername:(NSString *)username password:(NSString *)password;
+- (void)loginWithUsername:(NSString *)username password:(NSString *)password callback:(void (^)(BOOL))handler;
 
 @end

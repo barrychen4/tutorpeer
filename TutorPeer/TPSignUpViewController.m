@@ -62,6 +62,7 @@
     UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
     
     self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 40)];
+    [self.passwordTextField setSecureTextEntry:YES];
     self.passwordTextField.layer.cornerRadius = 5;
     self.passwordTextField.clipsToBounds = YES;
     self.passwordTextField.placeholder = @"Password";

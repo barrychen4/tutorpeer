@@ -7,11 +7,17 @@
 //
 
 #import "TPLoginViewController.h"
+#import "TPAuthenticationManager.h"
+#import "TPInboxViewController.h"
+#import "TPCourseViewController.h"
+#import "TPProfileViewController.h"
 
 @interface TPLoginViewController ()
 
 @property (strong, nonatomic) UITextField *usernameTextField;
 @property (strong, nonatomic) UITextField *passwordTextField;
+
+@property (strong, nonatomic) UIButton *loginButton;
 
 @end
 
@@ -30,7 +36,7 @@
 - (void)setupView
 {
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 50)];
-    self.titleLabel.text = @"Sign Up";
+    self.titleLabel.text = @"Log In";
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32];
     self.titleLabel.center = CGPointMake(self.view.center.x, 155);
@@ -58,6 +64,7 @@
     UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
     
     self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 50)];
+    [self.passwordTextField setSecureTextEntry:YES];
     self.passwordTextField.layer.cornerRadius = 5;
     self.passwordTextField.clipsToBounds = YES;
     self.passwordTextField.placeholder = @"Password";
@@ -74,10 +81,18 @@
     self.passwordTextField.delegate = self;
     [self.view addSubview:self.passwordTextField];
     
+    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 100, 40)];
+    [self.loginButton setTitle:@"Sign Up" forState:UIControlStateNormal];
+    [self.loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.loginButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];
+    self.loginButton.center = CGPointMake(self.view.center.x, self.view.center.y + 180);
+    [[self.loginButton layer] setBorderWidth:1.0f];
+    [[self.loginButton layer] setBorderColor:[UIColor blackColor].CGColor];
+    [self.loginButton addTarget:self action:@selector(attemptLogin) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.loginButton];
+    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
     [self.view addGestureRecognizer:tapGesture];
-    
-    
 }
 
 - (void)viewDidLoad
@@ -89,6 +104,29 @@
 - (void)hideKeyboard:(id)sender {
     [self.usernameTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
+}
+
+- (void)attemptLogin {
+    [[TPAuthenticationManager sharedInstance] loginWithUsername:self.usernameTextField.text password:self.passwordTextField.text callback:^(BOOL result) {
+        if (result) {
+            NSLog(@"Logged in!");
+            UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
+            UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseViewController alloc] init]];
+            UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[[TPProfileViewController alloc] init]];
+            
+            inboxViewController.title = @"Inbox";
+            courseViewController.title = @"Courses";
+            profileViewController.title = @"Profile";
+            
+            UITabBarController *tabBarController = [[UITabBarController alloc] init];
+
+            tabBarController.viewControllers = @[inboxViewController, courseViewController, profileViewController];
+            [self.navigationController pushViewController:tabBarController animated:YES];
+        }
+        else {
+            NSLog(@"Didn't log in!");
+        }
+    }];
 }
 
 

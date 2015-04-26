@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TPUser.h"
 
-@interface TPTutor : NSObject
+@interface TPTutor : TPUser
 
 @end
