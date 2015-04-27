@@ -7,6 +7,7 @@
 //
 
 #import "TPCourseViewController.h"
+#import "TPCourseView.h"
 
 @interface TPCourseViewController ()
 
@@ -14,9 +15,16 @@
 
 @implementation TPCourseViewController
 
+- (instancetype)initWithCourse:(NSString *)course {
+    self = [super init];
+    if (self) {
+        self.view = [[TPCourseView alloc] initWithCourse:course];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
 }
 
 @end

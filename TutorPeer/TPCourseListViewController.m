@@ -7,6 +7,7 @@
 //
 
 #import "TPCourseListViewController.h"
+#import "TPCourseViewController.h"
 
 @interface TPCourseListViewController ()
 
@@ -37,12 +38,16 @@
     return cell;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //return [self.courses count];
     return 20;
 }
 
 #pragma mark - Table view delegate methods
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    TPCourseViewController *courseViewController = [[TPCourseViewController alloc] initWithCourse:[_tableView cellForRowAtIndexPath:indexPath].textLabel.text];
+    [self.navigationController pushViewController:courseViewController animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES]; 
+}
 
 @end

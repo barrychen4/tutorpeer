@@ -1,5 +1,5 @@
 //
-//  TPInboxView.h
+//  TPConversationView.h
 //  TutorPeer
 //
 //  Created by Ethan Yu on 4/26/15.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TPInboxView : UIView
+@interface TPConversationView : UIView
+
+- (instancetype)initWithConversation:(NSString *)conversation;
 
 @end

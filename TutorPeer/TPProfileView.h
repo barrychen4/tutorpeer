@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class TPUser;
+
 @interface TPProfileView : UIView
+
+- (instancetype)initWithUser:(TPUser *)user;
 
 @end

@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Profile";
-    self.view = [[TPProfileView alloc] initWithFrame:self.view.frame];
+    self.view = [[TPProfileView alloc] initWithUser:nil];
 }
 
 @end

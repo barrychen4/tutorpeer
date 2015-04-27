@@ -10,4 +10,6 @@
 
 @interface TPCourseView : UIView
 
+- (instancetype)initWithCourse:(NSString *)course;
+
 @end

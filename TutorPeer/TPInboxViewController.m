@@ -7,6 +7,7 @@
 //
 
 #import "TPInboxViewController.h"
+#import "TPConversationViewController.h"
 
 @interface TPInboxViewController ()
 
@@ -33,17 +34,21 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"messageRow"];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"Message %ld", (long)indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"Conversation %ld", (long)indexPath.row];
     return cell;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //return [self.messages count];
     return 20;
 }
 
 
 #pragma mark - Table view delegate methods
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    TPConversationViewController *courseViewController = [[TPConversationViewController alloc] initWithConversation:[_tableView cellForRowAtIndexPath:indexPath].textLabel.text];
+    [self.navigationController pushViewController:courseViewController animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 @end

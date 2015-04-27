@@ -7,7 +7,7 @@
 //
 
 #import "TPProfileView.h"
-
+#import "TPUser.h"
 @interface TPProfileView ()
 
 @property (strong, nonatomic) UILabel *nameLabel;
@@ -16,12 +16,12 @@
 
 @implementation TPProfileView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithUser:(TPUser *)user {
+    self = [super init];
     if (self) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.frame = CGRectMake(20, 200, frame.size.width, 150);
-        _nameLabel.text = @"My name goes here";
+        _nameLabel.frame = CGRectMake(20, 200, 150, 150);
+        _nameLabel.text = @"User name goes here";
         [self addSubview:_nameLabel];
     }
     return self;
