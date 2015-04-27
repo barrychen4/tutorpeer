@@ -8,12 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		771631651AE5D2BB000947FB /* TPLandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771631641AE5D2BB000947FB /* TPLandingViewController.m */; };
-		771631681AE5DCFA000947FB /* TPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771631671AE5DCFA000947FB /* TPLoginViewController.m */; };
+		771631681AE5DCFA000947FB /* TPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771631671AE5DCFA000947FB /* TPSignInViewController.m */; };
 		7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */; };
 		771BEB881AEB0D530025DDCE /* TPAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 771BEB871AEB0D530025DDCE /* TPAuthenticationManager.m */; };
 		777273F01AE9D4F3007EDB1A /* TPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 777273EF1AE9D4F3007EDB1A /* TPUser.m */; };
-		777273F31AE9D616007EDB1A /* TPTutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 777273F21AE9D616007EDB1A /* TPTutor.m */; };
-		777273F61AE9D626007EDB1A /* TPTutee.m in Sources */ = {isa = PBXBuildFile; fileRef = 777273F51AE9D626007EDB1A /* TPTutee.m */; };
 		9F59BEF41AE42324007DAD1C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F59BEF31AE42324007DAD1C /* main.m */; };
 		9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F59BEF61AE42324007DAD1C /* AppDelegate.m */; };
 		9F59BEFF1AE42324007DAD1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F59BEFE1AE42324007DAD1C /* Images.xcassets */; };
@@ -44,18 +42,14 @@
 /* Begin PBXFileReference section */
 		771631631AE5D2BB000947FB /* TPLandingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLandingViewController.h; sourceTree = "<group>"; };
 		771631641AE5D2BB000947FB /* TPLandingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLandingViewController.m; sourceTree = "<group>"; };
-		771631661AE5DCFA000947FB /* TPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLoginViewController.h; sourceTree = "<group>"; };
-		771631671AE5DCFA000947FB /* TPLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLoginViewController.m; sourceTree = "<group>"; };
+		771631661AE5DCFA000947FB /* TPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSignInViewController.h; sourceTree = "<group>"; };
+		771631671AE5DCFA000947FB /* TPSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSignInViewController.m; sourceTree = "<group>"; };
 		771631691AE5DD0D000947FB /* TPSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSignUpViewController.h; sourceTree = "<group>"; };
 		7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSignUpViewController.m; sourceTree = "<group>"; };
 		771BEB861AEB0D530025DDCE /* TPAuthenticationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPAuthenticationManager.h; sourceTree = "<group>"; };
 		771BEB871AEB0D530025DDCE /* TPAuthenticationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPAuthenticationManager.m; sourceTree = "<group>"; };
 		777273EE1AE9D4F3007EDB1A /* TPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPUser.h; sourceTree = "<group>"; };
 		777273EF1AE9D4F3007EDB1A /* TPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPUser.m; sourceTree = "<group>"; };
-		777273F11AE9D616007EDB1A /* TPTutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTutor.h; sourceTree = "<group>"; };
-		777273F21AE9D616007EDB1A /* TPTutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTutor.m; sourceTree = "<group>"; };
-		777273F41AE9D626007EDB1A /* TPTutee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTutee.h; sourceTree = "<group>"; };
-		777273F51AE9D626007EDB1A /* TPTutee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTutee.m; sourceTree = "<group>"; };
 		9F59BEEE1AE42324007DAD1C /* TutorPeer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TutorPeer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F59BEF21AE42324007DAD1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F59BEF31AE42324007DAD1C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -123,10 +117,6 @@
 			children = (
 				777273EE1AE9D4F3007EDB1A /* TPUser.h */,
 				777273EF1AE9D4F3007EDB1A /* TPUser.m */,
-				777273F11AE9D616007EDB1A /* TPTutor.h */,
-				777273F21AE9D616007EDB1A /* TPTutor.m */,
-				777273F41AE9D626007EDB1A /* TPTutee.h */,
-				777273F51AE9D626007EDB1A /* TPTutee.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -144,6 +134,24 @@
 		771631621AE5D1B0000947FB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9F9DCF971AED94480066CFF9 /* Welcome */,
+				9F9DCF941AED94320066CFF9 /* Inbox */,
+				9F9DCF951AED943A0066CFF9 /* Courses */,
+				9F9DCF961AED94400066CFF9 /* Profile */,
+				771631631AE5D2BB000947FB /* TPLandingViewController.h */,
+				771631641AE5D2BB000947FB /* TPLandingViewController.m */,
+				771631661AE5DCFA000947FB /* TPSignInViewController.h */,
+				771631671AE5DCFA000947FB /* TPSignInViewController.m */,
+				771631691AE5DD0D000947FB /* TPSignUpViewController.h */,
+				7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */,
+				9F9DCF7C1AED64E50066CFF9 /* TPInboxViewController.h */,
+				9F9DCF7D1AED64E50066CFF9 /* TPInboxViewController.m */,
+				9F9DCF7F1AED64F50066CFF9 /* TPCourseListViewController.h */,
+				9F9DCF801AED64F50066CFF9 /* TPCourseListViewController.m */,
+				9F9DCF851AED74FB0066CFF9 /* TPCourseViewController.h */,
+				9F9DCF861AED74FB0066CFF9 /* TPCourseViewController.m */,
+				9F9DCF821AED64FF0066CFF9 /* TPProfileViewController.h */,
+				9F9DCF831AED64FF0066CFF9 /* TPProfileViewController.m */,
 				9F9DCF971AED94480066CFF9 /* Welcome */,
 				9F9DCF941AED94320066CFF9 /* Inbox */,
 				9F9DCF951AED943A0066CFF9 /* Courses */,
@@ -376,11 +384,9 @@
 				9F9DCF8D1AED768D0066CFF9 /* TPProfileView.m in Sources */,
 				9F9DCF931AED94220066CFF9 /* TPConversationViewController.m in Sources */,
 				777273F01AE9D4F3007EDB1A /* TPUser.m in Sources */,
-				777273F31AE9D616007EDB1A /* TPTutor.m in Sources */,
 				9F9DCF841AED64FF0066CFF9 /* TPProfileViewController.m in Sources */,
 				771BEB881AEB0D530025DDCE /* TPAuthenticationManager.m in Sources */,
 				9F59BEF41AE42324007DAD1C /* main.m in Sources */,
-				777273F61AE9D626007EDB1A /* TPTutee.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

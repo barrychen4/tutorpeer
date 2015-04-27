@@ -8,7 +8,7 @@
 
 #import "TPLandingViewController.h"
 #import "TPSignUpViewController.h"
-#import "TPLoginViewController.h"
+#import "TPSignInViewController.h"
 
 @implementation TPLandingViewController
 
@@ -25,6 +25,8 @@
 
 - (void)setupView
 {
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 50)];
     self.titleLabel.text = @"TutorPeer";
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -61,16 +63,22 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 - (void)signUp:(UITapGestureRecognizer *)recognizer
 {
     TPSignUpViewController *signUpVc = [[TPSignUpViewController alloc] init];
-    [self.navigationController pushViewController:signUpVc animated:NO];
+    [self.navigationController pushViewController:signUpVc animated:YES];
 }
 
 - (void)login:(UITapGestureRecognizer *)recognizer
 {
-    TPLoginViewController *loginVc = [[TPLoginViewController alloc] init];
-    [self.navigationController pushViewController:loginVc animated:NO];
+    TPSignInViewController *loginVc = [[TPSignInViewController alloc] init];
+    [self.navigationController pushViewController:loginVc animated:YES];
 }
 
 @end

@@ -22,11 +22,11 @@
     return sharedInstance;
 }
 
-- (void)signUpWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email firstName:(NSString *)firstName
+- (void)signUpWithEmail:(NSString *)email password:(NSString *)password firstName:(NSString *)firstName
                   lastName:(NSString *)lastName
 {
     PFUser *user = [PFUser user];
-    user.username = username;
+    user.username = email;
     user.password = password;
     user.email = email;
     
@@ -43,9 +43,9 @@
     }];
 }
 
-- (void)loginWithUsername:(NSString *)username password:(NSString *)password callback:(void (^)(BOOL))handler
+- (void)signInWithEmail:(NSString *)email password:(NSString *)password callback:(void (^)(BOOL))handler
 {
-    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
+    [PFUser logInWithUsernameInBackground:email password:password block:^(PFUser *user, NSError *error) {
         if (user) {
             NSLog(@"Succesful login!");
             handler(YES);

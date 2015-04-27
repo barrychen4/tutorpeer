@@ -8,6 +8,7 @@
 
 #import "TPProfileView.h"
 #import "TPUser.h"
+
 @interface TPProfileView ()
 
 @property (strong, nonatomic) UILabel *nameLabel;
