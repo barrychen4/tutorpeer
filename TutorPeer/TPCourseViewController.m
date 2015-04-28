@@ -7,9 +7,11 @@
 //
 
 #import "TPCourseViewController.h"
-#import "TPCourseView.h"
 
 @interface TPCourseViewController ()
+
+@property (strong, nonatomic) NSString *course; // change class later
+@property (strong, nonatomic) UILabel *courseLabel;
 
 @end
 
@@ -18,13 +20,18 @@
 - (instancetype)initWithCourse:(NSString *)course {
     self = [super init];
     if (self) {
-        self.view = [[TPCourseView alloc] initWithCourse:course];
+        _course = course;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    _courseLabel = [[UILabel alloc] init];
+    _courseLabel.frame = CGRectMake(20, 200, 150, 150);
+    _courseLabel.text = _course;
+    [self.view addSubview:_courseLabel];
 }
 
 @end

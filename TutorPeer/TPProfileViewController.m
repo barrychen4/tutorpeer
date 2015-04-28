@@ -7,18 +7,32 @@
 //
 
 #import "TPProfileViewController.h"
-#import "TPProfileView.h"
+#import "TPUser.h"
 
 @interface TPProfileViewController ()
+
+@property (strong, nonatomic) TPUser *user;
+@property (strong, nonatomic) UILabel *nameLabel;
 
 @end
 
 @implementation TPProfileViewController
 
+- (instancetype)initWithUser:(TPUser *)user {
+    self = [super init];
+    if (self) {
+        _user = user;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Profile";
-    self.view = [[TPProfileView alloc] initWithUser:nil];
+    _nameLabel = [[UILabel alloc] init];
+    _nameLabel.frame = CGRectMake(20, 200, 200, 150);
+    _nameLabel.text = [NSString stringWithFormat:@"My name is: %@", _user.name];
+    [self.view addSubview:_nameLabel];
 }
 
 @end

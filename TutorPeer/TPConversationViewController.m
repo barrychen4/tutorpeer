@@ -7,24 +7,33 @@
 //
 
 #import "TPConversationViewController.h"
-#import "TPConversationView.h"
+#import "TPMessage.h"
+#import "TPConversation.h"
 
 @interface TPConversationViewController ()
+
+@property (strong, nonatomic) TPConversation *conversation;
+@property (strong, nonatomic) UILabel *messageLabel;
 
 @end
 
 @implementation TPConversationViewController
 
-- (instancetype)initWithConversation:(NSString *)conversation {
+- (instancetype)initWithConversation:(TPConversation *)conversation {
     self = [super init];
     if (self) {
-        self.view = [[TPConversationView alloc] initWithConversation:conversation];
+        _conversation = conversation;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    _messageLabel = [[UILabel alloc] init];
+    _messageLabel.frame = CGRectMake(20, 200, 400, 150);
+    _messageLabel.text = @"Conversation messages go here";
+    [self.view addSubview:_messageLabel];
 }
 
 @end

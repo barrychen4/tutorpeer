@@ -12,6 +12,7 @@
 #import "TPInboxViewController.h"
 #import "TPCourseListViewController.h"
 #import "TPProfileViewController.h"
+#import "TPUser.h" 
 
 @interface TPSignUpViewController ()
 
@@ -142,17 +143,21 @@
     [[TPAuthenticationManager sharedInstance] signUpWithEmail:self.emailTextField.text password:self.passwordTextField.text firstName:self.firstNameTextField.text lastName:self.lastNameTextField.text callback:^(BOOL result) {
         if (result) {
             NSLog(@"Logged in!");
+            
+            TPUser *user = [[TPUser alloc] init];
+            user.name = @"Ethan Yu";
+            
             UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
             UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseListViewController alloc] init]];
-            UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[[TPProfileViewController alloc] init]];
+            UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[[TPProfileViewController alloc] initWithUser:user]];
             
             inboxViewController.title = @"Inbox";
             courseViewController.title = @"Courses";
             profileViewController.title = @"Profile";
             
             TPTabBarController *tabBarController = [[TPTabBarController alloc] init];
-            
             tabBarController.viewControllers = @[inboxViewController, courseViewController, profileViewController];
+            tabBarController.selectedIndex = 1;
             [self.navigationController pushViewController:tabBarController animated:YES];
         }
         else {
