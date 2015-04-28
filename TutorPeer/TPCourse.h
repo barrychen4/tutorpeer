@@ -10,4 +10,9 @@
 
 @interface TPCourse : NSObject
 
+@property (strong, nonatomic) NSString *courseCode;
+@property (strong, nonatomic) NSString *courseName;
+@property (strong, nonatomic) NSArray *tutors;
+@property (strong, nonatomic) NSArray *tutees; 
+
 @end

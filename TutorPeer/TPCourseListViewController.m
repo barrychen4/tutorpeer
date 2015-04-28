@@ -8,6 +8,7 @@
 
 #import "TPCourseListViewController.h"
 #import "TPCourseViewController.h"
+#import "TPCourse.h"
 
 @interface TPCourseListViewController ()
 
@@ -45,7 +46,9 @@
 
 #pragma mark - Table view delegate methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TPCourseViewController *courseViewController = [[TPCourseViewController alloc] initWithCourse:[_tableView cellForRowAtIndexPath:indexPath].textLabel.text];
+    TPCourse *course = [[TPCourse alloc] init];
+    course.courseName = [_tableView cellForRowAtIndexPath:indexPath].textLabel.text;
+    TPCourseViewController *courseViewController = [[TPCourseViewController alloc] initWithCourse:course];
     [self.navigationController pushViewController:courseViewController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES]; 
 }

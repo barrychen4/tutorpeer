@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class TPCourse;
+
 @interface TPCourseViewController : UIViewController
 
-- (instancetype)initWithCourse:(NSString *)course;
+- (instancetype)initWithCourse:(TPCourse *)course;
 
 @end
