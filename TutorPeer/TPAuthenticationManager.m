@@ -23,7 +23,7 @@
 }
 
 - (void)signUpWithEmail:(NSString *)email password:(NSString *)password firstName:(NSString *)firstName
-                  lastName:(NSString *)lastName
+               lastName:(NSString *)lastName callback:(void (^)(BOOL))handler
 {
     PFUser *user = [PFUser user];
     user.username = email;
@@ -36,9 +36,11 @@
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             NSLog(@"Sign up successful!");
+            handler(YES);
         } else {
             NSString *errorString = [error userInfo][@"error"];
             NSLog(@"%@", errorString);
+            handler(NO);
         }
     }];
 }

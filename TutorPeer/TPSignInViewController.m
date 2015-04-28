@@ -8,6 +8,7 @@
 
 #import "TPSignInViewController.h"
 #import "TPAuthenticationManager.h"
+#import "TPTabBarController.h"
 #import "TPInboxViewController.h"
 #import "TPCourseListViewController.h"
 #import "TPProfileViewController.h"
@@ -120,7 +121,7 @@
             courseViewController.title = @"Courses";
             profileViewController.title = @"Profile";
             
-            UITabBarController *tabBarController = [[UITabBarController alloc] init];
+            TPTabBarController *tabBarController = [[TPTabBarController alloc] init];
 
             tabBarController.viewControllers = @[inboxViewController, courseViewController, profileViewController];
             [self.navigationController pushViewController:tabBarController animated:YES];
@@ -130,6 +131,5 @@
         }
     }];
 }
-
 
 @end

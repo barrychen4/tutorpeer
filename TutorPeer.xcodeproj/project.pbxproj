@@ -23,6 +23,7 @@
 		9F9DCF8D1AED768D0066CFF9 /* TPProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DCF8C1AED768D0066CFF9 /* TPProfileView.m */; };
 		9F9DCF901AED76950066CFF9 /* TPConversationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DCF8F1AED76950066CFF9 /* TPConversationView.m */; };
 		9F9DCF931AED94220066CFF9 /* TPConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DCF921AED94220066CFF9 /* TPConversationViewController.m */; };
+		9FC1C12E1AEF0629005A14E6 /* TPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FC1C12D1AEF0629005A14E6 /* TPTabBarController.m */; };
 		9FD22B181AE42DC40043C696 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FD22B171AE42DC40043C696 /* LaunchScreen.xib */; };
 		9FD22B1A1AE42E600043C696 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD22B191AE42E600043C696 /* Parse.framework */; };
 		9FD22B1C1AE42E7B0043C696 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD22B1B1AE42E7B0043C696 /* Bolts.framework */; };
@@ -72,6 +73,8 @@
 		9F9DCF8F1AED76950066CFF9 /* TPConversationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPConversationView.m; sourceTree = "<group>"; };
 		9F9DCF911AED94220066CFF9 /* TPConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPConversationViewController.h; sourceTree = "<group>"; };
 		9F9DCF921AED94220066CFF9 /* TPConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPConversationViewController.m; sourceTree = "<group>"; };
+		9FC1C12C1AEF0629005A14E6 /* TPTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTabBarController.h; sourceTree = "<group>"; };
+		9FC1C12D1AEF0629005A14E6 /* TPTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTabBarController.m; sourceTree = "<group>"; };
 		9FD22B171AE42DC40043C696 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		9FD22B191AE42E600043C696 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		9FD22B1B1AE42E7B0043C696 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -138,24 +141,8 @@
 				9F9DCF941AED94320066CFF9 /* Inbox */,
 				9F9DCF951AED943A0066CFF9 /* Courses */,
 				9F9DCF961AED94400066CFF9 /* Profile */,
-				771631631AE5D2BB000947FB /* TPLandingViewController.h */,
-				771631641AE5D2BB000947FB /* TPLandingViewController.m */,
-				771631661AE5DCFA000947FB /* TPSignInViewController.h */,
-				771631671AE5DCFA000947FB /* TPSignInViewController.m */,
-				771631691AE5DD0D000947FB /* TPSignUpViewController.h */,
-				7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */,
-				9F9DCF7C1AED64E50066CFF9 /* TPInboxViewController.h */,
-				9F9DCF7D1AED64E50066CFF9 /* TPInboxViewController.m */,
-				9F9DCF7F1AED64F50066CFF9 /* TPCourseListViewController.h */,
-				9F9DCF801AED64F50066CFF9 /* TPCourseListViewController.m */,
-				9F9DCF851AED74FB0066CFF9 /* TPCourseViewController.h */,
-				9F9DCF861AED74FB0066CFF9 /* TPCourseViewController.m */,
-				9F9DCF821AED64FF0066CFF9 /* TPProfileViewController.h */,
-				9F9DCF831AED64FF0066CFF9 /* TPProfileViewController.m */,
-				9F9DCF971AED94480066CFF9 /* Welcome */,
-				9F9DCF941AED94320066CFF9 /* Inbox */,
-				9F9DCF951AED943A0066CFF9 /* Courses */,
-				9F9DCF961AED94400066CFF9 /* Profile */,
+				9FC1C12C1AEF0629005A14E6 /* TPTabBarController.h */,
+				9FC1C12D1AEF0629005A14E6 /* TPTabBarController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -247,8 +234,8 @@
 			children = (
 				771631631AE5D2BB000947FB /* TPLandingViewController.h */,
 				771631641AE5D2BB000947FB /* TPLandingViewController.m */,
-				771631661AE5DCFA000947FB /* TPLoginViewController.h */,
-				771631671AE5DCFA000947FB /* TPLoginViewController.m */,
+				771631661AE5DCFA000947FB /* TPSignInViewController.h */,
+				771631671AE5DCFA000947FB /* TPSignInViewController.m */,
 				771631691AE5DD0D000947FB /* TPSignUpViewController.h */,
 				7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */,
 			);
@@ -375,12 +362,13 @@
 				9F9DCF871AED74FB0066CFF9 /* TPCourseViewController.m in Sources */,
 				9F9DCF811AED64F50066CFF9 /* TPCourseListViewController.m in Sources */,
 				771631651AE5D2BB000947FB /* TPLandingViewController.m in Sources */,
+				9FC1C12E1AEF0629005A14E6 /* TPTabBarController.m in Sources */,
 				9F9DCF8A1AED760B0066CFF9 /* TPCourseView.m in Sources */,
 				7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */,
 				9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */,
 				9F9DCF7E1AED64E50066CFF9 /* TPInboxViewController.m in Sources */,
 				9F9DCF901AED76950066CFF9 /* TPConversationView.m in Sources */,
-				771631681AE5DCFA000947FB /* TPLoginViewController.m in Sources */,
+				771631681AE5DCFA000947FB /* TPSignInViewController.m in Sources */,
 				9F9DCF8D1AED768D0066CFF9 /* TPProfileView.m in Sources */,
 				9F9DCF931AED94220066CFF9 /* TPConversationViewController.m in Sources */,
 				777273F01AE9D4F3007EDB1A /* TPUser.m in Sources */,

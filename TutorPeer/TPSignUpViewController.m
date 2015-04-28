@@ -8,6 +8,10 @@
 
 #import "TPSignUpViewController.h"
 #import "TPAuthenticationManager.h"
+#import "TPTabBarController.h"
+#import "TPInboxViewController.h"
+#import "TPCourseListViewController.h"
+#import "TPProfileViewController.h"
 
 @interface TPSignUpViewController ()
 
@@ -135,7 +139,25 @@
 - (void)attemptSignUp
 {
     NSLog(@"Attempt sign up");
-    [[TPAuthenticationManager sharedInstance] signUpWithEmail:self.emailTextField.text password:self.passwordTextField.text firstName:self.firstNameTextField.text lastName:self.lastNameTextField.text];
+    [[TPAuthenticationManager sharedInstance] signUpWithEmail:self.emailTextField.text password:self.passwordTextField.text firstName:self.firstNameTextField.text lastName:self.lastNameTextField.text callback:^(BOOL result) {
+        if (result) {
+            NSLog(@"Logged in!");
+            UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
+            UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseListViewController alloc] init]];
+            UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[[TPProfileViewController alloc] init]];
+            
+            inboxViewController.title = @"Inbox";
+            courseViewController.title = @"Courses";
+            profileViewController.title = @"Profile";
+            
+            TPTabBarController *tabBarController = [[TPTabBarController alloc] init];
+            
+            tabBarController.viewControllers = @[inboxViewController, courseViewController, profileViewController];
+            [self.navigationController pushViewController:tabBarController animated:YES];
+        }
+        else {
+            NSLog(@"Didn't log in!");
+        }}];
 }
 
 - (void)hideKeyboard:(id)sender {

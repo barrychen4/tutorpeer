@@ -13,7 +13,7 @@
 + (instancetype)sharedInstance;
 
 - (void)signUpWithEmail:(NSString *)email password:(NSString *)password firstName:(NSString *)firstName
-               lastName:(NSString *)lastName;
+               lastName:(NSString *)lastName callback:(void (^)(BOOL))handler;
 
 - (void)signInWithEmail:(NSString *)email password:(NSString *)password callback:(void (^)(BOOL))handler;
 
