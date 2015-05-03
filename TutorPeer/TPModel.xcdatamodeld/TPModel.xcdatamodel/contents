@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14C1514" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="TPCourse" representedClassName="TPCourse" syncable="YES">
+        <attribute name="courseCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="courseName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tutees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPUser" inverseName="tuteeCourses" inverseEntity="TPUser" syncable="YES"/>
+        <relationship name="tutors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPUser" inverseName="tutorCourses" inverseEntity="TPUser" syncable="YES"/>
+    </entity>
+    <entity name="TPUser" representedClassName="TPUser" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="profileImage" optional="YES" attributeType="Transformable" valueTransformerName="TPImageTransformer" syncable="YES"/>
+        <relationship name="tuteeCourses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPCourse" inverseName="tutees" inverseEntity="TPCourse" syncable="YES"/>
+        <relationship name="tutorCourses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPCourse" inverseName="tutors" inverseEntity="TPCourse" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="TPUser" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="TPCourse" positionX="-54" positionY="18" width="128" height="105"/>
+    </elements>
+</model>
