@@ -2,11 +2,12 @@
 // Make changes to TPConversation.h instead.
 
 #import <CoreData/CoreData.h>
+#import "TPSyncEntity.h"
 
-@interface TPConversationID : NSManagedObjectID {}
+@interface TPConversationID : TPSyncEntityID {}
 @end
 
-@interface _TPConversation : NSManagedObject {}
+@interface _TPConversation : TPSyncEntity {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;

@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@import CoreData;
+
 @interface TPNetworkManager : NSObject
+
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
+
++ (instancetype)sharedInstance;
++ (NSString *)storePath;
 
 @end

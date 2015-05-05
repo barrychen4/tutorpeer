@@ -2,6 +2,7 @@
 // Make changes to TPCourse.h instead.
 
 #import <CoreData/CoreData.h>
+#import "TPSyncEntity.h"
 
 extern const struct TPCourseAttributes {
 	__unsafe_unretained NSString *courseCode;
@@ -16,10 +17,10 @@ extern const struct TPCourseRelationships {
 @class TPUser;
 @class TPUser;
 
-@interface TPCourseID : NSManagedObjectID {}
+@interface TPCourseID : TPSyncEntityID {}
 @end
 
-@interface _TPCourse : NSManagedObject {}
+@interface _TPCourse : TPSyncEntity {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;

@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14C1514" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="TPConversation" representedClassName="TPConversation" syncable="YES"/>
-    <entity name="TPCourse" representedClassName="TPCourse" syncable="YES">
+    <entity name="TPConversation" representedClassName="TPConversation" parentEntity="TPSyncEntity" syncable="YES"/>
+    <entity name="TPCourse" representedClassName="TPCourse" parentEntity="TPSyncEntity" syncable="YES">
         <attribute name="courseCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="courseName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="tutees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPUser" inverseName="tuteeCourses" inverseEntity="TPUser" syncable="YES"/>
         <relationship name="tutors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPUser" inverseName="tutorCourses" inverseEntity="TPUser" syncable="YES"/>
     </entity>
-    <entity name="TPMessage" representedClassName="TPMessage" syncable="YES">
+    <entity name="TPMessage" representedClassName="TPMessage" parentEntity="TPSyncEntity" syncable="YES">
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="TPUser" representedClassName="TPUser" syncable="YES">
+    <entity name="TPSyncEntity" representedClassName="TPSyncEntity" isAbstract="YES" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="TPUser" representedClassName="TPUser" parentEntity="TPSyncEntity" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
@@ -19,9 +25,10 @@
         <relationship name="tutorCourses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPCourse" inverseName="tutors" inverseEntity="TPCourse" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TPCourse" positionX="52" positionY="-243" width="128" height="105"/>
-        <element name="TPUser" positionX="-252" positionY="-315" width="128" height="135"/>
         <element name="TPConversation" positionX="-45" positionY="45" width="128" height="43"/>
+        <element name="TPCourse" positionX="52" positionY="-243" width="128" height="103"/>
         <element name="TPMessage" positionX="-225" positionY="120" width="128" height="58"/>
+        <element name="TPUser" positionX="-252" positionY="-315" width="128" height="133"/>
+        <element name="TPSyncEntity" positionX="-99" positionY="-90" width="128" height="105"/>
     </elements>
 </model>

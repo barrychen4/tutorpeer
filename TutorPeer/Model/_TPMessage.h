@@ -2,15 +2,16 @@
 // Make changes to TPMessage.h instead.
 
 #import <CoreData/CoreData.h>
+#import "TPSyncEntity.h"
 
 extern const struct TPMessageAttributes {
 	__unsafe_unretained NSString *message;
 } TPMessageAttributes;
 
-@interface TPMessageID : NSManagedObjectID {}
+@interface TPMessageID : TPSyncEntityID {}
 @end
 
-@interface _TPMessage : NSManagedObject {}
+@interface _TPMessage : TPSyncEntity {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;

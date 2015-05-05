@@ -35,6 +35,8 @@
 		77E3FF7D1AF8454B001E69F9 /* TPCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF731AF8454B001E69F9 /* TPCourse.m */; };
 		77E3FF7E1AF8454B001E69F9 /* TPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF751AF8454B001E69F9 /* TPMessage.m */; };
 		77E3FF7F1AF8454B001E69F9 /* TPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF771AF8454B001E69F9 /* TPUser.m */; };
+		77E3FF841AF84D98001E69F9 /* _TPSyncEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF811AF84D98001E69F9 /* _TPSyncEntity.m */; };
+		77E3FF851AF84D98001E69F9 /* TPSyncEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF831AF84D98001E69F9 /* TPSyncEntity.m */; };
 		9F59BEF41AE42324007DAD1C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F59BEF31AE42324007DAD1C /* main.m */; };
 		9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F59BEF61AE42324007DAD1C /* AppDelegate.m */; };
 		9F59BEFF1AE42324007DAD1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F59BEFE1AE42324007DAD1C /* Images.xcassets */; };
@@ -88,6 +90,10 @@
 		77E3FF751AF8454B001E69F9 /* TPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPMessage.m; path = Model/TPMessage.m; sourceTree = "<group>"; };
 		77E3FF761AF8454B001E69F9 /* TPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPUser.h; path = Model/TPUser.h; sourceTree = "<group>"; };
 		77E3FF771AF8454B001E69F9 /* TPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPUser.m; path = Model/TPUser.m; sourceTree = "<group>"; };
+		77E3FF801AF84D98001E69F9 /* _TPSyncEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _TPSyncEntity.h; path = Model/_TPSyncEntity.h; sourceTree = "<group>"; };
+		77E3FF811AF84D98001E69F9 /* _TPSyncEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _TPSyncEntity.m; path = Model/_TPSyncEntity.m; sourceTree = "<group>"; };
+		77E3FF821AF84D98001E69F9 /* TPSyncEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPSyncEntity.h; path = Model/TPSyncEntity.h; sourceTree = "<group>"; };
+		77E3FF831AF84D98001E69F9 /* TPSyncEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPSyncEntity.m; path = Model/TPSyncEntity.m; sourceTree = "<group>"; };
 		9F59BEEE1AE42324007DAD1C /* TutorPeer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TutorPeer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F59BEF21AE42324007DAD1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F59BEF31AE42324007DAD1C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -189,6 +195,8 @@
 		77B9CBDD1AF7DD4F0092D7AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				77E3FF801AF84D98001E69F9 /* _TPSyncEntity.h */,
+				77E3FF811AF84D98001E69F9 /* _TPSyncEntity.m */,
 				77E3FF681AF8454B001E69F9 /* _TPConversation.h */,
 				77E3FF691AF8454B001E69F9 /* _TPConversation.m */,
 				77E3FF6A1AF8454B001E69F9 /* _TPCourse.h */,
@@ -205,6 +213,8 @@
 				77E3FF751AF8454B001E69F9 /* TPMessage.m */,
 				77E3FF761AF8454B001E69F9 /* TPUser.h */,
 				77E3FF771AF8454B001E69F9 /* TPUser.m */,
+				77E3FF821AF84D98001E69F9 /* TPSyncEntity.h */,
+				77E3FF831AF84D98001E69F9 /* TPSyncEntity.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -406,6 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77E3FF841AF84D98001E69F9 /* _TPSyncEntity.m in Sources */,
 				77E3FF7F1AF8454B001E69F9 /* TPUser.m in Sources */,
 				9F9DCF871AED74FB0066CFF9 /* TPCourseViewController.m in Sources */,
 				9F9DCF811AED64F50066CFF9 /* TPCourseListViewController.m in Sources */,
@@ -420,6 +431,7 @@
 				9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */,
 				9F9DCF7E1AED64E50066CFF9 /* TPInboxViewController.m in Sources */,
 				771631681AE5DCFA000947FB /* TPSignInViewController.m in Sources */,
+				77E3FF851AF84D98001E69F9 /* TPSyncEntity.m in Sources */,
 				77E3FF791AF8454B001E69F9 /* _TPCourse.m in Sources */,
 				77E3FF7C1AF8454B001E69F9 /* TPConversation.m in Sources */,
 				9F9DCF931AED94220066CFF9 /* TPConversationViewController.m in Sources */,

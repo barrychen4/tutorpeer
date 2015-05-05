@@ -2,6 +2,7 @@
 // Make changes to TPUser.h instead.
 
 #import <CoreData/CoreData.h>
+#import "TPSyncEntity.h"
 
 extern const struct TPUserAttributes {
 	__unsafe_unretained NSString *email;
@@ -20,10 +21,10 @@ extern const struct TPUserRelationships {
 
 @class NSObject;
 
-@interface TPUserID : NSManagedObjectID {}
+@interface TPUserID : TPSyncEntityID {}
 @end
 
-@interface _TPUser : NSManagedObject {}
+@interface _TPUser : TPSyncEntity {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
