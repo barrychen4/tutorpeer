@@ -144,12 +144,9 @@
         if (result) {
             NSLog(@"Logged in!");
             
-            TPUser *user = [[TPUser alloc] init];
-            user.name = @"Ethan Yu";
-            
             UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
             UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseListViewController alloc] init]];
-            UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[[TPProfileViewController alloc] initWithUser:user]];
+            UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[[TPProfileViewController alloc] initWithUser:nil]];
             
             inboxViewController.title = @"Inbox";
             courseViewController.title = @"Courses";

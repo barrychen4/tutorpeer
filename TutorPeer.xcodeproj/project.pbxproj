@@ -6,18 +6,35 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		77B9CBE31AF7DDDD0092D7AC /* Mogenerator */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 77B9CBE41AF7DDDD0092D7AC /* Build configuration list for PBXAggregateTarget "Mogenerator" */;
+			buildPhases = (
+				77E3FF671AF844F2001E69F9 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Mogenerator;
+			productName = Mogenerator;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		771631651AE5D2BB000947FB /* TPLandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771631641AE5D2BB000947FB /* TPLandingViewController.m */; };
 		771631681AE5DCFA000947FB /* TPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771631671AE5DCFA000947FB /* TPSignInViewController.m */; };
 		7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */; };
 		771BEB881AEB0D530025DDCE /* TPAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 771BEB871AEB0D530025DDCE /* TPAuthenticationManager.m */; };
 		77782B911AF69E8C0006723F /* TPModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77782B8F1AF69E8C0006723F /* TPModel.xcdatamodeld */; };
-		77782B951AF6A1140006723F /* TPImageTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 77782B941AF6A1140006723F /* TPImageTransformer.m */; };
-		77782B981AF6A42B0006723F /* TPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 77782B971AF6A42B0006723F /* TPUser.m */; };
-		77782B9B1AF6A6610006723F /* TPCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 77782B9A1AF6A6610006723F /* TPCourse.m */; };
 		77782B9E1AF6A7880006723F /* TPNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 77782B9D1AF6A7880006723F /* TPNetworkManager.m */; };
-		9F2F13F41AEF0FF80042D3AC /* TPConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2F13F31AEF0FF80042D3AC /* TPConversation.m */; };
-		9F2F13F71AEF10040042D3AC /* TPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2F13F61AEF10040042D3AC /* TPMessage.m */; };
+		77E3FF781AF8454B001E69F9 /* _TPConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF691AF8454B001E69F9 /* _TPConversation.m */; };
+		77E3FF791AF8454B001E69F9 /* _TPCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF6B1AF8454B001E69F9 /* _TPCourse.m */; };
+		77E3FF7A1AF8454B001E69F9 /* _TPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF6D1AF8454B001E69F9 /* _TPMessage.m */; };
+		77E3FF7B1AF8454B001E69F9 /* _TPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF6F1AF8454B001E69F9 /* _TPUser.m */; };
+		77E3FF7C1AF8454B001E69F9 /* TPConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF711AF8454B001E69F9 /* TPConversation.m */; };
+		77E3FF7D1AF8454B001E69F9 /* TPCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF731AF8454B001E69F9 /* TPCourse.m */; };
+		77E3FF7E1AF8454B001E69F9 /* TPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF751AF8454B001E69F9 /* TPMessage.m */; };
+		77E3FF7F1AF8454B001E69F9 /* TPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF771AF8454B001E69F9 /* TPUser.m */; };
 		9F59BEF41AE42324007DAD1C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F59BEF31AE42324007DAD1C /* main.m */; };
 		9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F59BEF61AE42324007DAD1C /* AppDelegate.m */; };
 		9F59BEFF1AE42324007DAD1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F59BEFE1AE42324007DAD1C /* Images.xcassets */; };
@@ -53,18 +70,24 @@
 		771BEB861AEB0D530025DDCE /* TPAuthenticationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPAuthenticationManager.h; sourceTree = "<group>"; };
 		771BEB871AEB0D530025DDCE /* TPAuthenticationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPAuthenticationManager.m; sourceTree = "<group>"; };
 		77782B901AF69E8C0006723F /* TPModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TPModel.xcdatamodel; sourceTree = "<group>"; };
-		77782B931AF6A1140006723F /* TPImageTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPImageTransformer.h; sourceTree = "<group>"; };
-		77782B941AF6A1140006723F /* TPImageTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPImageTransformer.m; sourceTree = "<group>"; };
-		77782B961AF6A42B0006723F /* TPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPUser.h; path = ../TPUser.h; sourceTree = "<group>"; };
-		77782B971AF6A42B0006723F /* TPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPUser.m; path = ../TPUser.m; sourceTree = "<group>"; };
-		77782B991AF6A6610006723F /* TPCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPCourse.h; path = ../TPCourse.h; sourceTree = "<group>"; };
-		77782B9A1AF6A6610006723F /* TPCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPCourse.m; path = ../TPCourse.m; sourceTree = "<group>"; };
 		77782B9C1AF6A7880006723F /* TPNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNetworkManager.h; sourceTree = "<group>"; };
 		77782B9D1AF6A7880006723F /* TPNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNetworkManager.m; sourceTree = "<group>"; };
-		9F2F13F21AEF0FF80042D3AC /* TPConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPConversation.h; sourceTree = "<group>"; };
-		9F2F13F31AEF0FF80042D3AC /* TPConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPConversation.m; sourceTree = "<group>"; };
-		9F2F13F51AEF10040042D3AC /* TPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPMessage.h; sourceTree = "<group>"; };
-		9F2F13F61AEF10040042D3AC /* TPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPMessage.m; sourceTree = "<group>"; };
+		77E3FF681AF8454B001E69F9 /* _TPConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _TPConversation.h; path = Model/_TPConversation.h; sourceTree = "<group>"; };
+		77E3FF691AF8454B001E69F9 /* _TPConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _TPConversation.m; path = Model/_TPConversation.m; sourceTree = "<group>"; };
+		77E3FF6A1AF8454B001E69F9 /* _TPCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _TPCourse.h; path = Model/_TPCourse.h; sourceTree = "<group>"; };
+		77E3FF6B1AF8454B001E69F9 /* _TPCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _TPCourse.m; path = Model/_TPCourse.m; sourceTree = "<group>"; };
+		77E3FF6C1AF8454B001E69F9 /* _TPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _TPMessage.h; path = Model/_TPMessage.h; sourceTree = "<group>"; };
+		77E3FF6D1AF8454B001E69F9 /* _TPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _TPMessage.m; path = Model/_TPMessage.m; sourceTree = "<group>"; };
+		77E3FF6E1AF8454B001E69F9 /* _TPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _TPUser.h; path = Model/_TPUser.h; sourceTree = "<group>"; };
+		77E3FF6F1AF8454B001E69F9 /* _TPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _TPUser.m; path = Model/_TPUser.m; sourceTree = "<group>"; };
+		77E3FF701AF8454B001E69F9 /* TPConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPConversation.h; path = Model/TPConversation.h; sourceTree = "<group>"; };
+		77E3FF711AF8454B001E69F9 /* TPConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPConversation.m; path = Model/TPConversation.m; sourceTree = "<group>"; };
+		77E3FF721AF8454B001E69F9 /* TPCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPCourse.h; path = Model/TPCourse.h; sourceTree = "<group>"; };
+		77E3FF731AF8454B001E69F9 /* TPCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPCourse.m; path = Model/TPCourse.m; sourceTree = "<group>"; };
+		77E3FF741AF8454B001E69F9 /* TPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPMessage.h; path = Model/TPMessage.h; sourceTree = "<group>"; };
+		77E3FF751AF8454B001E69F9 /* TPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPMessage.m; path = Model/TPMessage.m; sourceTree = "<group>"; };
+		77E3FF761AF8454B001E69F9 /* TPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPUser.h; path = Model/TPUser.h; sourceTree = "<group>"; };
+		77E3FF771AF8454B001E69F9 /* TPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPUser.m; path = Model/TPUser.m; sourceTree = "<group>"; };
 		9F59BEEE1AE42324007DAD1C /* TutorPeer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TutorPeer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F59BEF21AE42324007DAD1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F59BEF31AE42324007DAD1C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -123,21 +146,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		771631601AE5D1A4000947FB /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				77782B991AF6A6610006723F /* TPCourse.h */,
-				77782B9A1AF6A6610006723F /* TPCourse.m */,
-				77782B961AF6A42B0006723F /* TPUser.h */,
-				77782B971AF6A42B0006723F /* TPUser.m */,
-				9F2F13F21AEF0FF80042D3AC /* TPConversation.h */,
-				9F2F13F31AEF0FF80042D3AC /* TPConversation.m */,
-				9F2F13F51AEF10040042D3AC /* TPMessage.h */,
-				9F2F13F61AEF10040042D3AC /* TPMessage.m */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
 		771631611AE5D1A9000947FB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,17 +181,38 @@
 			isa = PBXGroup;
 			children = (
 				77782B8F1AF69E8C0006723F /* TPModel.xcdatamodeld */,
-				77782B931AF6A1140006723F /* TPImageTransformer.h */,
-				77782B941AF6A1140006723F /* TPImageTransformer.m */,
 			);
 			name = "Core Data";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		77B9CBDD1AF7DD4F0092D7AC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				77E3FF681AF8454B001E69F9 /* _TPConversation.h */,
+				77E3FF691AF8454B001E69F9 /* _TPConversation.m */,
+				77E3FF6A1AF8454B001E69F9 /* _TPCourse.h */,
+				77E3FF6B1AF8454B001E69F9 /* _TPCourse.m */,
+				77E3FF6C1AF8454B001E69F9 /* _TPMessage.h */,
+				77E3FF6D1AF8454B001E69F9 /* _TPMessage.m */,
+				77E3FF6E1AF8454B001E69F9 /* _TPUser.h */,
+				77E3FF6F1AF8454B001E69F9 /* _TPUser.m */,
+				77E3FF701AF8454B001E69F9 /* TPConversation.h */,
+				77E3FF711AF8454B001E69F9 /* TPConversation.m */,
+				77E3FF721AF8454B001E69F9 /* TPCourse.h */,
+				77E3FF731AF8454B001E69F9 /* TPCourse.m */,
+				77E3FF741AF8454B001E69F9 /* TPMessage.h */,
+				77E3FF751AF8454B001E69F9 /* TPMessage.m */,
+				77E3FF761AF8454B001E69F9 /* TPUser.h */,
+				77E3FF771AF8454B001E69F9 /* TPUser.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		9F59BEE51AE42324007DAD1C = {
 			isa = PBXGroup;
 			children = (
 				9F59BEF01AE42324007DAD1C /* TutorPeer */,
-				77782B921AF69E9A0006723F /* Core Data */,
 				9FD22B331AE42EEC0043C696 /* Frameworks */,
 				9F59BEEF1AE42324007DAD1C /* Products */,
 			);
@@ -200,14 +229,15 @@
 		9F59BEF01AE42324007DAD1C /* TutorPeer */ = {
 			isa = PBXGroup;
 			children = (
+				77B9CBDD1AF7DD4F0092D7AC /* Model */,
 				771BEB851AEB0D310025DDCE /* Singleton */,
 				771631621AE5D1B0000947FB /* Controller */,
 				771631611AE5D1A9000947FB /* View */,
-				771631601AE5D1A4000947FB /* Model */,
 				9F59BEF51AE42324007DAD1C /* AppDelegate.h */,
 				9F59BEF61AE42324007DAD1C /* AppDelegate.m */,
 				9FD22B171AE42DC40043C696 /* LaunchScreen.xib */,
 				9F59BEFE1AE42324007DAD1C /* Images.xcassets */,
+				77782B921AF69E9A0006723F /* Core Data */,
 				9F59BEF11AE42324007DAD1C /* Supporting Files */,
 			);
 			path = TutorPeer;
@@ -315,6 +345,9 @@
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = TutorPeer;
 				TargetAttributes = {
+					77B9CBE31AF7DDDD0092D7AC = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
 					9F59BEED1AE42324007DAD1C = {
 						CreatedOnToolsVersion = 6.3;
 						DevelopmentTeam = 5PBDJVQUK2;
@@ -335,6 +368,7 @@
 			projectRoot = "";
 			targets = (
 				9F59BEED1AE42324007DAD1C /* TutorPeer */,
+				77B9CBE31AF7DDDD0092D7AC /* Mogenerator */,
 			);
 		};
 /* End PBXProject section */
@@ -351,29 +385,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		77E3FF671AF844F2001E69F9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "mogenerator -m TutorPeer/TPModel.xcdatamodeld -O TutorPeer/Model --template-var arc=true";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9F59BEEA1AE42324007DAD1C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77E3FF7F1AF8454B001E69F9 /* TPUser.m in Sources */,
 				9F9DCF871AED74FB0066CFF9 /* TPCourseViewController.m in Sources */,
-				77782B951AF6A1140006723F /* TPImageTransformer.m in Sources */,
 				9F9DCF811AED64F50066CFF9 /* TPCourseListViewController.m in Sources */,
 				77782B9E1AF6A7880006723F /* TPNetworkManager.m in Sources */,
 				771631651AE5D2BB000947FB /* TPLandingViewController.m in Sources */,
+				77E3FF7E1AF8454B001E69F9 /* TPMessage.m in Sources */,
+				77E3FF7B1AF8454B001E69F9 /* _TPUser.m in Sources */,
 				9FC1C12E1AEF0629005A14E6 /* TPTabBarController.m in Sources */,
-				9F2F13F71AEF10040042D3AC /* TPMessage.m in Sources */,
+				77E3FF7A1AF8454B001E69F9 /* _TPMessage.m in Sources */,
 				7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */,
+				77E3FF781AF8454B001E69F9 /* _TPConversation.m in Sources */,
 				9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */,
 				9F9DCF7E1AED64E50066CFF9 /* TPInboxViewController.m in Sources */,
 				771631681AE5DCFA000947FB /* TPSignInViewController.m in Sources */,
+				77E3FF791AF8454B001E69F9 /* _TPCourse.m in Sources */,
+				77E3FF7C1AF8454B001E69F9 /* TPConversation.m in Sources */,
 				9F9DCF931AED94220066CFF9 /* TPConversationViewController.m in Sources */,
 				77782B911AF69E8C0006723F /* TPModel.xcdatamodeld in Sources */,
 				9F9DCF841AED64FF0066CFF9 /* TPProfileViewController.m in Sources */,
 				771BEB881AEB0D530025DDCE /* TPAuthenticationManager.m in Sources */,
-				77782B9B1AF6A6610006723F /* TPCourse.m in Sources */,
-				9F2F13F41AEF0FF80042D3AC /* TPConversation.m in Sources */,
-				77782B981AF6A42B0006723F /* TPUser.m in Sources */,
+				77E3FF7D1AF8454B001E69F9 /* TPCourse.m in Sources */,
 				9F59BEF41AE42324007DAD1C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +434,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		77B9CBE51AF7DDDD0092D7AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		77B9CBE61AF7DDDD0092D7AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		9F59BF0F1AE42324007DAD1C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -502,6 +569,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		77B9CBE41AF7DDDD0092D7AC /* Build configuration list for PBXAggregateTarget "Mogenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77B9CBE51AF7DDDD0092D7AC /* Debug */,
+				77B9CBE61AF7DDDD0092D7AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9F59BEE91AE42324007DAD1C /* Build configuration list for PBXProject "TutorPeer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

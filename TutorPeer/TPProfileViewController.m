@@ -31,7 +31,7 @@
     self.title = @"Profile";
     _nameLabel = [[UILabel alloc] init];
     _nameLabel.frame = CGRectMake(20, 200, 200, 150);
-    _nameLabel.text = [NSString stringWithFormat:@"My name is: %@", _user.name];
+    _nameLabel.text = [NSString stringWithFormat:@"My name is: %@", _user.firstName];
     [self.view addSubview:_nameLabel];
 }
 

@@ -12,7 +12,6 @@
 #import "TPInboxViewController.h"
 #import "TPCourseListViewController.h"
 #import "TPProfileViewController.h"
-#import "TPUser.h"
 
 @interface TPSignInViewController ()
 
@@ -110,24 +109,21 @@
 }
 
 - (void)attemptSignIn {
-//    [[TPAuthenticationManager sharedInstance] signInWithEmail:self.emailTextField.text password:self.passwordTextField.text
-    [[TPAuthenticationManager sharedInstance] signInWithEmail:@"ethanyu94@gmail.com" password:@"test" callback:^(BOOL result) {
+    [[TPAuthenticationManager sharedInstance] signInWithEmail:self.emailTextField.text password:self.passwordTextField.text callback:^(BOOL result) {
+        
         if (result) {
             NSLog(@"Logged in!");
             
-            TPUser *user = [[TPUser alloc] init];
-            user.name = @"Ethan Yu";
-            
             UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
             UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseListViewController alloc] init]];
-            UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[[TPProfileViewController alloc] initWithUser:user]];
+            UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[[TPProfileViewController alloc] initWithUser:nil]];
             
             inboxViewController.title = @"Inbox";
             courseViewController.title = @"Courses";
             profileViewController.title = @"Profile";
             
             TPTabBarController *tabBarController = [[TPTabBarController alloc] init];
-
+            
             tabBarController.viewControllers = @[inboxViewController, courseViewController, profileViewController];
             tabBarController.selectedIndex = 1;
             [self.navigationController pushViewController:tabBarController animated:YES];
@@ -135,6 +131,7 @@
         else {
             NSLog(@"Didn't log in!");
         }
+
     }];
 }
 
