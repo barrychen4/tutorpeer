@@ -13,8 +13,9 @@
 @interface TPTuteeRegisterViewController()
 
 @property (strong, nonatomic) TPCourse *course;
-@property (strong, nonatomic) PFObject *courseObject;
-@property (strong, nonatomic) UITextField *priceTextField;
+@property (strong, nonatomic) PFObject *tutorEntryObject;
+@property (strong, nonatomic) UILabel *confirmLabel;
+@property (strong, nonatomic) UIButton *registerButton;
 
 @end
 
@@ -28,10 +29,10 @@
     return self;
 }
 
-- (instancetype)initWithPFObject:(PFObject *)courseObject {
+- (instancetype)initWithPFObject:(PFObject *)tutorEntryObject {
     self = [super init];
     if (self) {
-        _courseObject = courseObject;
+        _tutorEntryObject = tutorEntryObject;
     }
     return self;
 }
@@ -40,39 +41,23 @@
     self.title = @"Register as tutee";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(registerTutee)];
-    [rightBarButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue" size:16.0], NSFontAttributeName, nil] forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = rightBarButton;
-    
-    UIView *pricePaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
-    
-    self.priceTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 40)];
-    self.priceTextField.keyboardType = UIKeyboardTypeNumberPad;
-    self.priceTextField.layer.cornerRadius = 5;
-    self.priceTextField.clipsToBounds = YES;
-    self.priceTextField.placeholder = @"Price";
-    self.priceTextField.backgroundColor = [UIColor whiteColor];
-    self.priceTextField.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.priceTextField.layer.borderWidth = 1.0f;
-    self.priceTextField.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
-    self.priceTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    self.priceTextField.center = CGPointMake(self.view.center.x, self.view.center.y - 80);
-    self.priceTextField.leftView = pricePaddingView;
-    self.priceTextField.leftViewMode = UITextFieldViewModeAlways;
-    self.priceTextField.delegate = self;
-    [self.view addSubview:self.priceTextField];
+    self.title = @"Profile";
+    _confirmLabel = [[UILabel alloc] init];
+    _confirmLabel.frame = CGRectMake(20, 200, 200, 150);
+    _confirmLabel.text = [NSString stringWithFormat:@"Request %@ as your tutor for %@?", _tutorEntryObject[@"tutor"], _tutorEntryObject[@"price"]];
+
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
     [self.view addGestureRecognizer:tapGesture];
 }
 
-- (void)hideKeyboard:(id)sender {
-    [self.priceTextField resignFirstResponder];
-}
-
 - (void)registerTutee {
-    [_courseObject addObject:[PFUser currentUser].username forKey:@"tutees"];
-    [_courseObject saveInBackground];
+    PFObject *tuteeEntry = [PFObject objectWithClassName:@"TuteeEntry"];
+    tuteeEntry[@"course"] = _tutorEntryObject[@"course"];
+    tuteeEntry[@"tutor"] = _tutorEntryObject[@"tutor"];
+    [_tutorEntryObject addObject:[PFUser currentUser].username forKey:@"tutees"];
+    // Add to course //
+    // Add tuteeEntry objectID to user //
     [self.navigationController popViewControllerAnimated:YES];
 }
 
