@@ -12,6 +12,7 @@
 #import "TPInboxViewController.h"
 #import "TPCourseListViewController.h"
 #import "TPProfileViewController.h"
+#import <Parse/Parse.h>
 
 @interface TPSignInViewController ()
 
@@ -39,7 +40,7 @@
     UINavigationItem *navItem = self.navigationItem;
     navItem.title = @"Sign In";
     
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:nil action:@selector(attemptSignIn)];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(attemptSignIn)];
     [rightBarButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue" size:16.0], NSFontAttributeName, nil] forState:UIControlStateNormal];
     navItem.rightBarButtonItem = rightBarButton;
     
@@ -109,14 +110,14 @@
 }
 
 - (void)attemptSignIn {
-    [[TPAuthenticationManager sharedInstance] signInWithEmail:self.emailTextField.text password:self.passwordTextField.text callback:^(BOOL result) {
-        
+//    [[TPAuthenticationManager sharedInstance] signInWithEmail:self.emailTextField.text password:self.passwordTextField.text callback:^(BOOL result) {
+    [[TPAuthenticationManager sharedInstance] signInWithEmail:@"ethanyu94@gmail.com" password:@"test" callback:^(BOOL result) {
         if (result) {
             NSLog(@"Logged in!");
             
             UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
             UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseListViewController alloc] init]];
-            UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[[TPProfileViewController alloc] initWithUser:nil]];
+            UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[[TPProfileViewController alloc] init]];
             
             inboxViewController.title = @"Inbox";
             courseViewController.title = @"Courses";

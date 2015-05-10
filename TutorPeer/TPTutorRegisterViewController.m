@@ -8,10 +8,12 @@
 
 #import "TPTutorRegisterViewController.h"
 #import "TPCourse.h"
+#import <Parse/Parse.h>
 
 @interface TPTutorRegisterViewController()
 
 @property (strong, nonatomic) TPCourse *course;
+@property (strong, nonatomic) PFObject *courseObject;
 @property (strong, nonatomic) UITextField *priceTextField;
 
 @end
@@ -26,11 +28,20 @@
     return self;
 }
 
+- (instancetype)initWithPFObject:(PFObject *)courseObject {
+    self = [super init];
+    if (self) {
+        _courseObject = courseObject;
+    }
+    return self;
+}
+
+
 - (void)viewDidLoad {
     self.title = @"Register as tutor";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:nil action:@selector(registerTutor)];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(registerTutor)];
     [rightBarButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue" size:16.0], NSFontAttributeName, nil] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = rightBarButton;
     
@@ -61,7 +72,8 @@
 }
 
 - (void)registerTutor {
-    // 
+    [_courseObject addObject:[PFUser currentUser].username forKey:@"tutors"];
+    [_courseObject saveInBackground];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

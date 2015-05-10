@@ -12,6 +12,4 @@
 
 @interface TPProfileViewController : UIViewController
 
-- (instancetype)initWithUser:(TPUser *)user;
-
 @end

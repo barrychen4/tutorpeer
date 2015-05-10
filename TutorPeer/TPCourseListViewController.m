@@ -9,6 +9,7 @@
 #import "TPCourseListViewController.h"
 #import "TPCourseViewController.h"
 #import "TPCourse.h"
+#import <Parse/Parse.h>
 
 @interface TPCourseListViewController ()
 
@@ -25,6 +26,18 @@
     _tableView = [[UITableView alloc] initWithFrame:self.view.frame];
     [_tableView setDataSource:self];
     [_tableView setDelegate:self];
+    PFQuery *query = [PFQuery queryWithClassName:@"Course"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded. The first 100 objects are available in objects
+            _courses = objects;
+            [_tableView reloadData];
+            // NSLog(@"Found courses %@", _courses);
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
     [self.view addSubview:_tableView];
 }
 
@@ -35,20 +48,19 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"courseRow"];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"Course %ld", (long)indexPath.row];
+    PFObject *course = _courses[indexPath.row];
+    cell.textLabel.text = course[@"courseName"];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //return [self.courses count];
-    return 20;
+    return [_courses count];
 }
 
 #pragma mark - Table view delegate methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TPCourse *course = [[TPCourse alloc] init];
-    course.courseName = [_tableView cellForRowAtIndexPath:indexPath].textLabel.text;
-    TPCourseViewController *courseViewController = [[TPCourseViewController alloc] initWithCourse:course];
+    //TPCourse *course = _courses[indexPath.row];
+    TPCourseViewController *courseViewController = [[TPCourseViewController alloc] initWithPFObject:_courses[indexPath.row]];
     [self.navigationController pushViewController:courseViewController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES]; 
 }

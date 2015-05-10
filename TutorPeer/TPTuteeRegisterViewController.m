@@ -8,10 +8,12 @@
 
 #import "TPTuteeRegisterViewController.h"
 #import "TPCourse.h"
+#import <Parse/Parse.h>
 
 @interface TPTuteeRegisterViewController()
 
 @property (strong, nonatomic) TPCourse *course;
+@property (strong, nonatomic) PFObject *courseObject;
 @property (strong, nonatomic) UITextField *priceTextField;
 
 @end
@@ -26,9 +28,21 @@
     return self;
 }
 
+- (instancetype)initWithPFObject:(PFObject *)courseObject {
+    self = [super init];
+    if (self) {
+        _courseObject = courseObject;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     self.title = @"Register as tutee";
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(registerTutee)];
+    [rightBarButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue" size:16.0], NSFontAttributeName, nil] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
     
     UIView *pricePaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
     
@@ -54,6 +68,12 @@
 
 - (void)hideKeyboard:(id)sender {
     [self.priceTextField resignFirstResponder];
+}
+
+- (void)registerTutee {
+    [_courseObject addObject:[PFUser currentUser].username forKey:@"tutees"];
+    [_courseObject saveInBackground];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
