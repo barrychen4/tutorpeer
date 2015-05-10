@@ -25,6 +25,12 @@
 		771631681AE5DCFA000947FB /* TPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771631671AE5DCFA000947FB /* TPSignInViewController.m */; };
 		7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */; };
 		771BEB881AEB0D530025DDCE /* TPAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 771BEB871AEB0D530025DDCE /* TPAuthenticationManager.m */; };
+		775658D71AFFC78E004CA215 /* _TPContract.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658CC1AFFC78E004CA215 /* _TPContract.m */; };
+		775658D81AFFC78E004CA215 /* _TPTuteeEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658CE1AFFC78E004CA215 /* _TPTuteeEntry.m */; };
+		775658D91AFFC78E004CA215 /* _TPTutorEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658D01AFFC78E004CA215 /* _TPTutorEntry.m */; };
+		775658DA1AFFC78E004CA215 /* TPContract.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658D21AFFC78E004CA215 /* TPContract.m */; };
+		775658DB1AFFC78E004CA215 /* TPTuteeEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658D41AFFC78E004CA215 /* TPTuteeEntry.m */; };
+		775658DC1AFFC78E004CA215 /* TPTutorEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658D61AFFC78E004CA215 /* TPTutorEntry.m */; };
 		77782B911AF69E8C0006723F /* TPModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77782B8F1AF69E8C0006723F /* TPModel.xcdatamodeld */; };
 		77782B9E1AF6A7880006723F /* TPNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 77782B9D1AF6A7880006723F /* TPNetworkManager.m */; };
 		77E3FF781AF8454B001E69F9 /* _TPConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF691AF8454B001E69F9 /* _TPConversation.m */; };
@@ -73,6 +79,18 @@
 		7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSignUpViewController.m; sourceTree = "<group>"; };
 		771BEB861AEB0D530025DDCE /* TPAuthenticationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPAuthenticationManager.h; sourceTree = "<group>"; };
 		771BEB871AEB0D530025DDCE /* TPAuthenticationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPAuthenticationManager.m; sourceTree = "<group>"; };
+		775658CB1AFFC78E004CA215 /* _TPContract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _TPContract.h; path = Model/_TPContract.h; sourceTree = "<group>"; };
+		775658CC1AFFC78E004CA215 /* _TPContract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _TPContract.m; path = Model/_TPContract.m; sourceTree = "<group>"; };
+		775658CD1AFFC78E004CA215 /* _TPTuteeEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _TPTuteeEntry.h; path = Model/_TPTuteeEntry.h; sourceTree = "<group>"; };
+		775658CE1AFFC78E004CA215 /* _TPTuteeEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _TPTuteeEntry.m; path = Model/_TPTuteeEntry.m; sourceTree = "<group>"; };
+		775658CF1AFFC78E004CA215 /* _TPTutorEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _TPTutorEntry.h; path = Model/_TPTutorEntry.h; sourceTree = "<group>"; };
+		775658D01AFFC78E004CA215 /* _TPTutorEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _TPTutorEntry.m; path = Model/_TPTutorEntry.m; sourceTree = "<group>"; };
+		775658D11AFFC78E004CA215 /* TPContract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPContract.h; path = Model/TPContract.h; sourceTree = "<group>"; };
+		775658D21AFFC78E004CA215 /* TPContract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPContract.m; path = Model/TPContract.m; sourceTree = "<group>"; };
+		775658D31AFFC78E004CA215 /* TPTuteeEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPTuteeEntry.h; path = Model/TPTuteeEntry.h; sourceTree = "<group>"; };
+		775658D41AFFC78E004CA215 /* TPTuteeEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPTuteeEntry.m; path = Model/TPTuteeEntry.m; sourceTree = "<group>"; };
+		775658D51AFFC78E004CA215 /* TPTutorEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPTutorEntry.h; path = Model/TPTutorEntry.h; sourceTree = "<group>"; };
+		775658D61AFFC78E004CA215 /* TPTutorEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPTutorEntry.m; path = Model/TPTutorEntry.m; sourceTree = "<group>"; };
 		77782B901AF69E8C0006723F /* TPModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TPModel.xcdatamodel; sourceTree = "<group>"; };
 		77782B9C1AF6A7880006723F /* TPNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNetworkManager.h; sourceTree = "<group>"; };
 		77782B9D1AF6A7880006723F /* TPNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNetworkManager.m; sourceTree = "<group>"; };
@@ -201,6 +219,12 @@
 		77B9CBDD1AF7DD4F0092D7AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				775658CB1AFFC78E004CA215 /* _TPContract.h */,
+				775658CC1AFFC78E004CA215 /* _TPContract.m */,
+				775658CD1AFFC78E004CA215 /* _TPTuteeEntry.h */,
+				775658CE1AFFC78E004CA215 /* _TPTuteeEntry.m */,
+				775658CF1AFFC78E004CA215 /* _TPTutorEntry.h */,
+				775658D01AFFC78E004CA215 /* _TPTutorEntry.m */,
 				77E3FF801AF84D98001E69F9 /* _TPSyncEntity.h */,
 				77E3FF811AF84D98001E69F9 /* _TPSyncEntity.m */,
 				77E3FF681AF8454B001E69F9 /* _TPConversation.h */,
@@ -219,6 +243,12 @@
 				77E3FF751AF8454B001E69F9 /* TPMessage.m */,
 				77E3FF761AF8454B001E69F9 /* TPUser.h */,
 				77E3FF771AF8454B001E69F9 /* TPUser.m */,
+				775658D11AFFC78E004CA215 /* TPContract.h */,
+				775658D21AFFC78E004CA215 /* TPContract.m */,
+				775658D31AFFC78E004CA215 /* TPTuteeEntry.h */,
+				775658D41AFFC78E004CA215 /* TPTuteeEntry.m */,
+				775658D51AFFC78E004CA215 /* TPTutorEntry.h */,
+				775658D61AFFC78E004CA215 /* TPTutorEntry.m */,
 				77E3FF821AF84D98001E69F9 /* TPSyncEntity.h */,
 				77E3FF831AF84D98001E69F9 /* TPSyncEntity.m */,
 			);
@@ -431,12 +461,16 @@
 				77E3FF7F1AF8454B001E69F9 /* TPUser.m in Sources */,
 				9F9DCF871AED74FB0066CFF9 /* TPCourseViewController.m in Sources */,
 				9F9DCF811AED64F50066CFF9 /* TPCourseListViewController.m in Sources */,
+				775658D71AFFC78E004CA215 /* _TPContract.m in Sources */,
 				77782B9E1AF6A7880006723F /* TPNetworkManager.m in Sources */,
 				771631651AE5D2BB000947FB /* TPLandingViewController.m in Sources */,
 				77E3FF7E1AF8454B001E69F9 /* TPMessage.m in Sources */,
+				775658DA1AFFC78E004CA215 /* TPContract.m in Sources */,
+				775658D91AFFC78E004CA215 /* _TPTutorEntry.m in Sources */,
 				77E3FF7B1AF8454B001E69F9 /* _TPUser.m in Sources */,
 				9FC1C12E1AEF0629005A14E6 /* TPTabBarController.m in Sources */,
 				77E3FF7A1AF8454B001E69F9 /* _TPMessage.m in Sources */,
+				775658DB1AFFC78E004CA215 /* TPTuteeEntry.m in Sources */,
 				7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */,
 				77E3FF781AF8454B001E69F9 /* _TPConversation.m in Sources */,
 				9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */,
@@ -451,6 +485,8 @@
 				77E3FF7D1AF8454B001E69F9 /* TPCourse.m in Sources */,
 				9F4A2E251AF69D80003C65F3 /* TPTutorRegisterViewController.m in Sources */,
 				9F4A2E281AF69D8B003C65F3 /* TPTuteeRegisterViewController.m in Sources */,
+				775658DC1AFFC78E004CA215 /* TPTutorEntry.m in Sources */,
+				775658D81AFFC78E004CA215 /* _TPTuteeEntry.m in Sources */,
 				9F59BEF41AE42324007DAD1C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,12 +12,16 @@ extern const struct TPUserAttributes {
 } TPUserAttributes;
 
 extern const struct TPUserRelationships {
-	__unsafe_unretained NSString *tuteeCourses;
-	__unsafe_unretained NSString *tutorCourses;
+	__unsafe_unretained NSString *tuteeContracts;
+	__unsafe_unretained NSString *tuteeEntries;
+	__unsafe_unretained NSString *tutorContracts;
+	__unsafe_unretained NSString *tutorEntries;
 } TPUserRelationships;
 
-@class TPCourse;
-@class TPCourse;
+@class TPContract;
+@class TPTuteeEntry;
+@class TPContract;
+@class TPTutorEntry;
 
 @class NSObject;
 
@@ -46,29 +50,53 @@ extern const struct TPUserRelationships {
 
 //- (BOOL)validateProfileImage:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSSet *tuteeCourses;
+@property (nonatomic, strong) NSSet *tuteeContracts;
 
-- (NSMutableSet*)tuteeCoursesSet;
+- (NSMutableSet*)tuteeContractsSet;
 
-@property (nonatomic, strong) NSSet *tutorCourses;
+@property (nonatomic, strong) NSSet *tuteeEntries;
 
-- (NSMutableSet*)tutorCoursesSet;
+- (NSMutableSet*)tuteeEntriesSet;
+
+@property (nonatomic, strong) NSSet *tutorContracts;
+
+- (NSMutableSet*)tutorContractsSet;
+
+@property (nonatomic, strong) NSSet *tutorEntries;
+
+- (NSMutableSet*)tutorEntriesSet;
 
 @end
 
-@interface _TPUser (TuteeCoursesCoreDataGeneratedAccessors)
-- (void)addTuteeCourses:(NSSet*)value_;
-- (void)removeTuteeCourses:(NSSet*)value_;
-- (void)addTuteeCoursesObject:(TPCourse*)value_;
-- (void)removeTuteeCoursesObject:(TPCourse*)value_;
+@interface _TPUser (TuteeContractsCoreDataGeneratedAccessors)
+- (void)addTuteeContracts:(NSSet*)value_;
+- (void)removeTuteeContracts:(NSSet*)value_;
+- (void)addTuteeContractsObject:(TPContract*)value_;
+- (void)removeTuteeContractsObject:(TPContract*)value_;
 
 @end
 
-@interface _TPUser (TutorCoursesCoreDataGeneratedAccessors)
-- (void)addTutorCourses:(NSSet*)value_;
-- (void)removeTutorCourses:(NSSet*)value_;
-- (void)addTutorCoursesObject:(TPCourse*)value_;
-- (void)removeTutorCoursesObject:(TPCourse*)value_;
+@interface _TPUser (TuteeEntriesCoreDataGeneratedAccessors)
+- (void)addTuteeEntries:(NSSet*)value_;
+- (void)removeTuteeEntries:(NSSet*)value_;
+- (void)addTuteeEntriesObject:(TPTuteeEntry*)value_;
+- (void)removeTuteeEntriesObject:(TPTuteeEntry*)value_;
+
+@end
+
+@interface _TPUser (TutorContractsCoreDataGeneratedAccessors)
+- (void)addTutorContracts:(NSSet*)value_;
+- (void)removeTutorContracts:(NSSet*)value_;
+- (void)addTutorContractsObject:(TPContract*)value_;
+- (void)removeTutorContractsObject:(TPContract*)value_;
+
+@end
+
+@interface _TPUser (TutorEntriesCoreDataGeneratedAccessors)
+- (void)addTutorEntries:(NSSet*)value_;
+- (void)removeTutorEntries:(NSSet*)value_;
+- (void)addTutorEntriesObject:(TPTutorEntry*)value_;
+- (void)removeTutorEntriesObject:(TPTutorEntry*)value_;
 
 @end
 
@@ -86,10 +114,16 @@ extern const struct TPUserRelationships {
 - (id)primitiveProfileImage;
 - (void)setPrimitiveProfileImage:(id)value;
 
-- (NSMutableSet*)primitiveTuteeCourses;
-- (void)setPrimitiveTuteeCourses:(NSMutableSet*)value;
+- (NSMutableSet*)primitiveTuteeContracts;
+- (void)setPrimitiveTuteeContracts:(NSMutableSet*)value;
 
-- (NSMutableSet*)primitiveTutorCourses;
-- (void)setPrimitiveTutorCourses:(NSMutableSet*)value;
+- (NSMutableSet*)primitiveTuteeEntries;
+- (void)setPrimitiveTuteeEntries:(NSMutableSet*)value;
+
+- (NSMutableSet*)primitiveTutorContracts;
+- (void)setPrimitiveTutorContracts:(NSMutableSet*)value;
+
+- (NSMutableSet*)primitiveTutorEntries;
+- (void)setPrimitiveTutorEntries:(NSMutableSet*)value;
 
 @end

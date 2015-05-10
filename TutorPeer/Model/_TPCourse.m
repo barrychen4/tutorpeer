@@ -9,8 +9,9 @@ const struct TPCourseAttributes TPCourseAttributes = {
 };
 
 const struct TPCourseRelationships TPCourseRelationships = {
-	.tutees = @"tutees",
-	.tutors = @"tutors",
+	.contracts = @"contracts",
+	.tuteeEntries = @"tuteeEntries",
+	.tutorEntries = @"tutorEntries",
 };
 
 @implementation TPCourseID
@@ -46,25 +47,36 @@ const struct TPCourseRelationships TPCourseRelationships = {
 
 @dynamic courseName;
 
-@dynamic tutees;
+@dynamic contracts;
 
-- (NSMutableSet*)tuteesSet {
-	[self willAccessValueForKey:@"tutees"];
+- (NSMutableSet*)contractsSet {
+	[self willAccessValueForKey:@"contracts"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tutees"];
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"contracts"];
 
-	[self didAccessValueForKey:@"tutees"];
+	[self didAccessValueForKey:@"contracts"];
 	return result;
 }
 
-@dynamic tutors;
+@dynamic tuteeEntries;
 
-- (NSMutableSet*)tutorsSet {
-	[self willAccessValueForKey:@"tutors"];
+- (NSMutableSet*)tuteeEntriesSet {
+	[self willAccessValueForKey:@"tuteeEntries"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tutors"];
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tuteeEntries"];
 
-	[self didAccessValueForKey:@"tutors"];
+	[self didAccessValueForKey:@"tuteeEntries"];
+	return result;
+}
+
+@dynamic tutorEntries;
+
+- (NSMutableSet*)tutorEntriesSet {
+	[self willAccessValueForKey:@"tutorEntries"];
+
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tutorEntries"];
+
+	[self didAccessValueForKey:@"tutorEntries"];
 	return result;
 }
 

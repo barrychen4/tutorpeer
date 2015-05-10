@@ -11,8 +11,10 @@ const struct TPUserAttributes TPUserAttributes = {
 };
 
 const struct TPUserRelationships TPUserRelationships = {
-	.tuteeCourses = @"tuteeCourses",
-	.tutorCourses = @"tutorCourses",
+	.tuteeContracts = @"tuteeContracts",
+	.tuteeEntries = @"tuteeEntries",
+	.tutorContracts = @"tutorContracts",
+	.tutorEntries = @"tutorEntries",
 };
 
 @implementation TPUserID
@@ -52,25 +54,47 @@ const struct TPUserRelationships TPUserRelationships = {
 
 @dynamic profileImage;
 
-@dynamic tuteeCourses;
+@dynamic tuteeContracts;
 
-- (NSMutableSet*)tuteeCoursesSet {
-	[self willAccessValueForKey:@"tuteeCourses"];
+- (NSMutableSet*)tuteeContractsSet {
+	[self willAccessValueForKey:@"tuteeContracts"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tuteeCourses"];
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tuteeContracts"];
 
-	[self didAccessValueForKey:@"tuteeCourses"];
+	[self didAccessValueForKey:@"tuteeContracts"];
 	return result;
 }
 
-@dynamic tutorCourses;
+@dynamic tuteeEntries;
 
-- (NSMutableSet*)tutorCoursesSet {
-	[self willAccessValueForKey:@"tutorCourses"];
+- (NSMutableSet*)tuteeEntriesSet {
+	[self willAccessValueForKey:@"tuteeEntries"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tutorCourses"];
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tuteeEntries"];
 
-	[self didAccessValueForKey:@"tutorCourses"];
+	[self didAccessValueForKey:@"tuteeEntries"];
+	return result;
+}
+
+@dynamic tutorContracts;
+
+- (NSMutableSet*)tutorContractsSet {
+	[self willAccessValueForKey:@"tutorContracts"];
+
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tutorContracts"];
+
+	[self didAccessValueForKey:@"tutorContracts"];
+	return result;
+}
+
+@dynamic tutorEntries;
+
+- (NSMutableSet*)tutorEntriesSet {
+	[self willAccessValueForKey:@"tutorEntries"];
+
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tutorEntries"];
+
+	[self didAccessValueForKey:@"tutorEntries"];
 	return result;
 }
 
