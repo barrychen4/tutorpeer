@@ -9,6 +9,7 @@
 #import "TPCourseListViewController.h"
 #import "TPCourseViewController.h"
 #import "TPCourse.h"
+#import "TPNetworkManager+TPCourseRequests.h"
 #import <Parse/Parse.h>
 
 @interface TPCourseListViewController ()
@@ -26,18 +27,14 @@
     _tableView = [[UITableView alloc] initWithFrame:self.view.frame];
     [_tableView setDataSource:self];
     [_tableView setDelegate:self];
-    PFQuery *query = [PFQuery queryWithClassName:@"Course"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            // The find succeeded. The first 100 objects are available in objects
-            _courses = objects;
-            [_tableView reloadData];
-            // NSLog(@"Found courses %@", _courses);
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
+
+    [[TPNetworkManager sharedInstance] getCoursesWithCallback:^(NSArray *courses) {
+        _courses = courses;
+        [_tableView reloadData];
+        
+        NSLog(@"Successfully got courses with callback");
     }];
+    
     [self.view addSubview:_tableView];
 }
 

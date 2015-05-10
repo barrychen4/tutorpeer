@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TPSyncEntity.h"
+#import "TPCourse.h"
+#import <Parse/Parse.h>
 
 @import CoreData;
 
@@ -17,5 +20,10 @@
 
 + (instancetype)sharedInstance;
 + (NSString *)storePath;
+
+- (TPSyncEntity *)getLocalObjectForClass:(NSEntityDescription *)entityDesc withRemoteId:(NSString *)objectId;
+- (NSArray *)getLocalObjectsForClass:(NSEntityDescription *)entityDesc withRemoteIds:(NSArray *)objectIds;
+- (TPSyncEntity *)addLocalObjectForClass:(NSEntityDescription *)entityDesc withRemoteObject:(PFObject *)parseObject;
+- (NSDictionary *)addLocalObjectsForClass:(NSEntityDescription *)entityDesc withRemoteObjects:(NSArray *)parseObjects;
 
 @end

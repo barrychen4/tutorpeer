@@ -7,7 +7,6 @@ const struct TPUserAttributes TPUserAttributes = {
 	.email = @"email",
 	.firstName = @"firstName",
 	.lastName = @"lastName",
-	.profileImage = @"profileImage",
 };
 
 const struct TPUserRelationships TPUserRelationships = {
@@ -51,8 +50,6 @@ const struct TPUserRelationships TPUserRelationships = {
 @dynamic firstName;
 
 @dynamic lastName;
-
-@dynamic profileImage;
 
 @dynamic tuteeContracts;
 

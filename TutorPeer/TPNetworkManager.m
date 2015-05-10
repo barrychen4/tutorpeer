@@ -8,6 +8,7 @@
 
 #import "TPNetworkManager.h"
 #import "TPSyncEntity.h"
+#import "TPCourse.h"
 #import <Parse/Parse.h>
 
 @implementation TPNetworkManager
@@ -66,7 +67,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = entityDesc;
     
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"objectId IN %@", objectId];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"objectId == %@", objectId];
     [request setPredicate:pred];
     
     NSError *error = nil;
@@ -84,10 +85,29 @@
     }
 }
 
+- (NSArray *)getLocalObjectsForClass:(NSEntityDescription *)entityDesc withRemoteIds:(NSArray *)objectIds
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.entity = entityDesc;
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"objectId IN %@", objectIds];
+    [request setPredicate:pred];
+    
+    NSError *error = nil;
+    NSArray *result = [self.managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (!result) {
+        [NSException raise:@"Fetch failed" format:@"Reason: %@", [error localizedDescription]];
+    }
+    
+    return result;
+}
+
 - (TPSyncEntity *)addLocalObjectForClass:(NSEntityDescription *)entityDesc withRemoteObject:(PFObject *)parseObject
 {
     TPSyncEntity *localObject = [self getLocalObjectForClass:entityDesc withRemoteId:parseObject.objectId];
     if (localObject) {
+        NSLog(@"Loaded local object");
         return localObject;
     }
     
@@ -97,6 +117,18 @@
     
     return newObject;
 }
+
+- (NSDictionary *)addLocalObjectsForClass:(NSEntityDescription *)entityDesc withRemoteObjects:(NSArray *)parseObjects
+{
+    NSMutableDictionary *localObjects = [[NSMutableDictionary alloc] init];
+    for (PFObject *parseObject in parseObjects) {
+        [localObjects setObject:[self addLocalObjectForClass:entityDesc withRemoteObject:parseObject] forKey:parseObject.objectId];
+    }
+    
+    return localObjects;
+}
+
+
 
 
 @end

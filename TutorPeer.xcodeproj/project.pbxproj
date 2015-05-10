@@ -31,6 +31,7 @@
 		775658DA1AFFC78E004CA215 /* TPContract.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658D21AFFC78E004CA215 /* TPContract.m */; };
 		775658DB1AFFC78E004CA215 /* TPTuteeEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658D41AFFC78E004CA215 /* TPTuteeEntry.m */; };
 		775658DC1AFFC78E004CA215 /* TPTutorEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658D61AFFC78E004CA215 /* TPTutorEntry.m */; };
+		775658E11AFFCEB3004CA215 /* TPNetworkManager+TPCourseRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658E01AFFCEB3004CA215 /* TPNetworkManager+TPCourseRequests.m */; };
 		77782B911AF69E8C0006723F /* TPModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77782B8F1AF69E8C0006723F /* TPModel.xcdatamodeld */; };
 		77782B9E1AF6A7880006723F /* TPNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 77782B9D1AF6A7880006723F /* TPNetworkManager.m */; };
 		77E3FF781AF8454B001E69F9 /* _TPConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FF691AF8454B001E69F9 /* _TPConversation.m */; };
@@ -91,6 +92,8 @@
 		775658D41AFFC78E004CA215 /* TPTuteeEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPTuteeEntry.m; path = Model/TPTuteeEntry.m; sourceTree = "<group>"; };
 		775658D51AFFC78E004CA215 /* TPTutorEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPTutorEntry.h; path = Model/TPTutorEntry.h; sourceTree = "<group>"; };
 		775658D61AFFC78E004CA215 /* TPTutorEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPTutorEntry.m; path = Model/TPTutorEntry.m; sourceTree = "<group>"; };
+		775658DF1AFFCEB3004CA215 /* TPNetworkManager+TPCourseRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TPNetworkManager+TPCourseRequests.h"; sourceTree = "<group>"; };
+		775658E01AFFCEB3004CA215 /* TPNetworkManager+TPCourseRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TPNetworkManager+TPCourseRequests.m"; sourceTree = "<group>"; };
 		77782B901AF69E8C0006723F /* TPModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TPModel.xcdatamodel; sourceTree = "<group>"; };
 		77782B9C1AF6A7880006723F /* TPNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNetworkManager.h; sourceTree = "<group>"; };
 		77782B9D1AF6A7880006723F /* TPNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNetworkManager.m; sourceTree = "<group>"; };
@@ -199,12 +202,22 @@
 		771BEB851AEB0D310025DDCE /* Singleton */ = {
 			isa = PBXGroup;
 			children = (
+				775658DE1AFFCE59004CA215 /* TPNetworkManager */,
 				771BEB861AEB0D530025DDCE /* TPAuthenticationManager.h */,
 				771BEB871AEB0D530025DDCE /* TPAuthenticationManager.m */,
-				77782B9C1AF6A7880006723F /* TPNetworkManager.h */,
-				77782B9D1AF6A7880006723F /* TPNetworkManager.m */,
 			);
 			name = Singleton;
+			sourceTree = "<group>";
+		};
+		775658DE1AFFCE59004CA215 /* TPNetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				77782B9C1AF6A7880006723F /* TPNetworkManager.h */,
+				77782B9D1AF6A7880006723F /* TPNetworkManager.m */,
+				775658DF1AFFCEB3004CA215 /* TPNetworkManager+TPCourseRequests.h */,
+				775658E01AFFCEB3004CA215 /* TPNetworkManager+TPCourseRequests.m */,
+			);
+			name = TPNetworkManager;
 			sourceTree = "<group>";
 		};
 		77782B921AF69E9A0006723F /* Core Data */ = {
@@ -471,6 +484,7 @@
 				9FC1C12E1AEF0629005A14E6 /* TPTabBarController.m in Sources */,
 				77E3FF7A1AF8454B001E69F9 /* _TPMessage.m in Sources */,
 				775658DB1AFFC78E004CA215 /* TPTuteeEntry.m in Sources */,
+				775658E11AFFCEB3004CA215 /* TPNetworkManager+TPCourseRequests.m in Sources */,
 				7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */,
 				77E3FF781AF8454B001E69F9 /* _TPConversation.m in Sources */,
 				9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */,

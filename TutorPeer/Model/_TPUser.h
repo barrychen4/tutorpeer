@@ -8,7 +8,6 @@ extern const struct TPUserAttributes {
 	__unsafe_unretained NSString *email;
 	__unsafe_unretained NSString *firstName;
 	__unsafe_unretained NSString *lastName;
-	__unsafe_unretained NSString *profileImage;
 } TPUserAttributes;
 
 extern const struct TPUserRelationships {
@@ -22,8 +21,6 @@ extern const struct TPUserRelationships {
 @class TPTuteeEntry;
 @class TPContract;
 @class TPTutorEntry;
-
-@class NSObject;
 
 @interface TPUserID : TPSyncEntityID {}
 @end
@@ -45,10 +42,6 @@ extern const struct TPUserRelationships {
 @property (nonatomic, strong) NSString* lastName;
 
 //- (BOOL)validateLastName:(id*)value_ error:(NSError**)error_;
-
-@property (nonatomic, strong) id profileImage;
-
-//- (BOOL)validateProfileImage:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSSet *tuteeContracts;
 
@@ -110,9 +103,6 @@ extern const struct TPUserRelationships {
 
 - (NSString*)primitiveLastName;
 - (void)setPrimitiveLastName:(NSString*)value;
-
-- (id)primitiveProfileImage;
-- (void)setPrimitiveProfileImage:(id)value;
 
 - (NSMutableSet*)primitiveTuteeContracts;
 - (void)setPrimitiveTuteeContracts:(NSMutableSet*)value;

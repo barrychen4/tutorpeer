@@ -37,7 +37,6 @@
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="profileImage" optional="YES" attributeType="Transformable" valueTransformerName="TPImageTransformer" syncable="YES"/>
         <relationship name="tuteeContracts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPContract" inverseName="tutee" inverseEntity="TPContract" syncable="YES"/>
         <relationship name="tuteeEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPTuteeEntry" inverseName="tutee" inverseEntity="TPTuteeEntry" syncable="YES"/>
         <relationship name="tutorContracts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPContract" inverseName="tutor" inverseEntity="TPContract" syncable="YES"/>
@@ -48,7 +47,7 @@
         <element name="TPCourse" positionX="52" positionY="-243" width="128" height="120"/>
         <element name="TPMessage" positionX="-225" positionY="120" width="128" height="58"/>
         <element name="TPSyncEntity" positionX="-99" positionY="-90" width="128" height="105"/>
-        <element name="TPUser" positionX="-252" positionY="-315" width="128" height="165"/>
+        <element name="TPUser" positionX="-252" positionY="-315" width="128" height="150"/>
         <element name="TPTutorEntry" positionX="-99" positionY="-162" width="128" height="90"/>
         <element name="TPTuteeEntry" positionX="-90" positionY="-153" width="128" height="75"/>
         <element name="TPContract" positionX="-81" positionY="-144" width="128" height="120"/>
