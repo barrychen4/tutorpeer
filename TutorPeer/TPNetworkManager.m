@@ -12,6 +12,15 @@
 
 @implementation TPNetworkManager
 
+- (id)init
+{
+    if (self = [super init]) {
+        [self setupObjectManager];
+    }
+    
+    return self;
+}
+
 + (instancetype)sharedInstance
 {
     static TPNetworkManager *sharedInstance = nil;
