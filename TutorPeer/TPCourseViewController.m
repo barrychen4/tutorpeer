@@ -7,14 +7,12 @@
 //
 
 #import "TPCourseViewController.h"
-#import "TPCourse.h"
 #import "TPTutorRegisterViewController.h"
-#import "TPTuteeRegisterViewController.h"
+#import "TPTutorsListViewController.h"
 #import <Parse/Parse.h>
 
 @interface TPCourseViewController ()
 
-@property (strong, nonatomic) TPCourse *course;
 @property (strong, nonatomic) PFObject *courseObject;
 @property (strong, nonatomic) UILabel *courseLabel;
 @property (strong, nonatomic) UILabel *tutorsLabel;
@@ -26,15 +24,7 @@
 
 @implementation TPCourseViewController
 
-- (instancetype)initWithCourse:(TPCourse *)course {
-    self = [super init];
-    if (self) {
-        _course = course;
-    }
-    return self;
-}
-
-- (instancetype)initWithPFObject:(PFObject *)courseObject {
+- (instancetype)initWithCourseObject:(PFObject *)courseObject {
     self = [super init];
     if (self) {
         _courseObject = courseObject;
@@ -44,13 +34,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = _course.courseName;
     self.title = _courseObject[@"courseName"];
     self.view.backgroundColor = [UIColor whiteColor];
     
     _courseLabel = [[UILabel alloc] init];
     _courseLabel.frame = CGRectMake(20, 100, 300, 50);
-//    _courseLabel.text = [NSString stringWithFormat:@"Course name: %@", _course.courseName];
     _courseLabel.text = [NSString stringWithFormat:@"Course name: %@", _courseObject[@"courseName"]];
     [self.view addSubview:_courseLabel];
 }
@@ -64,9 +52,9 @@
     if ([self registeredAsTutor] || [self registeredAsTutee]) {
         [_registerTutorButton removeFromSuperview];
         [_registerTuteeButton removeFromSuperview];
-        _viewRegistrationDetailsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 150, 50)];
+        _viewRegistrationDetailsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 300, 50)];
         _viewRegistrationDetailsButton.center = CGPointMake(self.view.center.x, 300);
-        [_viewRegistrationDetailsButton setTitle:@"Already registered" forState:UIControlStateNormal];
+        [_viewRegistrationDetailsButton setTitle:@"Change registration details" forState:UIControlStateNormal];
         [_viewRegistrationDetailsButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_viewRegistrationDetailsButton addTarget:self action:@selector(viewDetails) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_viewRegistrationDetailsButton];
@@ -90,20 +78,20 @@
 }
 
 - (BOOL)registeredAsTutor {
-    return [_courseObject[@"tutors"] containsString:[PFUser currentUser].username];
+    return [_courseObject[@"tutors"] containsObject:[PFUser currentUser].username];
 }
 
 - (BOOL)registeredAsTutee {
-    return [_courseObject[@"tutees"] containsString:[PFUser currentUser].username];
+    return [_courseObject[@"tutees"] containsObject:[PFUser currentUser].username];
 }
 
 - (void)registerAsTutor {
-    TPTutorRegisterViewController *tutorRegisterViewController = [[TPTutorRegisterViewController alloc] initWithPFObject:_courseObject];
+    TPTutorRegisterViewController *tutorRegisterViewController = [[TPTutorRegisterViewController alloc] initWithCourseObject:_courseObject];
     [self.navigationController pushViewController:tutorRegisterViewController animated:YES];
 }
 
 - (void)registerAsTutee {
-    TPTuteeRegisterViewController *tuteeRegisterViewController = [[TPTuteeRegisterViewController alloc] initWithPFObject:_courseObject];
+    TPTutorsListViewController *tuteeRegisterViewController = [[TPTutorsListViewController alloc] initWithCourseObject:_courseObject];
     [self.navigationController pushViewController:tuteeRegisterViewController animated:YES];
 }
 
