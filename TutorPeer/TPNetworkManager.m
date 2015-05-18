@@ -80,7 +80,7 @@
     if (result.count > 0) {
         return [result objectAtIndex:0];
     } else {
-        NSLog(@"Error with fetching, empty set returned from fetching");
+        NSLog(@"Empty set returned from fetching");
         return nil;
     }
 }
@@ -108,6 +108,7 @@
     TPSyncEntity *localObject = [self getLocalObjectForClass:entityDesc withRemoteId:parseObject.objectId];
     if (localObject) {
         NSLog(@"Loaded local object");
+        [self updateLocalObject:localObject withRemoteObject:parseObject];
         return localObject;
     }
     
@@ -126,6 +127,21 @@
     }
     
     return localObjects;
+}
+
+- (void)updateLocalObject:(TPSyncEntity *)localObject withRemoteObject:(PFObject *)parseObject
+{
+    NSDictionary *attributes = [[localObject entity] attributesByName];
+    
+    // Update attributes
+    for (NSString *attribute in attributes) {
+        if (![attribute isEqualToString:@"objectId"] && ![attribute isEqualToString:@"createdAt"] && ![attribute isEqualToString:@"updatedAt"] &&
+            ![attribute isEqualToString:@"deleted"]) {
+            
+            [localObject setValue:[parseObject valueForKey:attribute] forKey:attribute];
+        }
+    }
+    
 }
 
 

@@ -30,21 +30,6 @@
             
             NSLog(@"Added objects locally");
             
-            NSArray *objectIds = [objects valueForKeyPath:@"objectId"];
-            
-            NSArray *locals = [self getLocalObjectsForClass:e withRemoteIds:objectIds];
-            
-            if (locals.count != 0) {
-                
-                for (TPCourse *course in locals) {
-                    NSLog(@"%@", course.courseName);
-                    NSLog(@"%@", course.courseCode);
-                }
-                
-            } else {
-                NSLog(@"empty");
-            }
-            
             callback(objects);
             
         } else {
@@ -54,5 +39,7 @@
     }];
 
 }
+
+
 
 @end
