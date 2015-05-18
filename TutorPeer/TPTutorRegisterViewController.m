@@ -8,6 +8,7 @@
 
 #import "TPTutorRegisterViewController.h"
 #import <Parse/Parse.h>
+#import "TPNetworkManager+TPCourseRequests.h"
 
 @interface TPTutorRegisterViewController()
 
@@ -79,12 +80,21 @@
     
     if ([self registeredAsTutor]) {
         // Get tutor entry information
-        PFQuery *query = [PFQuery queryWithClassName:@"TutorEntry"];
-        [query whereKey:@"tutor" equalTo:[PFUser currentUser].username];
-        [query whereKey:@"course" equalTo:_courseObject[@"courseCode"]];
-        _tutorEntryObject = [query findObjects][0];
-        self.priceTextField.text = [_tutorEntryObject[@"price"] stringValue];
-        self.blurbTextField.text = _tutorEntryObject[@"blurb"];
+//        PFQuery *query = [PFQuery queryWithClassName:@"TutorEntry"];
+//        [query whereKey:@"tutor" equalTo:[PFUser currentUser].username];
+//        [query whereKey:@"course" equalTo:_courseObject[@"courseCode"]];
+//        _tutorEntryObject = [query findObjects][0];
+//        self.priceTextField.text = [_tutorEntryObject[@"price"] stringValue];
+//        self.blurbTextField.text = _tutorEntryObject[@"blurb"];
+        [[TPNetworkManager sharedInstance] getTutorEntryFor:[PFUser currentUser].username andCourse:_courseObject[@"courseCode"] withCallback:^(NSArray *tutorEntry) {
+            _tutorEntryObject = [tutorEntry objectAtIndex:0];
+            
+            NSLog(@"Successfuly got tutor entry with callback");
+            
+            self.priceTextField.text = [_tutorEntryObject[@"price"] stringValue];
+            self.blurbTextField.text = _tutorEntryObject[@"blurb"];
+        }];
+        
         [_registerButton setTitle:@"Unregister" forState:UIControlStateNormal];
         [_registerButton addTarget:self action:@selector(unregisterTutor) forControlEvents:UIControlEventTouchUpInside];
     } else {

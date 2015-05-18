@@ -5,6 +5,7 @@
 #import "TPSyncEntity.h"
 
 extern const struct TPTutorEntryAttributes {
+	__unsafe_unretained NSString *blurb;
 	__unsafe_unretained NSString *price;
 } TPTutorEntryAttributes;
 
@@ -25,6 +26,10 @@ extern const struct TPTutorEntryRelationships {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) TPTutorEntryID* objectID;
 
+@property (nonatomic, strong) NSString* blurb;
+
+//- (BOOL)validateBlurb:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) NSNumber* price;
 
 @property (atomic) double priceValue;
@@ -44,6 +49,9 @@ extern const struct TPTutorEntryRelationships {
 @end
 
 @interface _TPTutorEntry (CoreDataGeneratedPrimitiveAccessors)
+
+- (NSString*)primitiveBlurb;
+- (void)setPrimitiveBlurb:(NSString*)value;
 
 - (NSNumber*)primitivePrice;
 - (void)setPrimitivePrice:(NSNumber*)value;

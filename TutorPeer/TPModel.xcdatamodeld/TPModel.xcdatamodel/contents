@@ -29,6 +29,7 @@
         <relationship name="tutee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPUser" inverseName="tuteeEntries" inverseEntity="TPUser" syncable="YES"/>
     </entity>
     <entity name="TPTutorEntry" representedClassName="TPTutorEntry" parentEntity="TPSyncEntity" syncable="YES">
+        <attribute name="blurb" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPCourse" inverseName="tutorEntries" inverseEntity="TPCourse" syncable="YES"/>
         <relationship name="tutor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPUser" inverseName="tutorEntries" inverseEntity="TPUser" syncable="YES"/>
@@ -43,13 +44,13 @@
         <relationship name="tutorEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPTutorEntry" inverseName="tutor" inverseEntity="TPTutorEntry" syncable="YES"/>
     </entity>
     <elements>
+        <element name="TPContract" positionX="-81" positionY="-144" width="128" height="120"/>
         <element name="TPConversation" positionX="-45" positionY="45" width="128" height="45"/>
         <element name="TPCourse" positionX="52" positionY="-243" width="128" height="120"/>
         <element name="TPMessage" positionX="-225" positionY="120" width="128" height="58"/>
         <element name="TPSyncEntity" positionX="-99" positionY="-90" width="128" height="105"/>
-        <element name="TPUser" positionX="-252" positionY="-315" width="128" height="150"/>
-        <element name="TPTutorEntry" positionX="-99" positionY="-162" width="128" height="90"/>
         <element name="TPTuteeEntry" positionX="-90" positionY="-153" width="128" height="75"/>
-        <element name="TPContract" positionX="-81" positionY="-144" width="128" height="120"/>
+        <element name="TPTutorEntry" positionX="-99" positionY="-162" width="128" height="105"/>
+        <element name="TPUser" positionX="-252" positionY="-315" width="128" height="150"/>
     </elements>
 </model>

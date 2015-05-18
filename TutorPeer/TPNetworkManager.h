@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "TPSyncEntity.h"
-#import "TPCourse.h"
 #import <Parse/Parse.h>
 
 @import CoreData;

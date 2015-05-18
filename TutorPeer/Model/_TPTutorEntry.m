@@ -4,6 +4,7 @@
 #import "_TPTutorEntry.h"
 
 const struct TPTutorEntryAttributes TPTutorEntryAttributes = {
+	.blurb = @"blurb",
 	.price = @"price",
 };
 
@@ -46,6 +47,8 @@ const struct TPTutorEntryRelationships TPTutorEntryRelationships = {
 
 	return keyPaths;
 }
+
+@dynamic blurb;
 
 @dynamic price;
 

@@ -8,6 +8,8 @@
 
 #import "TPNetworkManager+TPCourseRequests.h"
 #import <Parse/Parse.h>
+#import "TPCourse.h"
+#import "TPTutorEntry.h"
 
 @implementation TPNetworkManager (TPCourseRequests)
 
@@ -39,6 +41,73 @@
     }];
 
 }
+
+- (void)getTutorEntryFor:(NSString *)username andCourse:(NSString *)courseCode withCallback:(void (^)(NSArray *))callback
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"TutorEntry"];
+    [query whereKey:@"tutor" equalTo:username];
+    [query whereKey:@"course" equalTo:courseCode];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSEntityDescription *e = [NSEntityDescription entityForName:@"TPTutorEntry" inManagedObjectContext:self.managedObjectContext];
+            
+            NSArray *remoteObject = [NSArray arrayWithObject:objects[0]];
+            
+            NSDictionary *localObjects = [self addLocalObjectsForClass:e withRemoteObjects:remoteObject];
+            
+            for (PFObject *parseObject in objects) {
+                TPTutorEntry *tutorEntry = [localObjects objectForKey:parseObject.objectId];
+//                [tutorEntry setValue:parseObject[@"tutor"] forKey:@"tutor"];
+//                [tutorEntry setValue:parseObject[@"course"] forKey:@"course"];
+                [tutorEntry setValue:parseObject[@"price"] forKey:@"price"];
+                [tutorEntry setValue:parseObject[@"blurb"] forKey:@"blurb"];
+            }
+            
+            NSLog(@"Added objects locally");
+            
+            callback(remoteObject);
+            
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
+
+- (void)getTuteeEntryFor:(NSString *)username andCourse:(NSString *)courseCode andTutor:(NSString *)tutor withCallback:(void (^)(NSArray *))callback
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"TuteeEntry"];
+    [query whereKey:@"tutee" equalTo:username];
+    [query whereKey:@"course" equalTo:courseCode];
+    [query whereKey:@"tutor" equalTo:tutor];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSEntityDescription *e = [NSEntityDescription entityForName:@"TPTuteeEntry" inManagedObjectContext:self.managedObjectContext];
+            
+            NSArray *remoteObject = [NSArray arrayWithObject:objects[0]];
+            
+            NSDictionary *localObjects = [self addLocalObjectsForClass:e withRemoteObjects:remoteObject];
+            
+            for (PFObject *parseObject in objects) {
+                TPTuteeEntry *tuteeEntry = [localObjects objectForKey:parseObject.objectId];
+                //                [tutorEntry setValue:parseObject[@"tutor"] forKey:@"tutor"];
+                //                [tutorEntry setValue:parseObject[@"course"] forKey:@"course"];
+//                [tutorEntry setValue:parseObject[@"price"] forKey:@"price"];
+//                [tutorEntry setValue:parseObject[@"blurb"] forKey:@"blurb"];
+            }
+            
+            NSLog(@"Added objects locally");
+            
+            callback(remoteObject);
+            
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
+
+
 
 
 

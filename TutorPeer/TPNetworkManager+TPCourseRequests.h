@@ -8,8 +8,11 @@
 
 #import "TPNetworkManager.h"
 
+@import CoreData;
+
 @interface TPNetworkManager (TPCourseRequests)
 
 - (void)getCoursesWithCallback:(void (^)(NSArray *))callback;
+- (void)getTutorEntryFor:(NSString *) username andCourse:(NSString *)courseCode withCallback:(void (^)(NSArray *))callback;
 
 @end
