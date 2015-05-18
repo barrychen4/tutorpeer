@@ -8,12 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class TPCourse;
 @class PFObject;
 
 @interface TPTutorRegisterViewController : UIViewController <UITextFieldDelegate>
 
-- (instancetype)initWithCourse:(TPCourse *)course;
-- (instancetype)initWithPFObject:(PFObject *)courseObject;
+- (instancetype)initWithCourseObject:(PFObject *)courseObject;
 
 @end
