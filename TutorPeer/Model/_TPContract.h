@@ -7,14 +7,17 @@
 extern const struct TPContractAttributes {
 	__unsafe_unretained NSString *hrsWeek;
 	__unsafe_unretained NSString *price;
+	__unsafe_unretained NSString *status;
 } TPContractAttributes;
 
 extern const struct TPContractRelationships {
+	__unsafe_unretained NSString *conversation;
 	__unsafe_unretained NSString *course;
 	__unsafe_unretained NSString *tutee;
 	__unsafe_unretained NSString *tutor;
 } TPContractRelationships;
 
+@class TPConversation;
 @class TPCourse;
 @class TPUser;
 @class TPUser;
@@ -44,6 +47,18 @@ extern const struct TPContractRelationships {
 
 //- (BOOL)validatePrice:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSNumber* status;
+
+@property (atomic) int32_t statusValue;
+- (int32_t)statusValue;
+- (void)setStatusValue:(int32_t)value_;
+
+//- (BOOL)validateStatus:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) TPConversation *conversation;
+
+//- (BOOL)validateConversation:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) TPCourse *course;
 
 //- (BOOL)validateCourse:(id*)value_ error:(NSError**)error_;
@@ -71,6 +86,15 @@ extern const struct TPContractRelationships {
 
 - (double)primitivePriceValue;
 - (void)setPrimitivePriceValue:(double)value_;
+
+- (NSNumber*)primitiveStatus;
+- (void)setPrimitiveStatus:(NSNumber*)value;
+
+- (int32_t)primitiveStatusValue;
+- (void)setPrimitiveStatusValue:(int32_t)value_;
+
+- (TPConversation*)primitiveConversation;
+- (void)setPrimitiveConversation:(TPConversation*)value;
 
 - (TPCourse*)primitiveCourse;
 - (void)setPrimitiveCourse:(TPCourse*)value;

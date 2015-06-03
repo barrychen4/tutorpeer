@@ -23,6 +23,8 @@
 - (TPSyncEntity *)getLocalObjectForClass:(NSEntityDescription *)entityDesc withRemoteId:(NSString *)objectId;
 - (NSArray *)getLocalObjectsForClass:(NSEntityDescription *)entityDesc withRemoteIds:(NSArray *)objectIds;
 - (TPSyncEntity *)addLocalObjectForClass:(NSEntityDescription *)entityDesc withRemoteObject:(PFObject *)parseObject;
-- (NSDictionary *)addLocalObjectsForClass:(NSEntityDescription *)entityDesc withRemoteObjects:(NSArray *)parseObjects;
+- (NSArray *)addLocalObjectsForClass:(NSEntityDescription *)entityDesc withRemoteObjects:(NSArray *)parseObjects;
+- (NSDate *)latestDateForClass:(NSEntityDescription *)entityDesc;
+- (NSArray *)allObjectIDsForClass:(NSEntityDescription *)entityDesc;
 
 @end

@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14C1514" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="TPContract" representedClassName="TPContract" parentEntity="TPSyncEntity" syncable="YES">
         <attribute name="hrsWeek" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="conversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPConversation" inverseName="contract" inverseEntity="TPConversation" syncable="YES"/>
         <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPCourse" inverseName="contracts" inverseEntity="TPCourse" syncable="YES"/>
-        <relationship name="tutee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPUser" inverseName="tuteeContracts" inverseEntity="TPUser" syncable="YES"/>
-        <relationship name="tutor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPUser" inverseName="tutorContracts" inverseEntity="TPUser" syncable="YES"/>
+        <relationship name="tutee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPUser" syncable="YES"/>
+        <relationship name="tutor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPUser" syncable="YES"/>
     </entity>
-    <entity name="TPConversation" representedClassName="TPConversation" parentEntity="TPSyncEntity" syncable="YES"/>
+    <entity name="TPConversation" representedClassName="TPConversation" parentEntity="TPSyncEntity" syncable="YES">
+        <relationship name="contract" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPContract" inverseName="conversation" inverseEntity="TPContract" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPMessage" inverseName="conversation" inverseEntity="TPMessage" syncable="YES"/>
+        <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPUser" inverseName="conversations" inverseEntity="TPUser" syncable="YES"/>
+    </entity>
     <entity name="TPCourse" representedClassName="TPCourse" parentEntity="TPSyncEntity" syncable="YES">
         <attribute name="courseCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="courseName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="contracts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPContract" inverseName="course" inverseEntity="TPContract" syncable="YES"/>
-        <relationship name="tuteeEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPTuteeEntry" inverseName="course" inverseEntity="TPTuteeEntry" syncable="YES"/>
         <relationship name="tutorEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPTutorEntry" inverseName="course" inverseEntity="TPTutorEntry" syncable="YES"/>
     </entity>
     <entity name="TPMessage" representedClassName="TPMessage" parentEntity="TPSyncEntity" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="from" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="to" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="conversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPConversation" inverseName="messages" inverseEntity="TPConversation" syncable="YES"/>
     </entity>
     <entity name="TPSyncEntity" representedClassName="TPSyncEntity" isAbstract="YES" syncable="YES">
-        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
-    </entity>
-    <entity name="TPTuteeEntry" representedClassName="TPTuteeEntry" parentEntity="TPSyncEntity" syncable="YES">
-        <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPCourse" inverseName="tuteeEntries" inverseEntity="TPCourse" syncable="YES"/>
-        <relationship name="tutee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPUser" inverseName="tuteeEntries" inverseEntity="TPUser" syncable="YES"/>
     </entity>
     <entity name="TPTutorEntry" representedClassName="TPTutorEntry" parentEntity="TPSyncEntity" syncable="YES">
         <attribute name="blurb" optional="YES" attributeType="String" syncable="YES"/>
@@ -35,22 +38,22 @@
         <relationship name="tutor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TPUser" inverseName="tutorEntries" inverseEntity="TPUser" syncable="YES"/>
     </entity>
     <entity name="TPUser" representedClassName="TPUser" parentEntity="TPSyncEntity" syncable="YES">
+        <attribute name="defaultBio" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="defaultPrice" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="tuteeContracts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPContract" inverseName="tutee" inverseEntity="TPContract" syncable="YES"/>
-        <relationship name="tuteeEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPTuteeEntry" inverseName="tutee" inverseEntity="TPTuteeEntry" syncable="YES"/>
-        <relationship name="tutorContracts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPContract" inverseName="tutor" inverseEntity="TPContract" syncable="YES"/>
+        <relationship name="contracts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPContract" syncable="YES"/>
+        <relationship name="conversations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPConversation" inverseName="participants" inverseEntity="TPConversation" syncable="YES"/>
         <relationship name="tutorEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPTutorEntry" inverseName="tutor" inverseEntity="TPTutorEntry" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TPContract" positionX="-81" positionY="-144" width="128" height="120"/>
-        <element name="TPConversation" positionX="-45" positionY="45" width="128" height="45"/>
-        <element name="TPCourse" positionX="52" positionY="-243" width="128" height="120"/>
-        <element name="TPMessage" positionX="-225" positionY="120" width="128" height="58"/>
-        <element name="TPSyncEntity" positionX="-99" positionY="-90" width="128" height="105"/>
-        <element name="TPTuteeEntry" positionX="-90" positionY="-153" width="128" height="75"/>
+        <element name="TPContract" positionX="-81" positionY="-144" width="128" height="150"/>
+        <element name="TPConversation" positionX="-45" positionY="45" width="128" height="90"/>
+        <element name="TPCourse" positionX="52" positionY="-243" width="128" height="105"/>
+        <element name="TPMessage" positionX="-225" positionY="120" width="128" height="120"/>
+        <element name="TPSyncEntity" positionX="-99" positionY="-90" width="128" height="75"/>
         <element name="TPTutorEntry" positionX="-99" positionY="-162" width="128" height="105"/>
-        <element name="TPUser" positionX="-252" positionY="-315" width="128" height="150"/>
+        <element name="TPUser" positionX="-252" positionY="-315" width="128" height="165"/>
     </elements>
 </model>

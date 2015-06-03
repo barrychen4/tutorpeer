@@ -11,12 +11,10 @@ extern const struct TPCourseAttributes {
 
 extern const struct TPCourseRelationships {
 	__unsafe_unretained NSString *contracts;
-	__unsafe_unretained NSString *tuteeEntries;
 	__unsafe_unretained NSString *tutorEntries;
 } TPCourseRelationships;
 
 @class TPContract;
-@class TPTuteeEntry;
 @class TPTutorEntry;
 
 @interface TPCourseID : TPSyncEntityID {}
@@ -40,10 +38,6 @@ extern const struct TPCourseRelationships {
 
 - (NSMutableSet*)contractsSet;
 
-@property (nonatomic, strong) NSSet *tuteeEntries;
-
-- (NSMutableSet*)tuteeEntriesSet;
-
 @property (nonatomic, strong) NSSet *tutorEntries;
 
 - (NSMutableSet*)tutorEntriesSet;
@@ -55,14 +49,6 @@ extern const struct TPCourseRelationships {
 - (void)removeContracts:(NSSet*)value_;
 - (void)addContractsObject:(TPContract*)value_;
 - (void)removeContractsObject:(TPContract*)value_;
-
-@end
-
-@interface _TPCourse (TuteeEntriesCoreDataGeneratedAccessors)
-- (void)addTuteeEntries:(NSSet*)value_;
-- (void)removeTuteeEntries:(NSSet*)value_;
-- (void)addTuteeEntriesObject:(TPTuteeEntry*)value_;
-- (void)removeTuteeEntriesObject:(TPTuteeEntry*)value_;
 
 @end
 
@@ -84,9 +70,6 @@ extern const struct TPCourseRelationships {
 
 - (NSMutableSet*)primitiveContracts;
 - (void)setPrimitiveContracts:(NSMutableSet*)value;
-
-- (NSMutableSet*)primitiveTuteeEntries;
-- (void)setPrimitiveTuteeEntries:(NSMutableSet*)value;
 
 - (NSMutableSet*)primitiveTutorEntries;
 - (void)setPrimitiveTutorEntries:(NSMutableSet*)value;

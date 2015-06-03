@@ -9,11 +9,12 @@
 #import "TPNetworkManager.h"
 
 @import CoreData;
+@class TPTutorEntry;
+
 
 @interface TPNetworkManager (TPCourseRequests)
 
-- (void)getCoursesWithCallback:(void (^)(NSArray *))callback;
-- (void)getTutorEntryFor:(NSString *)username andCourse:(NSString *)courseCode withCallback:(void (^)(NSArray *))callback;
-- (void)getTuteeEntryFor:(NSString *)username andCourse:(NSString *)courseCode andTutor:(NSString *)tutor withCallback:(void (^)(NSArray *))callback;
+- (void)getCoursesWithCallback:(void (^)(NSArray *))callback delta:(BOOL)delta;
+- (void)getTutorEntryFor:(NSString *)username andCourse:(NSString *)courseCode withCallback:(void (^)(NSArray *))callback delta:(BOOL)delta;
 
 @end

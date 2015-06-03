@@ -4,15 +4,16 @@
 #import "_TPUser.h"
 
 const struct TPUserAttributes TPUserAttributes = {
+	.defaultBio = @"defaultBio",
+	.defaultPrice = @"defaultPrice",
 	.email = @"email",
 	.firstName = @"firstName",
 	.lastName = @"lastName",
 };
 
 const struct TPUserRelationships TPUserRelationships = {
-	.tuteeContracts = @"tuteeContracts",
-	.tuteeEntries = @"tuteeEntries",
-	.tutorContracts = @"tutorContracts",
+	.contracts = @"contracts",
+	.conversations = @"conversations",
 	.tutorEntries = @"tutorEntries",
 };
 
@@ -42,7 +43,35 @@ const struct TPUserRelationships TPUserRelationships = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
+	if ([key isEqualToString:@"defaultPriceValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"defaultPrice"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+
 	return keyPaths;
+}
+
+@dynamic defaultBio;
+
+@dynamic defaultPrice;
+
+- (double)defaultPriceValue {
+	NSNumber *result = [self defaultPrice];
+	return [result doubleValue];
+}
+
+- (void)setDefaultPriceValue:(double)value_ {
+	[self setDefaultPrice:[NSNumber numberWithDouble:value_]];
+}
+
+- (double)primitiveDefaultPriceValue {
+	NSNumber *result = [self primitiveDefaultPrice];
+	return [result doubleValue];
+}
+
+- (void)setPrimitiveDefaultPriceValue:(double)value_ {
+	[self setPrimitiveDefaultPrice:[NSNumber numberWithDouble:value_]];
 }
 
 @dynamic email;
@@ -51,36 +80,25 @@ const struct TPUserRelationships TPUserRelationships = {
 
 @dynamic lastName;
 
-@dynamic tuteeContracts;
+@dynamic contracts;
 
-- (NSMutableSet*)tuteeContractsSet {
-	[self willAccessValueForKey:@"tuteeContracts"];
+- (NSMutableSet*)contractsSet {
+	[self willAccessValueForKey:@"contracts"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tuteeContracts"];
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"contracts"];
 
-	[self didAccessValueForKey:@"tuteeContracts"];
+	[self didAccessValueForKey:@"contracts"];
 	return result;
 }
 
-@dynamic tuteeEntries;
+@dynamic conversations;
 
-- (NSMutableSet*)tuteeEntriesSet {
-	[self willAccessValueForKey:@"tuteeEntries"];
+- (NSMutableSet*)conversationsSet {
+	[self willAccessValueForKey:@"conversations"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tuteeEntries"];
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"conversations"];
 
-	[self didAccessValueForKey:@"tuteeEntries"];
-	return result;
-}
-
-@dynamic tutorContracts;
-
-- (NSMutableSet*)tutorContractsSet {
-	[self willAccessValueForKey:@"tutorContracts"];
-
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tutorContracts"];
-
-	[self didAccessValueForKey:@"tutorContracts"];
+	[self didAccessValueForKey:@"conversations"];
 	return result;
 }
 

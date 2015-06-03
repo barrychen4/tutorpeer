@@ -4,7 +4,14 @@
 #import "_TPMessage.h"
 
 const struct TPMessageAttributes TPMessageAttributes = {
+	.date = @"date",
+	.from = @"from",
 	.message = @"message",
+	.to = @"to",
+};
+
+const struct TPMessageRelationships TPMessageRelationships = {
+	.conversation = @"conversation",
 };
 
 @implementation TPMessageID
@@ -36,7 +43,15 @@ const struct TPMessageAttributes TPMessageAttributes = {
 	return keyPaths;
 }
 
+@dynamic date;
+
+@dynamic from;
+
 @dynamic message;
+
+@dynamic to;
+
+@dynamic conversation;
 
 @end
 

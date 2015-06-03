@@ -10,7 +10,6 @@ const struct TPCourseAttributes TPCourseAttributes = {
 
 const struct TPCourseRelationships TPCourseRelationships = {
 	.contracts = @"contracts",
-	.tuteeEntries = @"tuteeEntries",
 	.tutorEntries = @"tutorEntries",
 };
 
@@ -55,17 +54,6 @@ const struct TPCourseRelationships TPCourseRelationships = {
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"contracts"];
 
 	[self didAccessValueForKey:@"contracts"];
-	return result;
-}
-
-@dynamic tuteeEntries;
-
-- (NSMutableSet*)tuteeEntriesSet {
-	[self willAccessValueForKey:@"tuteeEntries"];
-
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"tuteeEntries"];
-
-	[self didAccessValueForKey:@"tuteeEntries"];
 	return result;
 }
 

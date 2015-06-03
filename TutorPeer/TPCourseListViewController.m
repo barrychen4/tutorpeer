@@ -31,7 +31,7 @@
         [_tableView reloadData];
         
         NSLog(@"Successfuly got courses with callback");
-    }];
+    } delta:YES];
     
     [self.view addSubview:_tableView];
 }

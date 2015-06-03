@@ -5,21 +5,21 @@
 #import "TPSyncEntity.h"
 
 extern const struct TPUserAttributes {
+	__unsafe_unretained NSString *defaultBio;
+	__unsafe_unretained NSString *defaultPrice;
 	__unsafe_unretained NSString *email;
 	__unsafe_unretained NSString *firstName;
 	__unsafe_unretained NSString *lastName;
 } TPUserAttributes;
 
 extern const struct TPUserRelationships {
-	__unsafe_unretained NSString *tuteeContracts;
-	__unsafe_unretained NSString *tuteeEntries;
-	__unsafe_unretained NSString *tutorContracts;
+	__unsafe_unretained NSString *contracts;
+	__unsafe_unretained NSString *conversations;
 	__unsafe_unretained NSString *tutorEntries;
 } TPUserRelationships;
 
 @class TPContract;
-@class TPTuteeEntry;
-@class TPContract;
+@class TPConversation;
 @class TPTutorEntry;
 
 @interface TPUserID : TPSyncEntityID {}
@@ -30,6 +30,18 @@ extern const struct TPUserRelationships {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) TPUserID* objectID;
+
+@property (nonatomic, strong) NSString* defaultBio;
+
+//- (BOOL)validateDefaultBio:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSNumber* defaultPrice;
+
+@property (atomic) double defaultPriceValue;
+- (double)defaultPriceValue;
+- (void)setDefaultPriceValue:(double)value_;
+
+//- (BOOL)validateDefaultPrice:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSString* email;
 
@@ -43,17 +55,13 @@ extern const struct TPUserRelationships {
 
 //- (BOOL)validateLastName:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSSet *tuteeContracts;
+@property (nonatomic, strong) NSSet *contracts;
 
-- (NSMutableSet*)tuteeContractsSet;
+- (NSMutableSet*)contractsSet;
 
-@property (nonatomic, strong) NSSet *tuteeEntries;
+@property (nonatomic, strong) NSSet *conversations;
 
-- (NSMutableSet*)tuteeEntriesSet;
-
-@property (nonatomic, strong) NSSet *tutorContracts;
-
-- (NSMutableSet*)tutorContractsSet;
+- (NSMutableSet*)conversationsSet;
 
 @property (nonatomic, strong) NSSet *tutorEntries;
 
@@ -61,27 +69,19 @@ extern const struct TPUserRelationships {
 
 @end
 
-@interface _TPUser (TuteeContractsCoreDataGeneratedAccessors)
-- (void)addTuteeContracts:(NSSet*)value_;
-- (void)removeTuteeContracts:(NSSet*)value_;
-- (void)addTuteeContractsObject:(TPContract*)value_;
-- (void)removeTuteeContractsObject:(TPContract*)value_;
+@interface _TPUser (ContractsCoreDataGeneratedAccessors)
+- (void)addContracts:(NSSet*)value_;
+- (void)removeContracts:(NSSet*)value_;
+- (void)addContractsObject:(TPContract*)value_;
+- (void)removeContractsObject:(TPContract*)value_;
 
 @end
 
-@interface _TPUser (TuteeEntriesCoreDataGeneratedAccessors)
-- (void)addTuteeEntries:(NSSet*)value_;
-- (void)removeTuteeEntries:(NSSet*)value_;
-- (void)addTuteeEntriesObject:(TPTuteeEntry*)value_;
-- (void)removeTuteeEntriesObject:(TPTuteeEntry*)value_;
-
-@end
-
-@interface _TPUser (TutorContractsCoreDataGeneratedAccessors)
-- (void)addTutorContracts:(NSSet*)value_;
-- (void)removeTutorContracts:(NSSet*)value_;
-- (void)addTutorContractsObject:(TPContract*)value_;
-- (void)removeTutorContractsObject:(TPContract*)value_;
+@interface _TPUser (ConversationsCoreDataGeneratedAccessors)
+- (void)addConversations:(NSSet*)value_;
+- (void)removeConversations:(NSSet*)value_;
+- (void)addConversationsObject:(TPConversation*)value_;
+- (void)removeConversationsObject:(TPConversation*)value_;
 
 @end
 
@@ -95,6 +95,15 @@ extern const struct TPUserRelationships {
 
 @interface _TPUser (CoreDataGeneratedPrimitiveAccessors)
 
+- (NSString*)primitiveDefaultBio;
+- (void)setPrimitiveDefaultBio:(NSString*)value;
+
+- (NSNumber*)primitiveDefaultPrice;
+- (void)setPrimitiveDefaultPrice:(NSNumber*)value;
+
+- (double)primitiveDefaultPriceValue;
+- (void)setPrimitiveDefaultPriceValue:(double)value_;
+
 - (NSString*)primitiveEmail;
 - (void)setPrimitiveEmail:(NSString*)value;
 
@@ -104,14 +113,11 @@ extern const struct TPUserRelationships {
 - (NSString*)primitiveLastName;
 - (void)setPrimitiveLastName:(NSString*)value;
 
-- (NSMutableSet*)primitiveTuteeContracts;
-- (void)setPrimitiveTuteeContracts:(NSMutableSet*)value;
+- (NSMutableSet*)primitiveContracts;
+- (void)setPrimitiveContracts:(NSMutableSet*)value;
 
-- (NSMutableSet*)primitiveTuteeEntries;
-- (void)setPrimitiveTuteeEntries:(NSMutableSet*)value;
-
-- (NSMutableSet*)primitiveTutorContracts;
-- (void)setPrimitiveTutorContracts:(NSMutableSet*)value;
+- (NSMutableSet*)primitiveConversations;
+- (void)setPrimitiveConversations:(NSMutableSet*)value;
 
 - (NSMutableSet*)primitiveTutorEntries;
 - (void)setPrimitiveTutorEntries:(NSMutableSet*)value;

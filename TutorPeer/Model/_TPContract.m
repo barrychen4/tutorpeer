@@ -6,9 +6,11 @@
 const struct TPContractAttributes TPContractAttributes = {
 	.hrsWeek = @"hrsWeek",
 	.price = @"price",
+	.status = @"status",
 };
 
 const struct TPContractRelationships TPContractRelationships = {
+	.conversation = @"conversation",
 	.course = @"course",
 	.tutee = @"tutee",
 	.tutor = @"tutor",
@@ -47,6 +49,11 @@ const struct TPContractRelationships TPContractRelationships = {
 	}
 	if ([key isEqualToString:@"priceValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"price"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"statusValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"status"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -93,6 +100,28 @@ const struct TPContractRelationships TPContractRelationships = {
 - (void)setPrimitivePriceValue:(double)value_ {
 	[self setPrimitivePrice:[NSNumber numberWithDouble:value_]];
 }
+
+@dynamic status;
+
+- (int32_t)statusValue {
+	NSNumber *result = [self status];
+	return [result intValue];
+}
+
+- (void)setStatusValue:(int32_t)value_ {
+	[self setStatus:[NSNumber numberWithInt:value_]];
+}
+
+- (int32_t)primitiveStatusValue {
+	NSNumber *result = [self primitiveStatus];
+	return [result intValue];
+}
+
+- (void)setPrimitiveStatusValue:(int32_t)value_ {
+	[self setPrimitiveStatus:[NSNumber numberWithInt:value_]];
+}
+
+@dynamic conversation;
 
 @dynamic course;
 

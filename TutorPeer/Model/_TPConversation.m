@@ -3,6 +3,12 @@
 
 #import "_TPConversation.h"
 
+const struct TPConversationRelationships TPConversationRelationships = {
+	.contract = @"contract",
+	.messages = @"messages",
+	.participants = @"participants",
+};
+
 @implementation TPConversationID
 @end
 
@@ -30,6 +36,30 @@
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
 	return keyPaths;
+}
+
+@dynamic contract;
+
+@dynamic messages;
+
+- (NSMutableSet*)messagesSet {
+	[self willAccessValueForKey:@"messages"];
+
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"messages"];
+
+	[self didAccessValueForKey:@"messages"];
+	return result;
+}
+
+@dynamic participants;
+
+- (NSMutableSet*)participantsSet {
+	[self willAccessValueForKey:@"participants"];
+
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"participants"];
+
+	[self didAccessValueForKey:@"participants"];
+	return result;
 }
 
 @end

@@ -4,8 +4,6 @@
 #import "_TPSyncEntity.h"
 
 const struct TPSyncEntityAttributes TPSyncEntityAttributes = {
-	.createdAt = @"createdAt",
-	.deleted = @"deleted",
 	.objectId = @"objectId",
 	.updatedAt = @"updatedAt",
 };
@@ -36,35 +34,7 @@ const struct TPSyncEntityAttributes TPSyncEntityAttributes = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
-	if ([key isEqualToString:@"deletedValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"deleted"];
-		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
-		return keyPaths;
-	}
-
 	return keyPaths;
-}
-
-@dynamic createdAt;
-
-@dynamic deleted;
-
-- (BOOL)deletedValue {
-	NSNumber *result = [self deleted];
-	return [result boolValue];
-}
-
-- (void)setDeletedValue:(BOOL)value_ {
-	[self setDeleted:[NSNumber numberWithBool:value_]];
-}
-
-- (BOOL)primitiveDeletedValue {
-	NSNumber *result = [self primitiveDeleted];
-	return [result boolValue];
-}
-
-- (void)setPrimitiveDeletedValue:(BOOL)value_ {
-	[self setPrimitiveDeleted:[NSNumber numberWithBool:value_]];
 }
 
 @dynamic objectId;
