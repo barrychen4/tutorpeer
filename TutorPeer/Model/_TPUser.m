@@ -9,6 +9,8 @@ const struct TPUserAttributes TPUserAttributes = {
 	.email = @"email",
 	.firstName = @"firstName",
 	.lastName = @"lastName",
+	.loggedIn = @"loggedIn",
+	.picture = @"picture",
 };
 
 const struct TPUserRelationships TPUserRelationships = {
@@ -48,6 +50,11 @@ const struct TPUserRelationships TPUserRelationships = {
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
+	if ([key isEqualToString:@"loggedInValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"loggedIn"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 
 	return keyPaths;
 }
@@ -79,6 +86,28 @@ const struct TPUserRelationships TPUserRelationships = {
 @dynamic firstName;
 
 @dynamic lastName;
+
+@dynamic loggedIn;
+
+- (BOOL)loggedInValue {
+	NSNumber *result = [self loggedIn];
+	return [result boolValue];
+}
+
+- (void)setLoggedInValue:(BOOL)value_ {
+	[self setLoggedIn:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveLoggedInValue {
+	NSNumber *result = [self primitiveLoggedIn];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveLoggedInValue:(BOOL)value_ {
+	[self setPrimitiveLoggedIn:[NSNumber numberWithBool:value_]];
+}
+
+@dynamic picture;
 
 @dynamic contracts;
 

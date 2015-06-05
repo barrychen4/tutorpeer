@@ -10,8 +10,4 @@
 
 @interface TPLandingViewController : UIViewController
 
-@property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) UILabel *signUpLabel;
-@property (strong, nonatomic) UILabel *loginLabel;
-
 @end

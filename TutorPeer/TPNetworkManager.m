@@ -1,25 +1,25 @@
 //
-//  TPNetworkManager.m
+//  TPNetworkManager+TPCourseRequests.m
 //  TutorPeer
 //
-//  Created by Yondon Fu on 5/3/15.
+//  Created by Yondon Fu on 5/10/15.
 //  Copyright (c) 2015 TutorPeer. All rights reserved.
 //
 
 #import "TPNetworkManager.h"
-#import "TPSyncEntity.h"
-#import "TPCourse.h"
+#import "TPDBManager.h"
 #import <Parse/Parse.h>
+#import "TPCourse.h"
+#import "TPUser.h"
+#import "TPTutorEntry.h"
+
+@interface TPNetworkManager()
+
+@property (strong, nonatomic) TPDBManager *dbManager;
+
+@end
 
 @implementation TPNetworkManager
-
-- (id)init {
-    if (self = [super init]) {
-        [self setupObjectManager];
-    }
-    
-    return self;
-}
 
 + (instancetype)sharedInstance {
     static TPNetworkManager *sharedInstance = nil;
@@ -27,171 +27,90 @@
     dispatch_once(&onceToken, ^{
         sharedInstance = [[TPNetworkManager alloc] init];
     });
-    
     return sharedInstance;
 }
 
-+ (NSString *)storePath {
-    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    NSString *documentDirectory = [documentDirectories firstObject];
-    
-    return [documentDirectory stringByAppendingPathComponent:@"store.data"];
+- (instancetype)init {
+    if (self = [super init]) {
+        self.dbManager = [TPDBManager sharedInstance];
+    }
+    return self;
 }
 
-- (void)setupObjectManager {
-    _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
-    
-    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
-    
-    NSString *path = [self.class storePath];
-    NSURL *storeURL = [NSURL fileURLWithPath:path];
-    
-    NSError *error = nil;
-    
-    if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        @throw [NSException exceptionWithName:@"OpenFailure" reason:[error localizedDescription] userInfo:nil];
-    }
-    
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
-    _managedObjectContext.persistentStoreCoordinator = psc;
-    
-}
-
-- (TPSyncEntity *)getLocalObjectForClass:(NSEntityDescription *)entityDesc withRemoteId:(NSString *)objectId {
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    request.entity = entityDesc;
-    
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"objectId == %@", objectId];
-    [request setPredicate:pred];
-    
-    NSError *error = nil;
-    NSArray *result = [self.managedObjectContext executeFetchRequest:request error:&error];
-    
-    if (!result) {
-        [NSException raise:@"Fetch failed" format:@"Reason: %@", [error localizedDescription]];
-    }
-    
-    if (result.count > 0) {
-        return [result objectAtIndex:0];
+- (void)getCoursesWithCallback:(void (^)(NSArray *))callback delta:(BOOL)delta {
+    PFQuery *query;
+    query.limit = 1000;
+    if (delta) {
+        NSDate *latestDate = [self.dbManager latestDateForDBClass:@"TPCourse"];
+        if (latestDate) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(updatedAt > %@)", latestDate];
+            query = [PFQuery queryWithClassName:@"Course" predicate:predicate];
+        } else {
+            query = [PFQuery queryWithClassName:@"Course"];
+        }
     } else {
-        NSLog(@"No local object for %@", objectId);
-        return nil;
+        query = [PFQuery queryWithClassName:@"Course"];
     }
-}
-
-- (NSArray *)getLocalObjectsForClass:(NSEntityDescription *)entityDesc withRemoteIds:(NSArray *)objectIds {
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    request.entity = entityDesc;
-    
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"objectId IN %@", objectIds];
-    [request setPredicate:pred];
-    
-    NSError *error = nil;
-    NSArray *result = [self.managedObjectContext executeFetchRequest:request error:&error];
-    
-    if (!result) {
-        [NSException raise:@"Fetch failed" format:@"Reason: %@", [error localizedDescription]];
-    }
-    
-    return result;
-}
-
-- (TPSyncEntity *)addBlankLocalObjectForClass:(NSEntityDescription *)entityDesc withRemoteId:(NSString *)objectId  {
-    TPSyncEntity *localObject = [self getLocalObjectForClass:entityDesc withRemoteId:objectId];
-    if (localObject) {
-        NSLog(@"Loaded local object %@ instead of adding blank", objectId);
-    }
-    else {
-        localObject = [NSEntityDescription insertNewObjectForEntityForName:[entityDesc name] inManagedObjectContext:self.managedObjectContext];
-        localObject.objectId = objectId;
-    }
-    return localObject;
-}
-
-- (TPSyncEntity *)addLocalObjectForClass:(NSEntityDescription *)entityDesc withRemoteObject:(PFObject *)parseObject {
-    TPSyncEntity *localObject = [self getLocalObjectForClass:entityDesc withRemoteId:parseObject.objectId];
-    if (localObject) {
-        NSLog(@"Loaded local object %@ instead of adding", parseObject.objectId);
-    }
-    else {
-        localObject = [NSEntityDescription insertNewObjectForEntityForName:[entityDesc name] inManagedObjectContext:self.managedObjectContext];
-        localObject.objectId = parseObject.objectId;
-    }
-    [self updateLocalObjectAttributes:localObject withRemoteObject:parseObject];
-    [self updateLocalObjectRelationships:localObject withRemoteObject:parseObject];
-    return localObject;
-}
-
-- (NSArray *)addLocalObjectsForClass:(NSEntityDescription *)entityDesc withRemoteObjects:(NSArray *)parseObjects {
-    NSMutableArray *localObjects = [[NSMutableArray alloc] init];
-    for (PFObject *parseObject in parseObjects) {
-        [localObjects addObject:[self addLocalObjectForClass:entityDesc withRemoteObject:parseObject]];
-    }
-    
-    return localObjects;
-}
-
-- (void)updateLocalObjectAttributes:(TPSyncEntity *)localObject withRemoteObject:(PFObject *)parseObject {
-    NSDictionary *attributes = [[localObject entity] attributesByName];
-    
-    for (NSString *attribute in attributes) {
-        if (![attribute isEqualToString:@"objectId"]) {
-            [localObject setValue:[parseObject valueForKey:attribute] forKey:attribute];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if ([objects count]) {
+            NSArray *localObjects = [self.dbManager addLocalObjectsForDBClass:@"TPCourse" withRemoteObjects:objects];
+            callback(localObjects);
+        } else if (error) {
+            NSLog(@"Error getting Parse courses: %@", error);
         }
+    }];
+    if (delta) {
+        [self allParseObjectIDsForPFClass:@"Course" withCallback:^(NSArray *objectIDArray) {
+            [self.dbManager removeLocalObjectsNotOnParseForDBClass:@"TPCourse" parseObjectIDs:objectIDArray];
+        }];
     }
 }
 
-- (void)updateLocalObjectRelationships:(TPSyncEntity *)localObject withRemoteObject:(PFObject *)parseObject {
-    NSDictionary *relationships = [[localObject entity] relationshipsByName];
-    
-    for (NSString *relationship in relationships) {
-        NSEntityDescription *entity = ((NSRelationshipDescription *)relationships[relationship]).destinationEntity;
-
-        if ([parseObject[relationship] isKindOfClass:[NSArray class]]) {
-            NSMutableSet *relationSet = [localObject mutableSetValueForKey:relationship];
-            [relationSet removeAllObjects];
-            for (NSString *relatedId in parseObject[relationship]) {
-                TPSyncEntity *relatedObject = [self addBlankLocalObjectForClass:entity withRemoteId:relatedId];
-                [relationSet addObject:relatedObject];
-            }
-        } else if ([parseObject[relationship] isKindOfClass:[NSString class]]) {
-            NSString *relatedId = parseObject[relationship];
-            TPSyncEntity *relatedObject = [self addBlankLocalObjectForClass:entity withRemoteId:relatedId];
-            [localObject setValue:relatedObject forKey:relationship];
+- (void)getTutorEntriesForCourseId:(NSString *)courseId withCallback:(void (^)(NSArray *))callback delta:(BOOL)delta {
+    PFQuery *query;
+    if (delta) {
+        NSDate *latestDate = [self.dbManager latestDateForDBClass:@"TPCourse"];
+        NSPredicate *predicate;
+        if (latestDate) {
+            predicate = [NSPredicate predicateWithFormat:@"(course == %@) AND (updatedAt > %@)", courseId, latestDate];
+        } else {
+            predicate = [NSPredicate predicateWithFormat:@"course == %@", courseId];
         }
+        query = [PFQuery queryWithClassName:@"TutorEntry" predicate:predicate];
+    } else {
+        query = [PFQuery queryWithClassName:@"TutorEntry"];
+        [query whereKey:@"course" equalTo:courseId];
+    }
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if ([objects count]) {
+            NSArray *localObjects = [self.dbManager addLocalObjectsForDBClass:@"TPTutorEntry" withRemoteObjects:objects];
+            callback(localObjects);
+        } else if (error) {
+            NSLog(@"Error getting Parse tutor entries: %@", error);
+        }
+    }];
+    if (delta) {
+        [self allParseObjectIDsForPFClass:@"TutorEntry" withCallback:^(NSArray *objectIDArray) {
+            [self.dbManager removeLocalObjectsNotOnParseForDBClass:@"TPTutorEntry" parseObjectIDs:objectIDArray];
+        }];
     }
 }
 
-- (NSDate *)latestDateForClass:(NSEntityDescription *)entityDesc {
-    NSDate *date;
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    request.entity = entityDesc;
-    NSSortDescriptor *updatedAtSort = [NSSortDescriptor sortDescriptorWithKey:@"updatedAt" ascending:NO];
-    request.sortDescriptors = @[updatedAtSort];
-    [request setFetchLimit:1];
-    NSError *error;
-    NSArray *objects = [self.managedObjectContext executeFetchRequest:request error:&error];
-    if (!error) {
-        date = ((TPSyncEntity *)objects[0]).updatedAt;
-    }
-    return date;
-}
-
-- (NSArray *)allObjectIDsForClass:(NSEntityDescription *)entityDesc {
+- (void)allParseObjectIDsForPFClass:(NSString *)pfClassName withCallback:(void (^)(NSArray *))callback {
     NSMutableArray *objectIDArray = [NSMutableArray new];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    request.entity = entityDesc;
-    request.resultType = NSDictionaryResultType;
-    request.returnsDistinctResults = YES;
-    request.propertiesToFetch = @[@"objectId"];
-
-    NSError *error;
-    NSArray *objects = [self.managedObjectContext executeFetchRequest:request error:&error];
-    for (NSDictionary *dict in objects) {
-        [objectIDArray addObject:dict[@"objectId"]];
-    }
-    return objectIDArray;
+    PFQuery *query = [[PFQuery alloc] initWithClassName:pfClassName];
+    query.limit = 1000;
+    [query selectKeys:@[]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error && [objects count]) {
+            for (PFObject *object in objects) {
+                [objectIDArray addObject:object.objectId];
+            }
+            callback(objectIDArray);
+        } else {
+            NSLog(@"Error getting Parse IDs: %@", error);
+        }
+    }];
 }
 
 @end

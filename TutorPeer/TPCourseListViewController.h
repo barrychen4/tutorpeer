@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TPCourseListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@import CoreData;
+
+@interface TPCourseListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
 @end

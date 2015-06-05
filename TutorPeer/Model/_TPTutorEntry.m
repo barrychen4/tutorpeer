@@ -6,6 +6,7 @@
 const struct TPTutorEntryAttributes TPTutorEntryAttributes = {
 	.blurb = @"blurb",
 	.price = @"price",
+	.tutorName = @"tutorName",
 };
 
 const struct TPTutorEntryRelationships TPTutorEntryRelationships = {
@@ -69,6 +70,8 @@ const struct TPTutorEntryRelationships TPTutorEntryRelationships = {
 - (void)setPrimitivePriceValue:(double)value_ {
 	[self setPrimitivePrice:[NSNumber numberWithDouble:value_]];
 }
+
+@dynamic tutorName;
 
 @dynamic course;
 

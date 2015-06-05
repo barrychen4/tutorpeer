@@ -8,11 +8,13 @@
 
 #import "TPSignUpViewController.h"
 #import "TPAuthenticationManager.h"
+#import "TPDBManager.h"
 #import "TPTabBarController.h"
 #import "TPInboxViewController.h"
 #import "TPCourseListViewController.h"
 #import "TPProfileViewController.h"
-#import "TPUser.h" 
+#import "TPUser.h"
+#import <Parse/Parse.h>
 
 @interface TPSignUpViewController ()
 
@@ -25,18 +27,15 @@
 
 @implementation TPSignUpViewController
 
-- (id)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         [self setupView];
     }
-    
     return self;
 }
 
-- (void)setupView
-{
+- (void)setupView {
     self.view.backgroundColor = [UIColor whiteColor];
     
     UINavigationItem *navItem = self.navigationItem;
@@ -47,12 +46,9 @@
     navItem.rightBarButtonItem = rightBarButton;
     
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue-Light" size:21.0], NSFontAttributeName, nil]];
-    
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
     
-    
     UIView *emailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
-    
     self.emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 40)];
     self.emailTextField.layer.cornerRadius = 5;
     self.emailTextField.clipsToBounds = YES;
@@ -66,10 +62,9 @@
     self.emailTextField.leftView = emailPaddingView;
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
     self.emailTextField.delegate = self;
-    [self.view addSubview:self.emailTextField];
+    
     
     UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
-    
     self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 40)];
     [self.passwordTextField setSecureTextEntry:YES];
     self.passwordTextField.layer.cornerRadius = 5;
@@ -84,11 +79,8 @@
     self.passwordTextField.leftView = passwordPaddingView;
     self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
     self.passwordTextField.delegate = self;
-    [self.view addSubview:self.passwordTextField];
-    
     
     UIView *firstNamePaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
-    
     self.firstNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 40)];
     self.firstNameTextField.layer.cornerRadius = 5;
     self.firstNameTextField.clipsToBounds = YES;
@@ -102,10 +94,9 @@
     self.firstNameTextField.leftView = firstNamePaddingView;
     self.firstNameTextField.leftViewMode = UITextFieldViewModeAlways;
     self.firstNameTextField.delegate = self;
-    [self.view addSubview:self.firstNameTextField];
+    
     
     UIView *lastNamePaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
-    
     self.lastNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 40)];
     self.lastNameTextField.layer.cornerRadius = 5;
     self.lastNameTextField.clipsToBounds = YES;
@@ -119,6 +110,10 @@
     self.lastNameTextField.leftView = lastNamePaddingView;
     self.lastNameTextField.leftViewMode = UITextFieldViewModeAlways;
     self.lastNameTextField.delegate = self;
+    
+    [self.view addSubview:self.emailTextField];
+    [self.view addSubview:self.passwordTextField];
+    [self.view addSubview:self.firstNameTextField];
     [self.view addSubview:self.lastNameTextField];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
@@ -126,23 +121,19 @@
     
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO];
 }
 
-- (void)attemptSignUp
-{
-    NSLog(@"Attempt sign up");
+- (void)attemptSignUp {
     [[TPAuthenticationManager sharedInstance] signUpWithEmail:self.emailTextField.text password:self.passwordTextField.text firstName:self.firstNameTextField.text lastName:self.lastNameTextField.text callback:^(BOOL result) {
         if (result) {
-            NSLog(@"Logged in!");
+            [[TPDBManager sharedInstance] updateLocalUser];
             
             UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
             UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseListViewController alloc] init]];
@@ -157,9 +148,7 @@
             tabBarController.selectedIndex = 1;
             [self.navigationController pushViewController:tabBarController animated:YES];
         }
-        else {
-            NSLog(@"Didn't log in!");
-        }}];
+    }];
 }
 
 - (void)hideKeyboard:(id)sender {

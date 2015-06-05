@@ -7,6 +7,7 @@
 extern const struct TPTutorEntryAttributes {
 	__unsafe_unretained NSString *blurb;
 	__unsafe_unretained NSString *price;
+	__unsafe_unretained NSString *tutorName;
 } TPTutorEntryAttributes;
 
 extern const struct TPTutorEntryRelationships {
@@ -38,6 +39,10 @@ extern const struct TPTutorEntryRelationships {
 
 //- (BOOL)validatePrice:(id*)value_ error:(NSError**)error_;
 
+@property (nonatomic, strong) NSString* tutorName;
+
+//- (BOOL)validateTutorName:(id*)value_ error:(NSError**)error_;
+
 @property (nonatomic, strong) TPCourse *course;
 
 //- (BOOL)validateCourse:(id*)value_ error:(NSError**)error_;
@@ -58,6 +63,9 @@ extern const struct TPTutorEntryRelationships {
 
 - (double)primitivePriceValue;
 - (void)setPrimitivePriceValue:(double)value_;
+
+- (NSString*)primitiveTutorName;
+- (void)setPrimitiveTutorName:(NSString*)value;
 
 - (TPCourse*)primitiveCourse;
 - (void)setPrimitiveCourse:(TPCourse*)value;

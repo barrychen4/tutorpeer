@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class PFObject;
+@import CoreData;
+@class TPCourse;
 
-@interface TPTutorsListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface TPTutorsListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
-- (instancetype)initWithCourseObject:(PFObject *)courseObject;
+- (instancetype)initWithCourse:(TPCourse *)course;
 
 @end

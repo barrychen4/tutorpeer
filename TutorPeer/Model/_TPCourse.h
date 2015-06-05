@@ -7,6 +7,7 @@
 extern const struct TPCourseAttributes {
 	__unsafe_unretained NSString *courseCode;
 	__unsafe_unretained NSString *courseName;
+	__unsafe_unretained NSString *department;
 } TPCourseAttributes;
 
 extern const struct TPCourseRelationships {
@@ -33,6 +34,10 @@ extern const struct TPCourseRelationships {
 @property (nonatomic, strong) NSString* courseName;
 
 //- (BOOL)validateCourseName:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSString* department;
+
+//- (BOOL)validateDepartment:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSSet *contracts;
 
@@ -67,6 +72,9 @@ extern const struct TPCourseRelationships {
 
 - (NSString*)primitiveCourseName;
 - (void)setPrimitiveCourseName:(NSString*)value;
+
+- (NSString*)primitiveDepartment;
+- (void)setPrimitiveDepartment:(NSString*)value;
 
 - (NSMutableSet*)primitiveContracts;
 - (void)setPrimitiveContracts:(NSMutableSet*)value;

@@ -11,56 +11,49 @@
 
 @implementation TPAuthenticationManager
 
-+ (instancetype)sharedInstance
-{
++ (instancetype)sharedInstance {
     static TPAuthenticationManager *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[TPAuthenticationManager alloc] init];
     });
-    
     return sharedInstance;
 }
 
 - (void)signUpWithEmail:(NSString *)email password:(NSString *)password firstName:(NSString *)firstName
-               lastName:(NSString *)lastName callback:(void (^)(BOOL))handler
-{
+               lastName:(NSString *)lastName callback:(void (^)(BOOL))handler {
     PFUser *user = [PFUser user];
     user.username = email;
     user.password = password;
     user.email = email;
-    
     user[@"first_name"] = firstName;
     user[@"last_name"] = lastName;
-    
+    user[@"defaultPrice"] = @(15);
+    user[@"defaultBio"] = [NSString stringWithFormat:@"Hi, my name is %@! Please let me be your tutor.", firstName];
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             NSLog(@"Sign up successful!");
             handler(YES);
         } else {
-            NSString *errorString = [error userInfo][@"error"];
-            NSLog(@"%@", errorString);
+            NSLog(@"Sign up failed: %@", error);
             handler(NO);
         }
     }];
 }
 
-- (void)signInWithEmail:(NSString *)email password:(NSString *)password callback:(void (^)(BOOL))handler
-{
+- (void)signInWithEmail:(NSString *)email password:(NSString *)password callback:(void (^)(BOOL))handler {
     [PFUser logInWithUsernameInBackground:email password:password block:^(PFUser *user, NSError *error) {
-        if (user) {
-            NSLog(@"Succesful login!");
+        if (!error) {
+            NSLog(@"Login successful!");
             handler(YES);
-            
         } else {
-            NSLog(@"Failed login");
+            NSLog(@"Login failed: %@", error);
             handler(NO);
         }
     }];
 }
 
-- (void)logout
-{
+- (void)logout {
     [PFUser logOut];
 }
 

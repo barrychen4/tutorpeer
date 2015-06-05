@@ -1,30 +1,22 @@
 //
-//  TPNetworkManager.h
+//  TPNetworkManager+TPCourseRequests.h
 //  TutorPeer
 //
-//  Created by Yondon Fu on 5/3/15.
+//  Created by Yondon Fu on 5/10/15.
 //  Copyright (c) 2015 TutorPeer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "TPSyncEntity.h"
-#import <Parse/Parse.h>
+#import "TPNetworkManager.h"
 
-@import CoreData;
+@class TPTutorEntry;
 
 @interface TPNetworkManager : NSObject
 
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
-
 + (instancetype)sharedInstance;
-+ (NSString *)storePath;
 
-- (TPSyncEntity *)getLocalObjectForClass:(NSEntityDescription *)entityDesc withRemoteId:(NSString *)objectId;
-- (NSArray *)getLocalObjectsForClass:(NSEntityDescription *)entityDesc withRemoteIds:(NSArray *)objectIds;
-- (TPSyncEntity *)addLocalObjectForClass:(NSEntityDescription *)entityDesc withRemoteObject:(PFObject *)parseObject;
-- (NSArray *)addLocalObjectsForClass:(NSEntityDescription *)entityDesc withRemoteObjects:(NSArray *)parseObjects;
-- (NSDate *)latestDateForClass:(NSEntityDescription *)entityDesc;
-- (NSArray *)allObjectIDsForClass:(NSEntityDescription *)entityDesc;
+- (void)getCoursesWithCallback:(void (^)(NSArray *))callback delta:(BOOL)delta;
+- (void)getTutorEntriesForCourseId:(NSString *)courseId withCallback:(void (^)(NSArray *))callback delta:(BOOL)delta;
+- (void)allParseObjectIDsForPFClass:(NSString *)pfClassName withCallback:(void (^)(NSArray *))callback;
 
 @end

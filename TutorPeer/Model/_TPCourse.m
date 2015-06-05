@@ -6,6 +6,7 @@
 const struct TPCourseAttributes TPCourseAttributes = {
 	.courseCode = @"courseCode",
 	.courseName = @"courseName",
+	.department = @"department",
 };
 
 const struct TPCourseRelationships TPCourseRelationships = {
@@ -45,6 +46,8 @@ const struct TPCourseRelationships TPCourseRelationships = {
 @dynamic courseCode;
 
 @dynamic courseName;
+
+@dynamic department;
 
 @dynamic contracts;
 

@@ -10,6 +10,8 @@ extern const struct TPUserAttributes {
 	__unsafe_unretained NSString *email;
 	__unsafe_unretained NSString *firstName;
 	__unsafe_unretained NSString *lastName;
+	__unsafe_unretained NSString *loggedIn;
+	__unsafe_unretained NSString *picture;
 } TPUserAttributes;
 
 extern const struct TPUserRelationships {
@@ -54,6 +56,18 @@ extern const struct TPUserRelationships {
 @property (nonatomic, strong) NSString* lastName;
 
 //- (BOOL)validateLastName:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSNumber* loggedIn;
+
+@property (atomic) BOOL loggedInValue;
+- (BOOL)loggedInValue;
+- (void)setLoggedInValue:(BOOL)value_;
+
+//- (BOOL)validateLoggedIn:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSData* picture;
+
+//- (BOOL)validatePicture:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSSet *contracts;
 
@@ -112,6 +126,15 @@ extern const struct TPUserRelationships {
 
 - (NSString*)primitiveLastName;
 - (void)setPrimitiveLastName:(NSString*)value;
+
+- (NSNumber*)primitiveLoggedIn;
+- (void)setPrimitiveLoggedIn:(NSNumber*)value;
+
+- (BOOL)primitiveLoggedInValue;
+- (void)setPrimitiveLoggedInValue:(BOOL)value_;
+
+- (NSData*)primitivePicture;
+- (void)setPrimitivePicture:(NSData*)value;
 
 - (NSMutableSet*)primitiveContracts;
 - (void)setPrimitiveContracts:(NSMutableSet*)value;

@@ -7,76 +7,156 @@
 //
 
 #import "TPTutorsListViewController.h"
-#import "TPTuteeRegisterViewController.h"
-#import <Parse/Parse.h>
+#import "TPCourse.h"
+#import "TPTutorEntry.h"
+#import "TPUser.h"
+#import "TPContract.h"
+#import "TPTutorEntryViewController.h"
+#import "TPDBManager.h"
+#import "TPNetworkManager.h"
 
 @interface TPTutorsListViewController ()
 
-@property (strong, nonatomic) PFObject *courseObject;
+@property (strong, nonatomic) TPCourse *course;
 @property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) NSArray *tutorEntries;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
 @implementation TPTutorsListViewController
 
-- (instancetype)initWithCourseObject:(PFObject *)courseObject {
+- (instancetype)initWithCourse:(TPCourse *)course {
     self = [super init];
     if (self) {
-        _courseObject = courseObject;
+        self.course = course;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [NSString stringWithFormat:@"Tutor list for %@", _courseObject[@"courseName"]];
-    _tableView = [[UITableView alloc] initWithFrame:self.view.frame];
-    [_tableView setDataSource:self];
-    [_tableView setDelegate:self];
+    [self setupView];
+    [self setupFetchResultsController];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    PFQuery *query = [PFQuery queryWithClassName:@"TutorEntry"];
-    [query whereKey:@"course" equalTo:_courseObject[@"courseCode"]];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            // The find succeeded. The first 100 objects are available in objects
-            _tutorEntries = objects;
-            [_tableView reloadData];
-            // NSLog(@"Found courses %@", _courses);
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
+    [[TPNetworkManager sharedInstance] getTutorEntriesForCourse:self.course.courseCode withCallback:nil delta:YES];
+}
+
+- (void)setupView {
+    self.title = [NSString stringWithFormat:@"%@", self.course.courseName];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.frame];
+    [self.tableView setDataSource:self];
+    [self.tableView setDelegate:self];
+    [self.view addSubview:self.tableView];
+}
+
+- (void)setupFetchResultsController {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TPTutorEntry"];
+    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"tutorName" ascending:YES]]];
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[TPDBManager sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+    [self.fetchedResultsController setDelegate:self];
+    NSError *error = nil;
+    [self.fetchedResultsController performFetch:&error];
+    if (error) {
+        NSLog(@"Fetch error, %@", error);
+    }
+}
+
+- (BOOL)isRegisteredAsTuteeForTutorEntry:(TPTutorEntry *)tutorEntry {
+    BOOL registered = NO;
+    TPUser *currentUser = [[TPDBManager sharedInstance] currentUser];
+    for (TPContract *contract in currentUser.contracts) {
+        if ([contract.tutor.objectId isEqual:tutorEntry.tutor.objectId]) {
+            NSLog(@"Registered as tutee for tutor entry: %@", tutorEntry.objectId);
+            registered = YES;
+            break;
         }
-    }];
-    [self.view addSubview:_tableView];
+    }
+    return registered;
 }
 
 #pragma mark - Table view data source methods
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [[self.fetchedResultsController sections] count];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tutorRow"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tutorEntryRow"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"tutorRow"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"tutorEntryRow"];
     }
-    PFObject *tutorEntry = _tutorEntries[indexPath.row];
-    cell.textLabel.text = tutorEntry[@"tutor"];
-    if ([tutorEntry[@"tutees"] containsObject:[PFUser currentUser].username]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
+    [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_tutorEntries count];
+    NSArray *sections = [self.fetchedResultsController sections];
+    id<NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    id<NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return sectionInfo.name;
+}
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    TPTutorEntry *tutorEntry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@: $%@", tutorEntry.tutorName, tutorEntry.price];
+    
 }
 
 #pragma mark - Table view delegate methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TPTuteeRegisterViewController *tuteeRegistraterController = [[TPTuteeRegisterViewController alloc] initWithTutorEntryObject:_tutorEntries[indexPath.row] courseObject:_courseObject];
-    [self.navigationController pushViewController:tuteeRegistraterController animated:YES];
+    TPTutorEntry *tutorEntry = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    TPTutorEntryViewController *tutorEntryViewController = [[TPTutorEntryViewController alloc] initWithTutorEntry:tutorEntry];
+    [self.navigationController pushViewController:tutorEntryViewController animated:YES];
 }
+
+#pragma mark - Fetched results controller delegates
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    switch (type) {
+        case NSFetchedResultsChangeInsert: {
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+        case NSFetchedResultsChangeDelete: {
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+        case NSFetchedResultsChangeUpdate: {
+            [self configureCell:(UITableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+        }
+        case NSFetchedResultsChangeMove: {
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+    }
+}
+
 
 @end

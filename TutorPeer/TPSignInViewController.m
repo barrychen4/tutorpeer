@@ -8,11 +8,11 @@
 
 #import "TPSignInViewController.h"
 #import "TPAuthenticationManager.h"
+#import "TPDBManager.h"
 #import "TPTabBarController.h"
 #import "TPInboxViewController.h"
 #import "TPCourseListViewController.h"
 #import "TPProfileViewController.h"
-#import <Parse/Parse.h>
 
 @interface TPSignInViewController ()
 
@@ -23,18 +23,15 @@
 
 @implementation TPSignInViewController
 
-- (id)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         [self setupView];
     }
-    
     return self;
 }
 
-- (void)setupView
-{
+- (void)setupView {
     self.view.backgroundColor = [UIColor whiteColor];
     
     UINavigationItem *navItem = self.navigationItem;
@@ -50,7 +47,6 @@
 
     
     UIView *emailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
-    
     self.emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 50)];
     self.emailTextField.layer.cornerRadius = 5;
     self.emailTextField.clipsToBounds = YES;
@@ -66,10 +62,9 @@
     self.emailTextField.keyboardType = UIKeyboardTypeDefault;
     [self.emailTextField setUserInteractionEnabled:YES];
     self.emailTextField.delegate = self;
-    [self.view addSubview:self.emailTextField];
+    
     
     UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
-    
     self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 50)];
     [self.passwordTextField setSecureTextEntry:YES];
     self.passwordTextField.layer.cornerRadius = 5;
@@ -86,6 +81,8 @@
     self.passwordTextField.keyboardType = UIKeyboardTypeDefault;
     [self.passwordTextField setUserInteractionEnabled:YES];
     self.passwordTextField.delegate = self;
+    
+    [self.view addSubview:self.emailTextField];
     [self.view addSubview:self.passwordTextField];
     
     
@@ -93,8 +90,7 @@
     [self.view addGestureRecognizer:tapGesture];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 }
 
@@ -113,7 +109,7 @@
 //    [[TPAuthenticationManager sharedInstance] signInWithEmail:self.emailTextField.text password:self.passwordTextField.text callback:^(BOOL result) {
     [[TPAuthenticationManager sharedInstance] signInWithEmail:@"ethanyu94@gmail.com" password:@"test" callback:^(BOOL result) {
         if (result) {
-            NSLog(@"Logged in!");
+            [[TPDBManager sharedInstance] updateLocalUser];
             
             UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
             UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseListViewController alloc] init]];
@@ -129,10 +125,6 @@
             tabBarController.selectedIndex = 1;
             [self.navigationController pushViewController:tabBarController animated:YES];
         }
-        else {
-            NSLog(@"Didn't log in!");
-        }
-
     }];
 }
 
