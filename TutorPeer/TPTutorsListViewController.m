@@ -41,7 +41,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[TPNetworkManager sharedInstance] getTutorEntriesForCourse:self.course.courseCode withCallback:nil delta:YES];
+    [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:nil async:YES];
 }
 
 - (void)setupView {
@@ -54,6 +54,8 @@
 
 - (void)setupFetchResultsController {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TPTutorEntry"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"course.objectId == %@", self.course.objectId];
+    fetchRequest.predicate = predicate;
     [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"tutorName" ascending:YES]]];
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[TPDBManager sharedInstance] managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
     [self.fetchedResultsController setDelegate:self];
@@ -64,17 +66,16 @@
     }
 }
 
-- (BOOL)isRegisteredAsTuteeForTutorEntry:(TPTutorEntry *)tutorEntry {
-    BOOL registered = NO;
+- (TPContract *)contractForTutorEntry:(TPTutorEntry *)tutorEntry {
+    TPContract *contractForTutorEntry;
     TPUser *currentUser = [[TPDBManager sharedInstance] currentUser];
     for (TPContract *contract in currentUser.contracts) {
         if ([contract.tutor.objectId isEqual:tutorEntry.tutor.objectId]) {
-            NSLog(@"Registered as tutee for tutor entry: %@", tutorEntry.objectId);
-            registered = YES;
+            contractForTutorEntry = contract;
             break;
         }
     }
-    return registered;
+    return contractForTutorEntry;
 }
 
 #pragma mark - Table view data source methods
@@ -105,14 +106,20 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     TPTutorEntry *tutorEntry = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = [NSString stringWithFormat:@"%@: $%@", tutorEntry.tutorName, tutorEntry.price];
-    
+    TPContract *contract = [self contractForTutorEntry:tutorEntry];
+    if (contract) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
 }
 
 #pragma mark - Table view delegate methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TPTutorEntry *tutorEntry = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    TPTutorEntryViewController *tutorEntryViewController = [[TPTutorEntryViewController alloc] initWithTutorEntry:tutorEntry];
+    TPContract *contract = [self contractForTutorEntry:tutorEntry];
+    TPTutorEntryViewController *tutorEntryViewController = [[TPTutorEntryViewController alloc] initWithTutorEntry:tutorEntry contract:contract];
     [self.navigationController pushViewController:tutorEntryViewController animated:YES];
 }
 

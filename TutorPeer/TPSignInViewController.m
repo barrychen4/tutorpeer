@@ -9,10 +9,12 @@
 #import "TPSignInViewController.h"
 #import "TPAuthenticationManager.h"
 #import "TPDBManager.h"
+#import "TPNetworkManager.h"
 #import "TPTabBarController.h"
 #import "TPInboxViewController.h"
 #import "TPCourseListViewController.h"
 #import "TPProfileViewController.h"
+#import <Parse/Parse.h>
 
 @interface TPSignInViewController ()
 
@@ -36,13 +38,10 @@
     
     UINavigationItem *navItem = self.navigationItem;
     navItem.title = @"Sign In";
-    
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(attemptSignIn)];
     [rightBarButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue" size:16.0], NSFontAttributeName, nil] forState:UIControlStateNormal];
     navItem.rightBarButtonItem = rightBarButton;
-    
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue-Light" size:21.0], NSFontAttributeName, nil]];
-    
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
 
     
@@ -62,7 +61,6 @@
     self.emailTextField.keyboardType = UIKeyboardTypeDefault;
     [self.emailTextField setUserInteractionEnabled:YES];
     self.emailTextField.delegate = self;
-    
     
     UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
     self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 50)];
@@ -85,7 +83,6 @@
     [self.view addSubview:self.emailTextField];
     [self.view addSubview:self.passwordTextField];
     
-    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
     [self.view addGestureRecognizer:tapGesture];
 }
@@ -99,7 +96,6 @@
     [self.navigationController setNavigationBarHidden:NO];
 }
 
-
 - (void)hideKeyboard:(id)sender {
     [self.emailTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
@@ -110,6 +106,7 @@
     [[TPAuthenticationManager sharedInstance] signInWithEmail:@"ethanyu94@gmail.com" password:@"test" callback:^(BOOL result) {
         if (result) {
             [[TPDBManager sharedInstance] updateLocalUser];
+            [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil async:YES];
             
             UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
             UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseListViewController alloc] init]];

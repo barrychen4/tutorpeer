@@ -33,10 +33,14 @@
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             NSLog(@"Sign up successful!");
-            handler(YES);
+            if (handler) {
+                handler(YES);
+            }
         } else {
             NSLog(@"Sign up failed: %@", error);
-            handler(NO);
+            if (handler) {
+                handler(NO);
+            }
         }
     }];
 }
@@ -45,10 +49,14 @@
     [PFUser logInWithUsernameInBackground:email password:password block:^(PFUser *user, NSError *error) {
         if (!error) {
             NSLog(@"Login successful!");
-            handler(YES);
+            if (handler) {
+                handler(YES);
+            }
         } else {
             NSLog(@"Login failed: %@", error);
-            handler(NO);
+            if (handler) {
+                handler(NO);
+            }
         }
     }];
 }

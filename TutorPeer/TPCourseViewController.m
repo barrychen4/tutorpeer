@@ -45,18 +45,15 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if ([self isRegisteredAsTutor]) {
-        [self.registerTutorButton setTitle:@"Edit tutor registration" forState:UIControlStateNormal];
-    } else {
-        [self.registerTutorButton setTitle:@"Register as tutor" forState:UIControlStateNormal];
-    }
-    [[TPNetworkManager sharedInstance] getTutorEntriesForCourseId:self.course.objectId withCallback:^(NSArray *tutorEntries) {
-        for (TPTutorEntry *tutorEntry in tutorEntries) {
-            if ([tutorEntry.tutor.objectId isEqualToString:[[TPDBManager sharedInstance] currentUser].objectId]) {
-                self.currentUserTutorEntry = tutorEntry;
+    [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:^(NSError *error){
+        if (!error) {
+            if ([self isRegisteredAsTutor]) {
+                [self.registerTutorButton setTitle:@"Edit tutor registration" forState:UIControlStateNormal];
+            } else {
+                [self.registerTutorButton setTitle:@"Register as tutor" forState:UIControlStateNormal];
             }
         }
-    } delta:YES];
+    } async:YES];
 }
 
 - (void)setupView {
@@ -74,12 +71,19 @@
     self.registerTutorButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 300, 50)];
     self.registerTutorButton.center = CGPointMake(self.view.center.x, 300);
     [self.registerTutorButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.registerTutorButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [self.registerTutorButton addTarget:self action:@selector(registerTutor) forControlEvents:UIControlEventTouchUpInside];
+    if ([self isRegisteredAsTutor]) {
+        [self.registerTutorButton setTitle:@"Edit tutor registration" forState:UIControlStateNormal];
+    } else {
+        [self.registerTutorButton setTitle:@"Register as tutor" forState:UIControlStateNormal];
+    }
     
     self.viewTutorsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 150, 50)];
     self.viewTutorsButton.center = CGPointMake(self.view.center.x, 400);
-    [self.viewTutorsButton setTitle:@"Register As Tutee" forState:UIControlStateNormal];
+    [self.viewTutorsButton setTitle:@"View Tutors" forState:UIControlStateNormal];
     [self.viewTutorsButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.viewTutorsButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [self.viewTutorsButton addTarget:self action:@selector(viewTutors) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.courseLabel];
@@ -94,6 +98,7 @@
     for (TPTutorEntry *tutorEntry in currentUser.tutorEntries) {
         if ([tutorEntry.course.objectId isEqual:self.course.objectId]) {
             NSLog(@"Registered as tutor");
+            self.currentUserTutorEntry = tutorEntry;
             registered = YES;
             break;
         }
@@ -115,7 +120,7 @@
 }
 
 - (void)registerTutor {
-    TPTutorRegistrationViewController *tutorRegistrationViewController = [[TPTutorRegistrationViewController alloc] initWithCourse:self.course];
+    TPTutorRegistrationViewController *tutorRegistrationViewController = [[TPTutorRegistrationViewController alloc] initWithCourse:self.course tutorEntry:self.currentUserTutorEntry];
     [self.navigationController pushViewController:tutorRegistrationViewController animated:YES];
 }
 

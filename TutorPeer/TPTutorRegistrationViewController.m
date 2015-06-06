@@ -12,6 +12,7 @@
 #import "TPCourse.h"
 #import "TPTutorEntry.h"
 #import "TPUser.h"
+#import <Parse/Parse.h>
 
 @interface TPTutorRegistrationViewController()
 
@@ -43,13 +44,18 @@
     self.title = @"Registration";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Register" style:UIBarButtonItemStylePlain target:self action:@selector(registerTutor)];
+    UIBarButtonItem *rightBarButton;
+    if (self.tutorEntry) {
+        rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Update" style:UIBarButtonItemStylePlain target:self action:@selector(registerTutor)];
+    } else {
+        rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Register" style:UIBarButtonItemStylePlain target:self action:@selector(registerTutor)];
+    }
     [rightBarButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue" size:16.0], NSFontAttributeName, nil] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = rightBarButton;
     
     UIView *pricePaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
     self.priceTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 40)];
-    self.priceTextField.keyboardType = UIKeyboardTypeNumberPad;
+    self.priceTextField.keyboardType = UIKeyboardTypeDecimalPad;
     self.priceTextField.layer.cornerRadius = 5;
     self.priceTextField.clipsToBounds = YES;
     self.priceTextField.backgroundColor = [UIColor whiteColor];
@@ -92,9 +98,9 @@
     } else {
         NSString *defaultBio = [[TPDBManager sharedInstance] currentUser].defaultBio;
         if (defaultBio) {
-            self.priceTextField.text = defaultBio;
+            self.blurbTextField.text = defaultBio;
         } else {
-            self.priceTextField.text = [NSString stringWithFormat:@"Hi, my name is %@! Please let me be your tutor.", [[TPDBManager sharedInstance] currentUser].firstName];
+            self.blurbTextField.text = [NSString stringWithFormat:@"Hi, my name is %@! Please let me be your tutor.", [[TPDBManager sharedInstance] currentUser].firstName];
         }
     }
     
@@ -102,9 +108,11 @@
     [self.view addSubview:self.blurbTextField];
     
     if (self.tutorEntry) {
-        self.unRegisterButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        self.unRegisterButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
         self.unRegisterButton.center = self.view.center;
         [self.unRegisterButton setTitle:@"Unregister" forState:UIControlStateNormal];
+        [self.unRegisterButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.unRegisterButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
         [self.unRegisterButton addTarget:self action:@selector(unregisterTutor) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.unRegisterButton];
     }
@@ -118,52 +126,129 @@
 }
 
 - (void)registerTutor {
-//    PFObject *tutorEntry = self.tutorEntryObject == nil ? [PFObject objectWithClassName:@"TutorEntry"] : self.tutorEntryObject;
-//    tutorEntry[@"price"] = @([self.priceTextField.text integerValue]);
-//    tutorEntry[@"tutor"] = [PFUser currentUser].username;
-//    tutorEntry[@"blurb"] = self.blurbTextField.text;
-//    tutorEntry[@"course"] = self.courseObject[@"courseCode"];
-//    
-//    [tutorEntry saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (succeeded) {
-//            NSString *objectID = tutorEntry.objectId;
-//            [[PFUser currentUser] addUniqueObject:objectID forKey:@"tutorEntries"];
-//            [self.courseObject addUniqueObject:objectID forKey:@"tutorEntries"];
-//            [self.courseObject addUniqueObject:[PFUser currentUser].username forKey:@"tutors"];
-//            [PFObject saveAllInBackground:@[[PFUser currentUser], self.courseObject] block:^(BOOL succeeded, NSError *error) {
-//                if (succeeded) {
-//                    [self.navigationController popViewControllerAnimated:YES];
-//                } else {
-//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not register" message:@"Please check your internet connections" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//                    [alert show];
-//                }
-//            }];
-//        } else {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not save" message:@"Please check your internet connections" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//            [alert show];
-//        }
-//    }];
+    PFObject *tutorEntryPFObject;
+    if (self.tutorEntry) {
+        tutorEntryPFObject = [PFQuery getObjectOfClass:@"TutorEntry" objectId:self.tutorEntry.objectId];
+        if (!tutorEntryPFObject) {
+            [self showRegisterErrorAlert];
+        } else {
+            NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+            f.numberStyle = NSNumberFormatterDecimalStyle;
+            tutorEntryPFObject[@"price"] = [f numberFromString:self.priceTextField.text];
+            tutorEntryPFObject[@"blurb"] = self.blurbTextField.text;
+            NSError *error;
+            [tutorEntryPFObject save:&error];
+            if (error) {
+                [self showRegisterErrorAlert];
+            } else {
+                [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:nil async:NO];
+                [self showRegisterSuccessAlert];
+            }
+        }
+    } else {
+        PFObject *courseObject = [PFQuery getObjectOfClass:@"Course" objectId:self.course.objectId];
+        if (!courseObject) {
+            [self showRegisterErrorAlert];
+        } else {
+            tutorEntryPFObject = [PFObject objectWithClassName:@"TutorEntry"];
+            tutorEntryPFObject[@"course"] = self.course.objectId;
+            tutorEntryPFObject[@"tutor"] = [[TPDBManager sharedInstance] currentUser].objectId;
+            tutorEntryPFObject[@"tutorName"] = [NSString stringWithFormat:@"%@ %@", [[TPDBManager sharedInstance] currentUser].firstName, [[TPDBManager sharedInstance] currentUser].lastName];
+            NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+            f.numberStyle = NSNumberFormatterDecimalStyle;
+            tutorEntryPFObject[@"price"] = [f numberFromString:self.priceTextField.text];
+            tutorEntryPFObject[@"blurb"] = self.blurbTextField.text;
+            NSError *error;
+            [tutorEntryPFObject save:&error];
+            if (error) {
+                [self showRegisterErrorAlert];
+            } else {
+                NSMutableArray *userTutorEntries = [NSMutableArray arrayWithArray:[PFUser currentUser][@"tutorEntries"]];
+                NSMutableArray *courseTutorEntries = [NSMutableArray arrayWithArray:courseObject[@"tutorEntries"]];
+                [userTutorEntries addObject:tutorEntryPFObject.objectId];
+                [courseTutorEntries addObject:tutorEntryPFObject.objectId];
+                [PFUser currentUser][@"tutorEntries"] = userTutorEntries;
+                courseObject[@"tutorEntries"] = courseTutorEntries;
+                NSError *error;
+                [PFObject saveAll:@[[PFUser currentUser], courseObject] error:&error];
+                if (error) {
+                    [self showRegisterErrorAlert];
+                    return;
+                }
+                [[TPDBManager sharedInstance] updateLocalUser];
+                [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil async:YES];
+                [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:^(NSError *error) {
+                    if (!error) {
+                        TPUser *currentUser = [[TPDBManager sharedInstance] currentUser];
+                        for (TPTutorEntry *tutorEntry in currentUser.tutorEntries) {
+                            if ([tutorEntry.course.objectId isEqual:self.course.objectId]) {
+                                self.tutorEntry = tutorEntry;
+                                break;
+                            }
+                        }
+                    }
+                } async:YES];
+                [self showRegisterSuccessAlert];
+            }
+        }
+    }
 }
 
 - (void)unregisterTutor {
-//    [self.courseObject removeObject:[PFUser currentUser].username forKey:@"tutors"];
-//    [self.courseObject removeObject:self.tutorEntryObject.objectId forKey:@"tutorEntries"];
-//    [[PFUser currentUser] removeObject:self.tutorEntryObject.objectId forKey:@"tutorEntries"];
-//    [PFObject saveAllInBackground:@[self.courseObject, [PFUser currentUser]] block:^(BOOL success, NSError *error) {
-//        if (success) {
-//            [self.tutorEntryObject deleteInBackgroundWithBlock:^(BOOL success, NSError *error) {
-//                if (success) {
-//                    [self.navigationController popViewControllerAnimated:YES];
-//                } else {
-//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not unregister" message:@"Please check your internet connections" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//                    [alert show];
-//                }
-//            }];
-//        } else {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not delete" message:@"Please check your internet connections" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//            [alert show];
-//        }
-//    }];
+    PFObject *tutorEntryPFObject = [PFQuery getObjectOfClass:@"TutorEntry" objectId:self.tutorEntry.objectId];
+    if (!tutorEntryPFObject) {
+        [self showUnregisterErrorAlert];
+    } else {
+        PFObject *courseObject = [PFQuery getObjectOfClass:@"Course" objectId:self.course.objectId];
+        if (!courseObject) {
+            [self showUnregisterErrorAlert];
+        } else {
+            NSString *tutorEntryId = tutorEntryPFObject.objectId;
+            NSError *error;
+            [tutorEntryPFObject delete:&error];
+            if (error) {
+                [self showUnregisterErrorAlert];
+            } else {
+                NSMutableArray *userTutorEntries = [NSMutableArray arrayWithArray:[PFUser currentUser][@"tutorEntries"]];
+                NSMutableArray *courseTutorEntries = [NSMutableArray arrayWithArray:courseObject[@"tutorEntries"]];
+                [userTutorEntries removeObject:tutorEntryId];
+                [courseTutorEntries removeObject:tutorEntryId];
+                [PFUser currentUser][@"tutorEntries"] = userTutorEntries;
+                courseObject[@"tutorEntries"] = courseTutorEntries;
+                NSError *error;
+                [PFObject saveAll:@[[PFUser currentUser], courseObject] error:&error];
+                if (error) {
+                    [self showRegisterErrorAlert];
+                    return;
+                }
+                [[TPDBManager sharedInstance] updateLocalUser];
+                [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil async:YES];
+                [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:nil async:YES];
+                self.tutorEntry = nil;
+                [self showRegisterSuccessAlert];
+            }
+        }
+    }
+}
+
+- (void)showRegisterErrorAlert {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not register" message:@"Please check your internet connection" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)showRegisterSuccessAlert {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Successfully registered!" message:[NSString stringWithFormat:@"Registered as tutor for %@", self.course.courseName] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)showUnregisterErrorAlert {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not unregister" message:@"Please check your internet connection" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)showUnregisterSuccessAlert {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Successfully unregistered!" message:[NSString stringWithFormat:@"Unregistered as tutor for %@", self.course.courseName] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 @end

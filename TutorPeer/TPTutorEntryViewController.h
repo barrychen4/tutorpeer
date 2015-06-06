@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class TPTutorEntry;
+@class TPTutorEntry, TPContract;
 
 @interface TPTutorEntryViewController : UIViewController
 
-- (instancetype)initWithTutorEntry:(TPTutorEntry *)tutorEntry;
+- (instancetype)initWithTutorEntry:(TPTutorEntry *)tutorEntry contract:(TPContract *)contract;
 
 @end

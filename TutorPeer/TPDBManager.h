@@ -24,9 +24,11 @@
 - (NSArray *)getLocalObjectsForDBClass:(NSString *)dbClassName withRemoteIds:(NSArray *)objectIds;
 - (NSArray *)addLocalObjectsForDBClass:(NSString *)dbClassName withRemoteObjects:(NSArray *)parseObjects;
 - (NSDate *)latestDateForDBClass:(NSString *)dbClassName;
+- (NSDate *)latestDateForDBClass:(NSString *)dbClassName predicate:(NSPredicate *)predicate;
 - (NSArray *)allLocalObjectIDsForDBClass:(NSString *)dbClassName;
 - (NSArray *)allLocalObjectIDsForDBClass:(NSString *)dbClassName predicate:(NSPredicate *)predicate;
 - (void)removeLocalObjectsNotOnParseForDBClass:(NSString *)dbClassName parseObjectIDs:(NSArray *)parseObjectIDs;
+- (void)removeLocalObjectsNotOnParseForDBClass:(NSString *)dbClassName parseObjectIDs:(NSArray *)parseObjectIDs predicate:(NSPredicate *)predicate;
 - (void)updateLocalUser;
 
 @end

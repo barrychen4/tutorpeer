@@ -142,8 +142,13 @@
 }
 
 - (NSDate *)latestDateForDBClass:(NSString *)dbClassName {
+    return [self latestDateForDBClass:dbClassName predicate:nil];
+}
+
+- (NSDate *)latestDateForDBClass:(NSString *)dbClassName predicate:(NSPredicate *)predicate {
     NSDate *date;
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:dbClassName];
+    request.predicate = predicate;
     NSSortDescriptor *updatedAtSort = [NSSortDescriptor sortDescriptorWithKey:@"updatedAt" ascending:NO];
     request.sortDescriptors = @[updatedAtSort];
     [request setFetchLimit:1];
@@ -176,15 +181,25 @@
 }
 
 - (void)removeLocalObjectsNotOnParseForDBClass:(NSString *)dbClassName parseObjectIDs:(NSArray *)parseObjectIDs {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT (objectId IN %@)", parseObjectIDs];
+    [self removeLocalObjectsNotOnParseForDBClass:dbClassName parseObjectIDs:parseObjectIDs predicate:nil];
+}
+
+- (void)removeLocalObjectsNotOnParseForDBClass:(NSString *)dbClassName parseObjectIDs:(NSArray *)parseObjectIDs predicate:(NSPredicate *)predicate {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:dbClassName];
-    request.predicate = predicate;
+    if (predicate) {
+        NSPredicate *mainPredicate = [NSPredicate predicateWithFormat:@"NOT (objectId IN %@)", parseObjectIDs];
+        NSCompoundPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicate, mainPredicate]];
+        request.predicate = compoundPredicate;
+    } else {
+        request.predicate = [NSPredicate predicateWithFormat:@"NOT (objectId IN %@)", parseObjectIDs];
+    }
     
     NSError *error;
     NSArray *objects = [self.managedObjectContext executeFetchRequest:request error:&error];
     for (TPSyncEntity *object in objects) {
         [self.managedObjectContext deleteObject:object];
     }
+    NSLog(@"Deleted %lu objects", [objects count]);
     [self.managedObjectContext save:&error];
     if (error) {
         NSLog(@"Error deleting objects locally: %@", error);

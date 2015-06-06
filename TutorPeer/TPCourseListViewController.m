@@ -29,7 +29,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[TPNetworkManager sharedInstance] getCoursesWithCallback:nil delta:YES];
+    [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil async:YES];
 }
 
 - (void)setupView {
@@ -111,6 +111,7 @@
         }
     }
 }
+
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch (type) {
         case NSFetchedResultsChangeInsert: {

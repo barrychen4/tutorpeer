@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TPNetworkManager.h"
 
 @class TPTutorEntry;
 
@@ -15,8 +14,8 @@
 
 + (instancetype)sharedInstance;
 
-- (void)getCoursesWithCallback:(void (^)(NSArray *))callback delta:(BOOL)delta;
-- (void)getTutorEntriesForCourseId:(NSString *)courseId withCallback:(void (^)(NSArray *))callback delta:(BOOL)delta;
-- (void)allParseObjectIDsForPFClass:(NSString *)pfClassName withCallback:(void (^)(NSArray *))callback;
+- (BOOL)refreshCoursesWithCallback:(void (^)(NSError *))callback async:(BOOL)async;
+- (BOOL)refreshTutorEntriesForCourseId:(NSString *)courseId withCallback:(void (^)(NSError *))callback async:(BOOL)async;
+- (BOOL)refreshContractsForUserId:(NSString *)userId withCallback:(void (^)(NSError *))callback async:(BOOL)async;
 
 @end

@@ -13,19 +13,16 @@
 @interface TPLandingViewController ()
 
 @property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) UILabel *signUpLabel;
-@property (strong, nonatomic) UILabel *loginLabel;
+@property (strong, nonatomic) UIButton *signUpButton;
+@property (strong, nonatomic) UIButton *loginButton;
 
 @end
 
 @implementation TPLandingViewController
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self setupView];
-    }
-    return self;
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupView];
 }
 
 - (void)setupView {
@@ -37,33 +34,23 @@
     self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32];
     self.titleLabel.center = CGPointMake(self.view.center.x, 155);
     
-    self.signUpLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
-    self.signUpLabel.text = @"Sign Up";
-    self.signUpLabel.textAlignment = NSTextAlignmentCenter;
-    self.signUpLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24];
-    self.signUpLabel.center = CGPointMake(self.view.center.x, 300);
-    [self.signUpLabel setUserInteractionEnabled:YES];
+    self.signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
+    self.signUpButton.center = CGPointMake(self.view.center.x, 300);
+    [self.signUpButton setTitle:@"Sign Up" forState:UIControlStateNormal];
+    [self.signUpButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.signUpButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [self.signUpButton addTarget:self action:@selector(signUp) forControlEvents:UIControlEventTouchUpInside];
     
-    self.loginLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
-    self.loginLabel.text = @"Login";
-    self.loginLabel.textAlignment = NSTextAlignmentCenter;
-    self.loginLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24];
-    self.loginLabel.center = CGPointMake(self.view.center.x, 380);
-    [self.loginLabel setUserInteractionEnabled:YES];
+    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
+    self.loginButton.center = CGPointMake(self.view.center.x, 380);
+    [self.loginButton setTitle:@"Log In" forState:UIControlStateNormal];
+    [self.loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [self.loginButton addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.titleLabel];
-    [self.view addSubview:self.signUpLabel];
-    [self.view addSubview:self.loginLabel];
-    
-    UITapGestureRecognizer *loginTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(login:)];
-    UITapGestureRecognizer *signUpTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signUp:)];
-    
-    [self.loginLabel addGestureRecognizer:loginTapGesture];
-    [self.signUpLabel addGestureRecognizer:signUpTapGesture];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+    [self.view addSubview:self.signUpButton];
+    [self.view addSubview:self.loginButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -71,12 +58,12 @@
     [self.navigationController setNavigationBarHidden:YES];
 }
 
-- (void)signUp:(UITapGestureRecognizer *)recognizer {
+- (void)signUp {
     TPSignUpViewController *signUpVc = [[TPSignUpViewController alloc] init];
     [self.navigationController pushViewController:signUpVc animated:YES];
 }
 
-- (void)login:(UITapGestureRecognizer *)recognizer {
+- (void)login {
     TPSignInViewController *loginVc = [[TPSignInViewController alloc] init];
     [self.navigationController pushViewController:loginVc animated:YES];
 }
