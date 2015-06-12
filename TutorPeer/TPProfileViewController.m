@@ -37,6 +37,7 @@
     self.profileImageView.backgroundColor = [UIColor grayColor];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     self.profileImageView.clipsToBounds = YES;
+    self.profileImageView.contentMode = UIViewContentModeScaleAspectFill;
     
     [self.view addSubview:self.profileImageView];
     
@@ -60,6 +61,16 @@
     _emailLabel.frame = CGRectMake(20, self.view.center.y + 20, 200, 50);
     _emailLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
     _emailLabel.text = [NSString stringWithFormat:@"Email: %@", currentUser[@"email"]];
+    
+    if (currentUser[@"profileImage"]) {
+        PFFile *imageFile = currentUser[@"profileImage"];
+        [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            if (!error) {
+                UIImage *image = [UIImage imageWithData:data];
+                self.profileImageView.image = image;
+            }
+        }];
+    }
     
     [self.view addSubview:_bioLabel];
     [self.view addSubview:_nameLabel];
