@@ -20,6 +20,7 @@
 
 @property (strong, nonatomic) UITextField *emailTextField;
 @property (strong, nonatomic) UITextField *passwordTextField;
+@property (strong, nonatomic) UILabel *failedSignInLabel;
 
 @end
 
@@ -85,6 +86,14 @@
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
     [self.view addGestureRecognizer:tapGesture];
+    
+    self.failedSignInLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 50)];
+    self.failedSignInLabel.text = @"Invalid email or password. Please try again.";
+    self.failedSignInLabel.center = CGPointMake(self.view.center.x, self.view.center.y + 100);
+    self.failedSignInLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
+    [self.failedSignInLabel setHidden:YES];
+    
+    [self.view addSubview:self.failedSignInLabel];
 }
 
 - (void)viewDidLoad {
@@ -102,8 +111,7 @@
 }
 
 - (void)attemptSignIn {
-//    [[TPAuthenticationManager sharedInstance] signInWithEmail:self.emailTextField.text password:self.passwordTextField.text callback:^(BOOL result) {
-    [[TPAuthenticationManager sharedInstance] signInWithEmail:@"ethanyu94@gmail.com" password:@"test" callback:^(BOOL result) {
+    [[TPAuthenticationManager sharedInstance] signInWithEmail:self.emailTextField.text password:self.passwordTextField.text callback:^(BOOL result) {
         if (result) {
             [[TPDBManager sharedInstance] updateLocalUser];
             [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil async:YES];
@@ -121,6 +129,8 @@
             tabBarController.viewControllers = @[inboxViewController, courseViewController, profileViewController];
             tabBarController.selectedIndex = 1;
             [self.navigationController pushViewController:tabBarController animated:YES];
+        } else {
+            [self.failedSignInLabel setHidden:NO];
         }
     }];
 }
