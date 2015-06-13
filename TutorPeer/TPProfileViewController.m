@@ -75,6 +75,8 @@
     [self.view addSubview:_bioLabel];
     [self.view addSubview:_nameLabel];
     [self.view addSubview:_emailLabel];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doneEditing) name:@"TPDoneEditingNotification" object:nil];
 }
 
 - (void)editProfile {
@@ -83,6 +85,23 @@
     TPEditProfileViewController *editProfileVc = [[TPEditProfileViewController alloc] init];
     
     [self.navigationController pushViewController:editProfileVc animated:YES];
+}
+
+- (void)doneEditing
+{
+    PFUser *currentUser = [PFUser currentUser];
+    _bioLabel.text = currentUser[@"defaultBio"];
+    _nameLabel.text = [NSString stringWithFormat:@"Name: %@ %@", currentUser[@"firstName"], currentUser[@"lastName"]];
+    _emailLabel.text = [NSString stringWithFormat:@"Email: %@", currentUser[@"email"]];
+    if (currentUser[@"profileImage"]) {
+        PFFile *imageFile = currentUser[@"profileImage"];
+        [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            if (!error) {
+                UIImage *image = [UIImage imageWithData:data];
+                self.profileImageView.image = image;
+            }
+        }];
+    }
 }
 
 @end

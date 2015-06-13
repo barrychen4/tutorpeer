@@ -14,9 +14,10 @@
 
 @property (strong, nonatomic) TPUser *user;
 @property (strong, nonatomic) UIImageView *profileImageView;
-@property (strong, nonatomic) UILabel *editBioLabel;
-@property (strong, nonatomic) UILabel *editNameLabel;
-@property (strong, nonatomic) UILabel *editEmailLabel;
+@property (strong, nonatomic) UITextView *editBioTextView;
+@property (strong, nonatomic) UITextView *editFirstNameTextView;
+@property (strong, nonatomic) UITextView *editLastNameTextView;
+@property (strong, nonatomic) UITextView *editEmailTextView;
 
 @end
 
@@ -55,6 +56,43 @@
             }
         }];
     }
+    
+    self.editBioTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, self.view.center.y - 60, 250, 50)];
+    self.editBioTextView.text = currentUser[@"defaultBio"];
+    self.editBioTextView.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.editBioTextView.layer.borderWidth = 1.0f;
+    self.editBioTextView.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
+    [self.editBioTextView setReturnKeyType:UIReturnKeyDone];
+    
+    [self.view addSubview:self.editBioTextView];
+    
+    self.editFirstNameTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, self.view.center.y, 250, 50)];
+    self.editFirstNameTextView.text = currentUser[@"firstName"];
+    self.editFirstNameTextView.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.editFirstNameTextView.layer.borderWidth = 1.0f;
+    self.editFirstNameTextView.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
+    [self.editFirstNameTextView setReturnKeyType:UIReturnKeyDone];
+    
+    [self.view addSubview:self.editFirstNameTextView];
+    
+    self.editLastNameTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, self.view.center.y + 60, 250, 50)];
+    self.editLastNameTextView.text = currentUser[@"lastName"];
+    self.editLastNameTextView.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.editLastNameTextView.layer.borderWidth = 1.0f;
+    self.editLastNameTextView.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
+    [self.editLastNameTextView setReturnKeyType:UIReturnKeyDone];
+    
+    [self.view addSubview:self.editLastNameTextView];
+    
+    self.editEmailTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, self.view.center.y + 120, 250, 50)];
+    self.editEmailTextView.text = currentUser[@"email"];
+    self.editEmailTextView.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.editEmailTextView.layer.borderWidth = 1.0f;
+    self.editEmailTextView.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
+    [self.editEmailTextView setReturnKeyType:UIReturnKeyDone];
+    
+    [self.view addSubview:self.editEmailTextView];
+
 }
 
 - (void)chooseImage:(UITapGestureRecognizer *)recognizer
@@ -100,7 +138,17 @@
 
 - (void)finishEdit
 {
-    NSLog(@"Done editing");
+    PFUser *user = [PFUser currentUser];
+    user[@"defaultBio"] = self.editBioTextView.text;
+    user[@"firstName"] = self.editFirstNameTextView.text;
+    user[@"lastName"] = self.editLastNameTextView.text;
+    user[@"email"] = self.editEmailTextView.text;
+    
+    [user saveInBackground];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TPDoneEditingNotification" object:nil];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

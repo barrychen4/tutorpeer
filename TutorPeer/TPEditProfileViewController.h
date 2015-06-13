@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TPEditProfileViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface TPEditProfileViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 
 @end
