@@ -32,7 +32,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.dbManager = [TPDBManager sharedInstance];
+        _dbManager = [TPDBManager sharedInstance];
     }
     return self;
 }

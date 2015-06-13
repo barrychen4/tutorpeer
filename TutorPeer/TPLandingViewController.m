@@ -28,29 +28,29 @@
 - (void)setupView {
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 50)];
-    self.titleLabel.text = @"TutorPeer";
-    self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32];
-    self.titleLabel.center = CGPointMake(self.view.center.x, 155);
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 50)];
+    _titleLabel.text = @"TutorPeer";
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    _titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32];
+    _titleLabel.center = CGPointMake(self.view.center.x, 155);
     
-    self.signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
-    self.signUpButton.center = CGPointMake(self.view.center.x, 300);
-    [self.signUpButton setTitle:@"Sign Up" forState:UIControlStateNormal];
-    [self.signUpButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.signUpButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-    [self.signUpButton addTarget:self action:@selector(signUp) forControlEvents:UIControlEventTouchUpInside];
+    _signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
+    _signUpButton.center = CGPointMake(self.view.center.x, 300);
+    [_signUpButton setTitle:@"Sign Up" forState:UIControlStateNormal];
+    [_signUpButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_signUpButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [_signUpButton addTarget:self action:@selector(signUp) forControlEvents:UIControlEventTouchUpInside];
     
-    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
-    self.loginButton.center = CGPointMake(self.view.center.x, 380);
-    [self.loginButton setTitle:@"Log In" forState:UIControlStateNormal];
-    [self.loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-    [self.loginButton addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+    _loginButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
+    _loginButton.center = CGPointMake(self.view.center.x, 380);
+    [_loginButton setTitle:@"Log In" forState:UIControlStateNormal];
+    [_loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [_loginButton addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:self.titleLabel];
-    [self.view addSubview:self.signUpButton];
-    [self.view addSubview:self.loginButton];
+    [self.view addSubview:_titleLabel];
+    [self.view addSubview:_signUpButton];
+    [self.view addSubview:_loginButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

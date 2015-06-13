@@ -44,23 +44,23 @@
     PFUser *currentUser = [PFUser currentUser];
     NSLog(@"Current user %@", currentUser);
     
-    _bioLabel = [[UILabel alloc] init];
-    _bioLabel.frame = CGRectMake(0, 0, 200, 50);
-    _bioLabel.center = CGPointMake(self.view.center.x, self.view.center.y - 60);
-    _bioLabel.text = currentUser[@"defaultBio"];
-    _bioLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-    _bioLabel.numberOfLines = 2;
-    _bioLabel.textAlignment = NSTextAlignmentCenter;
+    self.bioLabel = [[UILabel alloc] init];
+    self.bioLabel.frame = CGRectMake(0, 0, 200, 50);
+    self.bioLabel.center = CGPointMake(self.view.center.x, self.view.center.y - 60);
+    self.bioLabel.text = currentUser[@"defaultBio"];
+    self.bioLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+    self.bioLabel.numberOfLines = 2;
+    self.bioLabel.textAlignment = NSTextAlignmentCenter;
     
-    _nameLabel = [[UILabel alloc] init];
-    _nameLabel.frame = CGRectMake(20, self.view.center.y - 20, 200, 50);
-    _nameLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
-    _nameLabel.text = [NSString stringWithFormat:@"Name: %@ %@", currentUser[@"firstName"], currentUser[@"lastName"]];
+    self.nameLabel = [[UILabel alloc] init];
+    self.nameLabel.frame = CGRectMake(20, self.view.center.y - 20, 200, 50);
+    self.nameLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
+    self.nameLabel.text = [NSString stringWithFormat:@"Name: %@ %@", currentUser[@"firstName"], currentUser[@"lastName"]];
     
-    _emailLabel = [[UILabel alloc] init];
-    _emailLabel.frame = CGRectMake(20, self.view.center.y + 20, 200, 50);
-    _emailLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
-    _emailLabel.text = [NSString stringWithFormat:@"Email: %@", currentUser[@"email"]];
+    self.emailLabel = [[UILabel alloc] init];
+    self.emailLabel.frame = CGRectMake(20, self.view.center.y + 20, 200, 50);
+    self.emailLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
+    self.emailLabel.text = [NSString stringWithFormat:@"Email: %@", currentUser[@"email"]];
     
     if (currentUser[@"profileImage"]) {
         PFFile *imageFile = currentUser[@"profileImage"];
@@ -72,9 +72,9 @@
         }];
     }
     
-    [self.view addSubview:_bioLabel];
-    [self.view addSubview:_nameLabel];
-    [self.view addSubview:_emailLabel];
+    [self.view addSubview:self.bioLabel];
+    [self.view addSubview:self.nameLabel];
+    [self.view addSubview:self.emailLabel];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doneEditing) name:@"TPDoneEditingNotification" object:nil];
 }
@@ -90,9 +90,9 @@
 - (void)doneEditing
 {
     PFUser *currentUser = [PFUser currentUser];
-    _bioLabel.text = currentUser[@"defaultBio"];
-    _nameLabel.text = [NSString stringWithFormat:@"Name: %@ %@", currentUser[@"firstName"], currentUser[@"lastName"]];
-    _emailLabel.text = [NSString stringWithFormat:@"Email: %@", currentUser[@"email"]];
+    self.bioLabel.text = currentUser[@"defaultBio"];
+    self.nameLabel.text = [NSString stringWithFormat:@"Name: %@ %@", currentUser[@"firstName"], currentUser[@"lastName"]];
+    self.emailLabel.text = [NSString stringWithFormat:@"Email: %@", currentUser[@"email"]];
     if (currentUser[@"profileImage"]) {
         PFFile *imageFile = currentUser[@"profileImage"];
         [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {

@@ -47,54 +47,55 @@
 
     
     UIView *emailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
-    self.emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 50)];
-    self.emailTextField.layer.cornerRadius = 5;
-    self.emailTextField.clipsToBounds = YES;
-    self.emailTextField.placeholder = @"Username";
-    self.emailTextField.backgroundColor = [UIColor whiteColor];
-    self.emailTextField.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.emailTextField.layer.borderWidth = 1.0f;
-    self.emailTextField.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
-    self.emailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    self.emailTextField.center = CGPointMake(self.view.center.x, self.view.center.y - 40);
-    self.emailTextField.leftView = emailPaddingView;
-    self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
-    self.emailTextField.keyboardType = UIKeyboardTypeDefault;
-    [self.emailTextField setUserInteractionEnabled:YES];
-    self.emailTextField.delegate = self;
+    _emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 50)];
+    _emailTextField.layer.cornerRadius = 5;
+    _emailTextField.clipsToBounds = YES;
+    _emailTextField.placeholder = @"Username";
+    _emailTextField.backgroundColor = [UIColor whiteColor];
+    _emailTextField.layer.borderColor = [[UIColor blackColor] CGColor];
+    _emailTextField.layer.borderWidth = 1.0f;
+    _emailTextField.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
+    _emailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _emailTextField.center = CGPointMake(self.view.center.x, self.view.center.y - 40);
+    _emailTextField.leftView = emailPaddingView;
+    _emailTextField.leftViewMode = UITextFieldViewModeAlways;
+    _emailTextField.keyboardType = UIKeyboardTypeDefault;
+    [_emailTextField setUserInteractionEnabled:YES];
+    _emailTextField.delegate = self;
+    
+    [self.view addSubview:_emailTextField];
     
     UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
-    self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 50)];
-    [self.passwordTextField setSecureTextEntry:YES];
-    self.passwordTextField.layer.cornerRadius = 5;
-    self.passwordTextField.clipsToBounds = YES;
-    self.passwordTextField.placeholder = @"Password";
-    self.passwordTextField.backgroundColor = [UIColor whiteColor];
-    self.passwordTextField.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.passwordTextField.layer.borderWidth = 1.0f;
-    self.passwordTextField.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
-    self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    self.passwordTextField.center = CGPointMake(self.view.center.x, self.view.center.y + 40);
-    self.passwordTextField.leftView = passwordPaddingView;
-    self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
-    self.passwordTextField.keyboardType = UIKeyboardTypeDefault;
-    [self.passwordTextField setUserInteractionEnabled:YES];
-    self.passwordTextField.delegate = self;
+    _passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 50)];
+    [_passwordTextField setSecureTextEntry:YES];
+    _passwordTextField.layer.cornerRadius = 5;
+    _passwordTextField.clipsToBounds = YES;
+    _passwordTextField.placeholder = @"Password";
+    _passwordTextField.backgroundColor = [UIColor whiteColor];
+    _passwordTextField.layer.borderColor = [[UIColor blackColor] CGColor];
+    _passwordTextField.layer.borderWidth = 1.0f;
+    _passwordTextField.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
+    _passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _passwordTextField.center = CGPointMake(self.view.center.x, self.view.center.y + 40);
+    _passwordTextField.leftView = passwordPaddingView;
+    _passwordTextField.leftViewMode = UITextFieldViewModeAlways;
+    _passwordTextField.keyboardType = UIKeyboardTypeDefault;
+    [_passwordTextField setUserInteractionEnabled:YES];
+    _passwordTextField.delegate = self;
     
-    [self.view addSubview:self.emailTextField];
-    [self.view addSubview:self.passwordTextField];
+    [self.view addSubview:_passwordTextField];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
     [self.view addGestureRecognizer:tapGesture];
     
-    self.failedSignInLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 50)];
-    self.failedSignInLabel.text = @"Invalid email or password. Please try again.";
-    self.failedSignInLabel.numberOfLines = 2;
-    self.failedSignInLabel.center = CGPointMake(self.view.center.x, self.view.center.y + 100);
-    self.failedSignInLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
-    [self.failedSignInLabel setHidden:YES];
+    _failedSignInLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width - 20, 50)];
+    _failedSignInLabel.text = @"Invalid email or password. Please try again.";
+    _failedSignInLabel.numberOfLines = 2;
+    _failedSignInLabel.center = CGPointMake(self.view.center.x, self.view.center.y + 100);
+    _failedSignInLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
+    [_failedSignInLabel setHidden:YES];
     
-    [self.view addSubview:self.failedSignInLabel];
+    [self.view addSubview:_failedSignInLabel];
 }
 
 - (void)viewDidLoad {
