@@ -30,4 +30,10 @@ static TPUser *_currentUser;
     return _currentUser;
 }
 
++ (void)logOut {
+    _currentUser = nil;
+    
+    [PFUser logOut];
+}
+
 @end

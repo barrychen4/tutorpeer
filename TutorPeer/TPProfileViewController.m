@@ -9,6 +9,7 @@
 #import "TPProfileViewController.h"
 #import "TPUser.h"
 #import "TPEditProfileViewController.h"
+#import "TPSettingsViewController.h"
 #import <Parse/Parse.h>
 
 @interface TPProfileViewController ()
@@ -31,6 +32,9 @@
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editProfile)];
     [leftBarButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue" size:16.0], NSFontAttributeName, nil] forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = leftBarButton;
+    
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(editSettings)];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
     
     self.profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     self.profileImageView.center = CGPointMake(self.view.center.x, self.view.center.y - 140);
@@ -85,6 +89,14 @@
     TPEditProfileViewController *editProfileVc = [[TPEditProfileViewController alloc] init];
     
     [self.navigationController pushViewController:editProfileVc animated:YES];
+}
+
+- (void)editSettings {
+    NSLog(@"Edit settings pressed");
+    
+    TPSettingsViewController *settingsVc = [[TPSettingsViewController alloc] init];
+    
+    [self.navigationController pushViewController:settingsVc animated:YES];
 }
 
 - (void)doneEditing

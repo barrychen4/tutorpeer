@@ -4,5 +4,6 @@
 // Custom logic goes here.
 
 + (TPUser *)currentUser;
++ (void)logOut;
 
 @end

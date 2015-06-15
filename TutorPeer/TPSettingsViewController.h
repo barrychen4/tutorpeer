@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TPSettingsViewController : UIViewController
+@interface TPSettingsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end
