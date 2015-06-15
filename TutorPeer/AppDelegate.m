@@ -32,7 +32,7 @@
                   clientKey:@"hqMGjaVFPYIUkO2322TgIoI10fGyiv8qvcOqurTg"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    if (![TPUser currentUser]) {
+    if (![PFUser currentUser]) {
         TPLandingViewController *landingVc = [[TPLandingViewController alloc] init];
         
         self.navigationController = [[UINavigationController alloc] initWithRootViewController:landingVc];
