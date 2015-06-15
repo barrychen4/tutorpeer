@@ -206,21 +206,6 @@
     }
 }
 
-- (TPUser *)currentUser {
-    if (!_currentUser) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"loggedIn == YES"];
-        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"TPUser"];
-        request.predicate = predicate;
-        request.fetchLimit = 1;
-        NSError *error;
-        NSArray *objects = [self.managedObjectContext executeFetchRequest:request error:&error];
-        if ([objects count]) {
-            _currentUser = objects[0];
-        }
-    }
-    return _currentUser;
-}
-
 - (TPUser *)makeCurrentUserWithId:(NSString *)objectId {
     TPUser *currentUser;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", [PFUser currentUser].objectId];
@@ -240,7 +225,7 @@
 
 - (void)updateLocalUser {
     TPUser *currentUser;
-    TPUser *user = [self currentUser];
+    TPUser *user = [TPUser currentUser];
     if (user) {
         if ([user.objectId isEqual:[PFUser currentUser].objectId]) {
             currentUser = user;
@@ -254,6 +239,7 @@
     
     [self updateLocalObjectAttributes:currentUser withRemoteObject:[PFUser currentUser]];
     [self updateLocalObjectRelationships:currentUser withRemoteObject:[PFUser currentUser]];
+    
     NSError *error;
     [self.managedObjectContext save:&error];
     if (error) {

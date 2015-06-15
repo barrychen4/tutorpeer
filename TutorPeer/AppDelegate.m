@@ -12,6 +12,10 @@
 #import "TPInboxViewController.h"
 #import "TPCourseListViewController.h"
 #import "TPProfileViewController.h"
+#import "TPDBManager.h"
+#import "TPUser.h"
+#import "TPNetworkManager.h"
+#import "TPTabBarController.h"
 
 @interface AppDelegate ()
 
@@ -28,13 +32,33 @@
                   clientKey:@"hqMGjaVFPYIUkO2322TgIoI10fGyiv8qvcOqurTg"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    TPLandingViewController *landingVc = [[TPLandingViewController alloc] init];
+    if (![TPUser currentUser]) {
+        TPLandingViewController *landingVc = [[TPLandingViewController alloc] init];
+        
+        self.navigationController = [[UINavigationController alloc] initWithRootViewController:landingVc];
+        
+        self.window.rootViewController = self.navigationController;
+        
+        [self.navigationController setNavigationBarHidden:YES animated:NO];
+    } else {
+        [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil async:YES];
+        
+        UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
+        UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseListViewController alloc] init]];
+        UINavigationController *profileViewController = [[UINavigationController alloc] initWithRootViewController:[[TPProfileViewController alloc] init]];
+        
+        inboxViewController.title = @"Inbox";
+        courseViewController.title = @"Courses";
+        profileViewController.title = @"Profile";
+        
+        TPTabBarController *tabBarController = [[TPTabBarController alloc] init];
+        
+        tabBarController.viewControllers = @[inboxViewController, courseViewController, profileViewController];
+        tabBarController.selectedIndex = 1;
+        
+        self.window.rootViewController = tabBarController;
+    }
     
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:landingVc];
-    
-    self.window.rootViewController = self.navigationController;
-    
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     self.window.backgroundColor = [UIColor whiteColor];
     

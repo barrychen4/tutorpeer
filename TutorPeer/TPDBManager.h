@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
 @import CoreData;
 @class TPSyncEntity, TPUser;
@@ -27,8 +28,11 @@
 - (NSDate *)latestDateForDBClass:(NSString *)dbClassName predicate:(NSPredicate *)predicate;
 - (NSArray *)allLocalObjectIDsForDBClass:(NSString *)dbClassName;
 - (NSArray *)allLocalObjectIDsForDBClass:(NSString *)dbClassName predicate:(NSPredicate *)predicate;
+- (TPSyncEntity *)addBlankLocalObjectForDBClass:(NSString *)dbClassName withRemoteId:(NSString *)objectId;
 - (void)removeLocalObjectsNotOnParseForDBClass:(NSString *)dbClassName parseObjectIDs:(NSArray *)parseObjectIDs;
 - (void)removeLocalObjectsNotOnParseForDBClass:(NSString *)dbClassName parseObjectIDs:(NSArray *)parseObjectIDs predicate:(NSPredicate *)predicate;
+- (void)updateLocalObjectAttributes:(TPSyncEntity *)localObject withRemoteObject:(PFObject *)parseObject;
+- (void)updateLocalObjectRelationships:(TPSyncEntity *)localObject withRemoteObject:(PFObject *)parseObject;
 - (void)updateLocalUser;
 
 @end

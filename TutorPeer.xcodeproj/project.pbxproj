@@ -25,6 +25,7 @@
 		771631681AE5DCFA000947FB /* TPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771631671AE5DCFA000947FB /* TPSignInViewController.m */; };
 		7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */; };
 		771BEB881AEB0D530025DDCE /* TPAuthenticationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 771BEB871AEB0D530025DDCE /* TPAuthenticationManager.m */; };
+		7726532F1B2F627000092E35 /* TPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7726532E1B2F627000092E35 /* TPSettingsViewController.m */; };
 		775658D71AFFC78E004CA215 /* _TPContract.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658CC1AFFC78E004CA215 /* _TPContract.m */; };
 		775658D91AFFC78E004CA215 /* _TPTutorEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658D01AFFC78E004CA215 /* _TPTutorEntry.m */; };
 		775658DA1AFFC78E004CA215 /* TPContract.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658D21AFFC78E004CA215 /* TPContract.m */; };
@@ -80,6 +81,8 @@
 		7716316A1AE5DD0D000947FB /* TPSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSignUpViewController.m; sourceTree = "<group>"; };
 		771BEB861AEB0D530025DDCE /* TPAuthenticationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPAuthenticationManager.h; sourceTree = "<group>"; };
 		771BEB871AEB0D530025DDCE /* TPAuthenticationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPAuthenticationManager.m; sourceTree = "<group>"; };
+		7726532D1B2F627000092E35 /* TPSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSettingsViewController.h; sourceTree = "<group>"; };
+		7726532E1B2F627000092E35 /* TPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSettingsViewController.m; sourceTree = "<group>"; };
 		775658CB1AFFC78E004CA215 /* _TPContract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _TPContract.h; path = Model/_TPContract.h; sourceTree = "<group>"; };
 		775658CC1AFFC78E004CA215 /* _TPContract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _TPContract.m; path = Model/_TPContract.m; sourceTree = "<group>"; };
 		775658CF1AFFC78E004CA215 /* _TPTutorEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _TPTutorEntry.h; path = Model/_TPTutorEntry.h; sourceTree = "<group>"; };
@@ -334,6 +337,8 @@
 				9F9DCF831AED64FF0066CFF9 /* TPProfileViewController.m */,
 				77CBF0A41B2B7EAD005EA141 /* TPEditProfileViewController.h */,
 				77CBF0A51B2B7EAD005EA141 /* TPEditProfileViewController.m */,
+				7726532D1B2F627000092E35 /* TPSettingsViewController.h */,
+				7726532E1B2F627000092E35 /* TPSettingsViewController.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -464,6 +469,7 @@
 				77E3FF7C1AF8454B001E69F9 /* TPConversation.m in Sources */,
 				77E3FF841AF84D98001E69F9 /* _TPSyncEntity.m in Sources */,
 				77E3FF7F1AF8454B001E69F9 /* TPUser.m in Sources */,
+				7726532F1B2F627000092E35 /* TPSettingsViewController.m in Sources */,
 				9F9DCF871AED74FB0066CFF9 /* TPCourseViewController.m in Sources */,
 				9F6BE14F1AFFDDD500A4048C /* TPTutorsListViewController.m in Sources */,
 				9F9DCF811AED64F50066CFF9 /* TPCourseListViewController.m in Sources */,
