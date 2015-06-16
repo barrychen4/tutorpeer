@@ -13,6 +13,8 @@
 #import "TPContract.h"
 #import "TPDBManager.h"
 #import "TPNetworkManager.h"
+#import "TPNetworkManager+ContractRequests.h"
+#import "TPNetworkManager+CourseRequests.h"
 #import <Parse/Parse.h>
 
 @interface TPTutorEntryViewController ()
@@ -116,7 +118,7 @@
                             break;
                         }
                     }
-                } async:NO];
+                }];
                 [self showRegisterSuccessAlert];
             }
         } else {
@@ -143,8 +145,8 @@
                         return;
                     }
                     [[TPDBManager sharedInstance] updateLocalUser];
-                    [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil async:YES];
-                    [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil async:YES];
+                    [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil];
+                    [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil];
                     self.contract = nil;
                     [self showRegisterSuccessAlert];
                 }

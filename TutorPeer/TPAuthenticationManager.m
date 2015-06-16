@@ -7,6 +7,7 @@
 //
 
 #import "TPAuthenticationManager.h"
+#import "TPDBManager.h"
 #import <Parse/Parse.h>
 
 @implementation TPAuthenticationManager
@@ -50,6 +51,7 @@
         if (!error) {
             NSLog(@"Login successful!");
             if (handler) {
+                [[TPDBManager sharedInstance] updateLocalUser];
                 handler(YES);
             }
         } else {

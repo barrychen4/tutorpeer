@@ -115,7 +115,7 @@
 - (void)updateLocalObjectAttributes:(TPSyncEntity *)localObject withRemoteObject:(PFObject *)parseObject {
     NSDictionary *attributes = [[localObject entity] attributesByName];
     for (NSString *attribute in attributes) {
-        if (![attribute isEqualToString:@"objectId"] && ![attribute isEqualToString:@"loggedIn"] && ![attribute isEqualToString:@"picture"]) {
+        if (![attribute isEqualToString:@"objectId"] && ![attribute isEqualToString:@"loggedIn"] && ![attribute isEqualToString:@"profileImage"]) {
             [localObject setValue:[parseObject valueForKey:attribute] forKey:attribute];
         }
     }

@@ -7,6 +7,7 @@
 //
 
 #import "TPCourseListViewController.h"
+#import "TPNetworkManager+CourseRequests.h"
 #import "TPDBManager.h"
 #import "TPNetworkManager.h"
 #import "TPCourseViewController.h"
@@ -29,7 +30,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil async:YES];
+    [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil];
 }
 
 - (void)setupView {

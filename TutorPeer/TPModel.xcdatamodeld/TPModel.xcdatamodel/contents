@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14C1514" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="TPContract" representedClassName="TPContract" parentEntity="TPSyncEntity" syncable="YES">
         <attribute name="hrsWeek" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -46,7 +46,7 @@
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="loggedIn" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="profileImage" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="contracts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPContract" syncable="YES"/>
         <relationship name="conversations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPConversation" inverseName="participants" inverseEntity="TPConversation" syncable="YES"/>
         <relationship name="tutorEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TPTutorEntry" inverseName="tutor" inverseEntity="TPTutorEntry" syncable="YES"/>

@@ -15,6 +15,7 @@
 #import "TPDBManager.h"
 #import "TPUser.h"
 #import "TPNetworkManager.h"
+#import "TPNetworkManager+ContractRequests.h"
 #import "TPTabBarController.h"
 
 @interface AppDelegate ()
@@ -32,7 +33,7 @@
                   clientKey:@"hqMGjaVFPYIUkO2322TgIoI10fGyiv8qvcOqurTg"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    if (![PFUser currentUser]) {
+    if (![TPUser currentUser].loggedIn) {
         TPLandingViewController *landingVc = [[TPLandingViewController alloc] init];
         
         self.navigationController = [[UINavigationController alloc] initWithRootViewController:landingVc];
@@ -40,8 +41,9 @@
         self.window.rootViewController = self.navigationController;
         
         [self.navigationController setNavigationBarHidden:YES animated:NO];
+        
     } else {
-        [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil async:YES];
+        [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil];
         
         UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
         UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseListViewController alloc] init]];

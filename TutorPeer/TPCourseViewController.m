@@ -13,6 +13,7 @@
 #import "TPContract.h"
 #import "TPDbManager.h"
 #import "TPNetworkManager.h"
+#import "TPNetworkManager+TutorEntryRequests.h"
 #import "TPTutorRegistrationViewController.h"
 #import "TPTutorsListViewController.h"
 
@@ -53,7 +54,7 @@
                 [self.registerTutorButton setTitle:@"Register as tutor" forState:UIControlStateNormal];
             }
         }
-    } async:YES];
+    }];
 }
 
 - (void)setupView {
@@ -94,7 +95,7 @@
 
 - (BOOL)isRegisteredAsTutor {
     BOOL registered = NO;
-    TPUser *currentUser = [[TPDBManager sharedInstance] currentUser];
+    TPUser *currentUser = [TPUser currentUser];
     for (TPTutorEntry *tutorEntry in currentUser.tutorEntries) {
         if ([tutorEntry.course.objectId isEqual:self.course.objectId]) {
             NSLog(@"Registered as tutor");
@@ -108,7 +109,7 @@
 
 - (BOOL)isRegisteredAsTutee {
     BOOL registered = NO;
-    TPUser *currentUser = [[TPDBManager sharedInstance] currentUser];
+    TPUser *currentUser = [TPUser currentUser];
     for (TPContract *contract in currentUser.contracts) {
         if ([contract.course.objectId isEqual:self.course.objectId]) {
             NSLog(@"Registered as tutee");

@@ -10,7 +10,7 @@ const struct TPUserAttributes TPUserAttributes = {
 	.firstName = @"firstName",
 	.lastName = @"lastName",
 	.loggedIn = @"loggedIn",
-	.picture = @"picture",
+	.profileImage = @"profileImage",
 };
 
 const struct TPUserRelationships TPUserRelationships = {
@@ -107,7 +107,7 @@ const struct TPUserRelationships TPUserRelationships = {
 	[self setPrimitiveLoggedIn:[NSNumber numberWithBool:value_]];
 }
 
-@dynamic picture;
+@dynamic profileImage;
 
 @dynamic contracts;
 

@@ -14,6 +14,7 @@
 #import "TPTutorEntryViewController.h"
 #import "TPDBManager.h"
 #import "TPNetworkManager.h"
+#import "TPNetworkManager+TutorEntryRequests.h"
 
 @interface TPTutorsListViewController ()
 
@@ -41,7 +42,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:nil async:YES];
+    [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:nil];
 }
 
 - (void)setupView {

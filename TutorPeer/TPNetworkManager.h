@@ -14,8 +14,8 @@
 
 + (instancetype)sharedInstance;
 
-- (BOOL)refreshCoursesWithCallback:(void (^)(NSError *))callback async:(BOOL)async;
-- (BOOL)refreshTutorEntriesForCourseId:(NSString *)courseId withCallback:(void (^)(NSError *))callback async:(BOOL)async;
-- (BOOL)refreshContractsForUserId:(NSString *)userId withCallback:(void (^)(NSError *))callback async:(BOOL)async;
+- (BOOL)allParseObjectIDsForPFClass:(NSString *)pfClassName withCallback:(void (^)(NSArray *, NSError *))callback;
+- (BOOL)allParseObjectIDsForPFClass:(NSString *)pfClassName predicate:(NSPredicate *)predicate withCallback:(void (^)(NSArray *, NSError *))callback;
+
 
 @end

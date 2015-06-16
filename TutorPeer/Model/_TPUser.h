@@ -11,7 +11,7 @@ extern const struct TPUserAttributes {
 	__unsafe_unretained NSString *firstName;
 	__unsafe_unretained NSString *lastName;
 	__unsafe_unretained NSString *loggedIn;
-	__unsafe_unretained NSString *picture;
+	__unsafe_unretained NSString *profileImage;
 } TPUserAttributes;
 
 extern const struct TPUserRelationships {
@@ -65,9 +65,9 @@ extern const struct TPUserRelationships {
 
 //- (BOOL)validateLoggedIn:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSData* picture;
+@property (nonatomic, strong) NSData* profileImage;
 
-//- (BOOL)validatePicture:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateProfileImage:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSSet *contracts;
 
@@ -133,8 +133,8 @@ extern const struct TPUserRelationships {
 - (BOOL)primitiveLoggedInValue;
 - (void)setPrimitiveLoggedInValue:(BOOL)value_;
 
-- (NSData*)primitivePicture;
-- (void)setPrimitivePicture:(NSData*)value;
+- (NSData*)primitiveProfileImage;
+- (void)setPrimitiveProfileImage:(NSData*)value;
 
 - (NSMutableSet*)primitiveContracts;
 - (void)setPrimitiveContracts:(NSMutableSet*)value;

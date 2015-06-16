@@ -10,6 +10,7 @@
 #import "TPAuthenticationManager.h"
 #import "TPDBManager.h"
 #import "TPNetworkManager.h"
+#import "TPNetworkManager+ContractRequests.h"
 #import "TPTabBarController.h"
 #import "TPInboxViewController.h"
 #import "TPCourseListViewController.h"
@@ -116,8 +117,7 @@
 //    [[TPAuthenticationManager sharedInstance] signInWithEmail:self.emailTextField.text password:self.passwordTextField.text callback:^(BOOL result) {
     [[TPAuthenticationManager sharedInstance] signInWithEmail:@"y.fu710@gmail.com" password:@"test" callback:^(BOOL result) {
         if (result) {
-            [[TPDBManager sharedInstance] updateLocalUser];
-            [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil async:YES];
+            [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil];
             
             UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];
             UINavigationController *courseViewController = [[UINavigationController alloc] initWithRootViewController:[[TPCourseListViewController alloc] init]];
