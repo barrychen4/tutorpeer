@@ -15,6 +15,7 @@
 #import "TPNetworkManager.h"
 #import "TPNetworkManager+ContractRequests.h"
 #import "TPNetworkManager+CourseRequests.h"
+#import "TPNetworkManager+TutorEntryRequests.h"
 #import <Parse/Parse.h>
 
 @interface TPTutorEntryViewController ()
@@ -62,7 +63,7 @@
     self.priceLabel.text = [NSString stringWithFormat:@"Price: %@", [self.tutorEntry.price stringValue]];
     
     self.registerTuteeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 300, 50)];
-    self.registerTuteeButton.center = CGPointMake(self.view.center.x, 550);
+    self.registerTuteeButton.center = CGPointMake(self.view.center.x, self.view.center.y);
     [self.registerTuteeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.registerTuteeButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [self.registerTuteeButton addTarget:self action:@selector(toggleRegistration) forControlEvents:UIControlEventTouchUpInside];
@@ -79,39 +80,89 @@
     [self.view addSubview:self.registerTuteeButton];
 }
 
+//- (void)toggleRegistration {
+//    PFObject *courseObject = [PFQuery getObjectOfClass:@"Course" objectId:self.tutorEntry.course.objectId];
+//    if (!courseObject) {
+//        [self showRegisterErrorAlert];
+//    }
+//    else {
+//        if (!self.contract) {
+//            PFObject *contractPFObject = [PFObject objectWithClassName:@"Contract"];
+//            contractPFObject[@"price"] = self.tutorEntry.price;
+//            contractPFObject[@"course"] = self.tutorEntry.course.objectId;
+//            contractPFObject[@"tutor"] = self.tutorEntry.tutor.objectId;
+//            contractPFObject[@"tutee"] = [PFUser currentUser].objectId;
+//            contractPFObject[@"status"] = @(kTPContractStatusInitiated);
+//            NSError *error;
+//            [contractPFObject save:&error];
+//            if (error) {
+//                [self showRegisterErrorAlert];
+//            } else {
+//                NSMutableArray *userContracts = [NSMutableArray arrayWithArray:[PFUser currentUser][@"contracts"]];
+//                NSMutableArray *courseContracts = [NSMutableArray arrayWithArray:courseObject[@"contracts"]];
+//                [userContracts addObject:contractPFObject.objectId];
+//                [courseContracts addObject:contractPFObject.objectId];
+//                [PFUser currentUser][@"contracts"] = userContracts;
+//                courseObject[@"contracts"] = courseContracts;
+//                NSError *error;
+//                [PFObject saveAll:@[[PFUser currentUser], courseObject] error:&error];
+//                if (error) {
+//                    [self showRegisterErrorAlert];
+//                    return;
+//                }
+//                [[TPDBManager sharedInstance] updateLocalUser];
+//                [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:^(NSError *error) {
+//                    TPUser *currentUser = [TPUser currentUser];
+//                    for (TPContract *contract in currentUser.contracts) {
+//                        if ([contract.tutor.objectId isEqual:self.tutorEntry.tutor.objectId]) {
+//                            self.contract = contract;
+//                            break;
+//                        }
+//                    }
+//                }];
+//                [self showRegisterSuccessAlert];
+//            }
+//        } else {
+//            PFObject *contractPFObject = [PFQuery getObjectOfClass:@"Contract" objectId:self.contract.objectId];
+//            if (!contractPFObject) {
+//                [self showUnregisterErrorAlert];
+//            } else {
+//                NSString *contractId = contractPFObject.objectId;
+//                NSError *error;
+//                [contractPFObject delete:&error];
+//                if (error) {
+//                    [self showUnregisterErrorAlert];
+//                } else {
+//                    NSMutableArray *userContracts = [NSMutableArray arrayWithArray:[PFUser currentUser][@"contracts"]];
+//                    NSMutableArray *courseContracts = [NSMutableArray arrayWithArray:courseObject[@"contracts"]];
+//                    [userContracts removeObject:contractId];
+//                    [courseContracts removeObject:contractId];
+//                    [PFUser currentUser][@"contracts"] = userContracts;
+//                    courseObject[@"contracts"] = courseContracts;
+//                    NSError *error;
+//                    [PFObject saveAll:@[[PFUser currentUser], courseObject] error:&error];
+//                    if (error) {
+//                        [self showRegisterErrorAlert];
+//                        return;
+//                    }
+//                    [[TPDBManager sharedInstance] updateLocalUser];
+//                    [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil];
+//                    [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil];
+//                    self.contract = nil;
+//                    [self showRegisterSuccessAlert];
+//                }
+//            }
+//        }
+//    }
+//}
+
 - (void)toggleRegistration {
-    PFObject *courseObject = [PFQuery getObjectOfClass:@"Course" objectId:self.tutorEntry.course.objectId];
-    if (!courseObject) {
-        [self showRegisterErrorAlert];
-    }
-    else {
-        if (!self.contract) {
-            PFObject *contractPFObject = [PFObject objectWithClassName:@"Contract"];
-            contractPFObject[@"price"] = self.tutorEntry.price;
-            contractPFObject[@"course"] = self.tutorEntry.course.objectID;
-            contractPFObject[@"tutor"] = self.tutorEntry.tutor.objectId;
-            contractPFObject[@"tutee"] = [PFUser currentUser].objectId;
-            contractPFObject[@"status"] = @(kTPContractStatusInitiated);
-            NSError *error;
-            [contractPFObject save:&error];
-            if (error) {
-                [self showRegisterErrorAlert];
-            } else {
-                NSMutableArray *userContracts = [NSMutableArray arrayWithArray:[PFUser currentUser][@"contracts"]];
-                NSMutableArray *courseContracts = [NSMutableArray arrayWithArray:courseObject[@"contracts"]];
-                [userContracts addObject:contractPFObject.objectId];
-                [courseContracts addObject:contractPFObject.objectId];
-                [PFUser currentUser][@"contracts"] = userContracts;
-                courseObject[@"contracts"] = courseContracts;
-                NSError *error;
-                [PFObject saveAll:@[[PFUser currentUser], courseObject] error:&error];
-                if (error) {
-                    [self showRegisterErrorAlert];
-                    return;
-                }
-                [[TPDBManager sharedInstance] updateLocalUser];
+    if (!self.contract) {
+        NSLog(@"No contract");
+        [[TPNetworkManager sharedInstance] registerAsTutee:[PFUser currentUser].objectId withTutor:self.tutorEntry.tutor.objectId forCourse:self.tutorEntry.course.objectId withPrice:[self.tutorEntry.price integerValue] withCallback:^(NSError *error) {
+            if (!error) {
                 [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:^(NSError *error) {
-                    TPUser *currentUser = [[TPDBManager sharedInstance] currentUser];
+                    TPUser *currentUser = [TPUser currentUser];
                     for (TPContract *contract in currentUser.contracts) {
                         if ([contract.tutor.objectId isEqual:self.tutorEntry.tutor.objectId]) {
                             self.contract = contract;
@@ -120,40 +171,26 @@
                     }
                 }];
                 [self showRegisterSuccessAlert];
-            }
-        } else {
-            PFObject *contractPFObject = [PFQuery getObjectOfClass:@"Contract" objectId:self.contract.objectId];
-            if (!contractPFObject) {
-                [self showUnregisterErrorAlert];
             } else {
-                NSString *contractId = contractPFObject.objectId;
-                NSError *error;
-                [contractPFObject delete:&error];
-                if (error) {
-                    [self showUnregisterErrorAlert];
-                } else {
-                    NSMutableArray *userContracts = [NSMutableArray arrayWithArray:[PFUser currentUser][@"contracts"]];
-                    NSMutableArray *courseContracts = [NSMutableArray arrayWithArray:courseObject[@"contracts"]];
-                    [userContracts removeObject:contractId];
-                    [courseContracts removeObject:contractId];
-                    [PFUser currentUser][@"contracts"] = userContracts;
-                    courseObject[@"contracts"] = courseContracts;
-                    NSError *error;
-                    [PFObject saveAll:@[[PFUser currentUser], courseObject] error:&error];
-                    if (error) {
-                        [self showRegisterErrorAlert];
-                        return;
-                    }
-                    [[TPDBManager sharedInstance] updateLocalUser];
-                    [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil];
-                    [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil];
-                    self.contract = nil;
-                    [self showRegisterSuccessAlert];
-                }
+                [self showRegisterErrorAlert];
             }
-        }
+        }];
+    } else {
+        NSLog(@"Should unregister");
+        [[TPNetworkManager sharedInstance] unregisterAsTuteeForCourse:self.tutorEntry.course.objectId forContract:self.contract.objectId withCallback:^(NSError *error) {
+            if (!error) {
+                [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil];
+                [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil];
+                self.contract = nil;
+                [self showUnregisterSuccessAlert];
+            } else {
+                [self showUnregisterErrorAlert];
+            }
+        }];
     }
+
 }
+
 
 - (void)showRegisterErrorAlert {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not register" message:@"Please check your internet connection" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

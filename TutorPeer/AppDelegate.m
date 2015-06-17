@@ -43,6 +43,7 @@
         [self.navigationController setNavigationBarHidden:YES animated:NO];
         
     } else {
+        [[TPDBManager sharedInstance] updateLocalUser];
         [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil];
         
         UINavigationController *inboxViewController = [[UINavigationController alloc] initWithRootViewController:[[TPInboxViewController alloc] init]];

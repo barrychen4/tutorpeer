@@ -10,6 +10,6 @@
 
 @interface TPNetworkManager (CourseRequests)
 
-- (BOOL)refreshCoursesWithCallback:(void (^)(NSError *))callback;
+- (void)refreshCoursesWithCallback:(void (^)(NSError *))callback;
 
 @end

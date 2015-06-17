@@ -23,11 +23,11 @@
     return sharedInstance;
 }
 
-- (BOOL)allParseObjectIDsForPFClass:(NSString *)pfClassName withCallback:(void (^)(NSArray *, NSError *))callback {
-    return [self allParseObjectIDsForPFClass:pfClassName predicate:nil withCallback:callback];
+- (void)allParseObjectIDsForPFClass:(NSString *)pfClassName withCallback:(void (^)(NSArray *, NSError *))callback {
+    [self allParseObjectIDsForPFClass:pfClassName predicate:nil withCallback:callback];
 }
 
-- (BOOL)allParseObjectIDsForPFClass:(NSString *)pfClassName predicate:(NSPredicate *)predicate withCallback:(void (^)(NSArray *, NSError *))callback {
+- (void)allParseObjectIDsForPFClass:(NSString *)pfClassName predicate:(NSPredicate *)predicate withCallback:(void (^)(NSArray *, NSError *))callback {
     
     NSMutableArray *objectIDArray = [NSMutableArray new];
     PFQuery *query;
@@ -56,8 +56,6 @@
             }
         }
     }];
-    
-    return YES;
 
 }
 

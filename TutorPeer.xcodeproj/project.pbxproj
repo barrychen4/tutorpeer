@@ -105,6 +105,7 @@
 		77C65DF21B30C76500B06DAD /* TPNetworkManager+TutorEntryRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TPNetworkManager+TutorEntryRequests.m"; sourceTree = "<group>"; };
 		77C65DF41B30C77F00B06DAD /* TPNetworkManager+ContractRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TPNetworkManager+ContractRequests.h"; sourceTree = "<group>"; };
 		77C65DF51B30C77F00B06DAD /* TPNetworkManager+ContractRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TPNetworkManager+ContractRequests.m"; sourceTree = "<group>"; };
+		77C65DF91B31CCA900B06DAD /* TPConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPConstants.h; sourceTree = "<group>"; };
 		77CBF0A41B2B7EAD005EA141 /* TPEditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPEditProfileViewController.h; sourceTree = "<group>"; };
 		77CBF0A51B2B7EAD005EA141 /* TPEditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPEditProfileViewController.m; sourceTree = "<group>"; };
 		77E3FF681AF8454B001E69F9 /* _TPConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _TPConversation.h; path = Model/_TPConversation.h; sourceTree = "<group>"; };
@@ -282,6 +283,14 @@
 			name = TPNetworkManager;
 			sourceTree = "<group>";
 		};
+		77C65DF71B31CC2600B06DAD /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				77C65DF91B31CCA900B06DAD /* TPConstants.h */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
 		9F59BEE51AE42324007DAD1C = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +311,7 @@
 		9F59BEF01AE42324007DAD1C /* TutorPeer */ = {
 			isa = PBXGroup;
 			children = (
+				77C65DF71B31CC2600B06DAD /* Constants */,
 				77B9CBDD1AF7DD4F0092D7AC /* Model */,
 				771BEB851AEB0D310025DDCE /* Singleton */,
 				771631621AE5D1B0000947FB /* Controller */,

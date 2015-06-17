@@ -128,124 +128,177 @@
     [self.priceTextField resignFirstResponder];
 }
 
-- (void)registerTutor {
-    PFObject *tutorEntryPFObject;
-    if (self.tutorEntry) {
-        tutorEntryPFObject = [PFQuery getObjectOfClass:@"TutorEntry" objectId:self.tutorEntry.objectId];
-        if (!tutorEntryPFObject) {
-            [self showRegisterErrorAlert];
-        } else {
-            NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-            f.numberStyle = NSNumberFormatterDecimalStyle;
-            tutorEntryPFObject[@"price"] = [f numberFromString:self.priceTextField.text];
-            tutorEntryPFObject[@"blurb"] = self.blurbTextField.text;
-            
-            [tutorEntryPFObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (!error) {
-                    if (succeeded) {
-                        [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:nil];
-                    } else {
-                        NSLog(@"Save in background failed");
-                    }
-                } else {
-                    NSLog(@"%@", [error localizedDescription]);
-                    [self showRegisterErrorAlert];
-                }
-            }];
-            
-        }
-    } else {
-        PFObject *courseObject = [PFQuery getObjectOfClass:@"Course" objectId:self.course.objectId];
-        if (!courseObject) {
-            [self showRegisterErrorAlert];
-        } else {
-            tutorEntryPFObject = [PFObject objectWithClassName:@"TutorEntry"];
-            tutorEntryPFObject[@"course"] = self.course.objectId;
-            tutorEntryPFObject[@"tutor"] = [TPUser currentUser].objectId;
-            tutorEntryPFObject[@"tutorName"] = [NSString stringWithFormat:@"%@ %@", [TPUser currentUser].firstName, [TPUser currentUser].lastName];
-            NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-            f.numberStyle = NSNumberFormatterDecimalStyle;
-            tutorEntryPFObject[@"price"] = [f numberFromString:self.priceTextField.text];
-            tutorEntryPFObject[@"blurb"] = self.blurbTextField.text;
-            
-            [tutorEntryPFObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (!error) {
-                    if (succeeded) {
-                        NSMutableArray *userTutorEntries = [NSMutableArray arrayWithArray:[PFUser currentUser][@"tutorEntries"]];
-                        NSMutableArray *courseTutorEntries = [NSMutableArray arrayWithArray:courseObject[@"tutorEntries"]];
-                        [userTutorEntries addObject:tutorEntryPFObject.objectId];
-                        [courseTutorEntries addObject:tutorEntryPFObject.objectId];
-                        [PFUser currentUser][@"tutorEntries"] = userTutorEntries;
-                        courseObject[@"tutorEntries"] = courseTutorEntries;
-                        NSError *error;
-                        [PFObject saveAll:@[[PFUser currentUser], courseObject] error:&error];
-                        if (error) {
-                            [self showRegisterErrorAlert];
-                            return;
-                        }
-                        [[TPDBManager sharedInstance] updateLocalUser];
-                        [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil];
-                        [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:^(NSError *error) {
-                            if (!error) {
-                                TPUser *currentUser = [[TPDBManager sharedInstance] currentUser];
-                                for (TPTutorEntry *tutorEntry in currentUser.tutorEntries) {
-                                    if ([tutorEntry.course.objectId isEqual:self.course.objectId]) {
-                                        self.tutorEntry = tutorEntry;
-                                        break;
-                                    }
-                                }
-                            }
-                        }];
-                        [self showRegisterSuccessAlert];
-                    } else {
-                        NSLog(@"Save in background failed");
-                    }
-                } else {
-                    NSLog(@"%@", [error localizedDescription]);
-                    [self showRegisterErrorAlert];
-                }
-            }];
-            
+//- (void)registerTutor {
+//    PFObject *tutorEntryPFObject;
+//    if (self.tutorEntry) {
+//        tutorEntryPFObject = [PFQuery getObjectOfClass:@"TutorEntry" objectId:self.tutorEntry.objectId];
+//        if (!tutorEntryPFObject) {
+//            [self showRegisterErrorAlert];
+//        } else {
+//            NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//            f.numberStyle = NSNumberFormatterDecimalStyle;
+//            tutorEntryPFObject[@"price"] = [f numberFromString:self.priceTextField.text];
+//            tutorEntryPFObject[@"blurb"] = self.blurbTextField.text;
+//            
+//            [tutorEntryPFObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//                if (!error) {
+//                    if (succeeded) {
+//                        [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:nil];
+//                    } else {
+//                        NSLog(@"Save in background failed");
+//                    }
+//                } else {
+//                    NSLog(@"%@", [error localizedDescription]);
+//                    [self showRegisterErrorAlert];
+//                }
+//            }];
+//            
+//        }
+//    } else {
+//        PFObject *courseObject = [PFQuery getObjectOfClass:@"Course" objectId:self.course.objectId];
+//        if (!courseObject) {
+//            [self showRegisterErrorAlert];
+//        } else {
+//            tutorEntryPFObject = [PFObject objectWithClassName:@"TutorEntry"];
+//            tutorEntryPFObject[@"course"] = self.course.objectId;
+//            tutorEntryPFObject[@"tutor"] = [TPUser currentUser].objectId;
+//            tutorEntryPFObject[@"tutorName"] = [NSString stringWithFormat:@"%@ %@", [TPUser currentUser].firstName, [TPUser currentUser].lastName];
+//            NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//            f.numberStyle = NSNumberFormatterDecimalStyle;
+//            tutorEntryPFObject[@"price"] = [f numberFromString:self.priceTextField.text];
+//            tutorEntryPFObject[@"blurb"] = self.blurbTextField.text;
+//            
+//            [tutorEntryPFObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//                if (!error) {
+//                    if (succeeded) {
+//                        NSMutableArray *userTutorEntries = [NSMutableArray arrayWithArray:[PFUser currentUser][@"tutorEntries"]];
+//                        NSMutableArray *courseTutorEntries = [NSMutableArray arrayWithArray:courseObject[@"tutorEntries"]];
+//                        [userTutorEntries addObject:tutorEntryPFObject.objectId];
+//                        [courseTutorEntries addObject:tutorEntryPFObject.objectId];
+//                        [PFUser currentUser][@"tutorEntries"] = userTutorEntries;
+//                        courseObject[@"tutorEntries"] = courseTutorEntries;
+//                        NSError *error;
+//                        [PFObject saveAll:@[[PFUser currentUser], courseObject] error:&error];
+//                        if (error) {
+//                            [self showRegisterErrorAlert];
+//                            return;
+//                        }
+//                        [[TPDBManager sharedInstance] updateLocalUser];
+//                        [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil];
+//                        [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:^(NSError *error) {
+//                            if (!error) {
+//                                TPUser *currentUser = [[TPDBManager sharedInstance] currentUser];
+//                                for (TPTutorEntry *tutorEntry in currentUser.tutorEntries) {
+//                                    if ([tutorEntry.course.objectId isEqual:self.course.objectId]) {
+//                                        self.tutorEntry = tutorEntry;
+//                                        break;
+//                                    }
+//                                }
+//                            }
+//                        }];
+//                        [self showRegisterSuccessAlert];
+//                    } else {
+//                        NSLog(@"Save in background failed");
+//                    }
+//                } else {
+//                    NSLog(@"%@", [error localizedDescription]);
+//                    [self showRegisterErrorAlert];
+//                }
+//            }];
+//            
+//
+//        }
+//    }
+//}
 
-        }
+- (void)registerTutor {
+    if (self.tutorEntry) {
+        [[TPNetworkManager sharedInstance] updateTutorEntryWithId:self.tutorEntry.objectId withPrice:[self.priceTextField.text intValue] withBlurb:self.blurbTextField.text withCallback:^(NSError *error) {
+            
+            if (!error) {
+                [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:nil];
+                
+                [self showRegisterSuccessAlert];
+            } else {
+                [self showRegisterErrorAlert];
+            }
+        }];
+        
+    } else {
+        [[TPNetworkManager sharedInstance] registerAsTutorForCourseId:self.course.objectId withPrice:[self.priceTextField.text intValue] withBlurb:self.blurbTextField.text withCallback:^(NSError *error) {
+            
+            if (!error) {
+                [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil];
+                [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:^(NSError *error) {
+                    if (!error) {
+                        TPUser *currentUser = [[TPDBManager sharedInstance] currentUser];
+                        for (TPTutorEntry *tutorEntry in currentUser.tutorEntries) {
+                            if ([tutorEntry.course.objectId isEqual:self.course.objectId]) {
+                                self.tutorEntry = tutorEntry;
+                                break;
+                            }
+                        }
+                    }
+                }];
+                
+                [self showRegisterSuccessAlert];
+            } else {
+                [self showRegisterErrorAlert];
+            }
+        }];
+        
     }
 }
 
+
+//- (void)unregisterTutor {
+//    PFObject *tutorEntryPFObject = [PFQuery getObjectOfClass:@"TutorEntry" objectId:self.tutorEntry.objectId];
+//    if (!tutorEntryPFObject) {
+//        [self showUnregisterErrorAlert];
+//    } else {
+//        PFObject *courseObject = [PFQuery getObjectOfClass:@"Course" objectId:self.course.objectId];
+//        if (!courseObject) {
+//            [self showUnregisterErrorAlert];
+//        } else {
+//            NSString *tutorEntryId = tutorEntryPFObject.objectId;
+//            NSError *error;
+//            [tutorEntryPFObject delete:&error];
+//            if (error) {
+//                [self showUnregisterErrorAlert];
+//            } else {
+//                NSMutableArray *userTutorEntries = [NSMutableArray arrayWithArray:[PFUser currentUser][@"tutorEntries"]];
+//                NSMutableArray *courseTutorEntries = [NSMutableArray arrayWithArray:courseObject[@"tutorEntries"]];
+//                [userTutorEntries removeObject:tutorEntryId];
+//                [courseTutorEntries removeObject:tutorEntryId];
+//                [PFUser currentUser][@"tutorEntries"] = userTutorEntries;
+//                courseObject[@"tutorEntries"] = courseTutorEntries;
+//                NSError *error;
+//                [PFObject saveAll:@[[PFUser currentUser], courseObject] error:&error];
+//                if (error) {
+//                    [self showRegisterErrorAlert];
+//                    return;
+//                }
+//                [[TPDBManager sharedInstance] updateLocalUser];
+//                [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil];
+//                [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:nil];
+//                self.tutorEntry = nil;
+//                [self showRegisterSuccessAlert];
+//            }
+//        }
+//    }
+//}
+
 - (void)unregisterTutor {
-    PFObject *tutorEntryPFObject = [PFQuery getObjectOfClass:@"TutorEntry" objectId:self.tutorEntry.objectId];
-    if (!tutorEntryPFObject) {
-        [self showUnregisterErrorAlert];
-    } else {
-        PFObject *courseObject = [PFQuery getObjectOfClass:@"Course" objectId:self.course.objectId];
-        if (!courseObject) {
-            [self showUnregisterErrorAlert];
+    [[TPNetworkManager sharedInstance] unregisterAsTutorWithId:self.tutorEntry.objectId forCourseId:self.course.objectId withCallback:^(NSError *error) {
+        if (!error) {
+            [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil];
+            [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:nil];
+            self.tutorEntry = nil;
+            [self showRegisterSuccessAlert];
         } else {
-            NSString *tutorEntryId = tutorEntryPFObject.objectId;
-            NSError *error;
-            [tutorEntryPFObject delete:&error];
-            if (error) {
-                [self showUnregisterErrorAlert];
-            } else {
-                NSMutableArray *userTutorEntries = [NSMutableArray arrayWithArray:[PFUser currentUser][@"tutorEntries"]];
-                NSMutableArray *courseTutorEntries = [NSMutableArray arrayWithArray:courseObject[@"tutorEntries"]];
-                [userTutorEntries removeObject:tutorEntryId];
-                [courseTutorEntries removeObject:tutorEntryId];
-                [PFUser currentUser][@"tutorEntries"] = userTutorEntries;
-                courseObject[@"tutorEntries"] = courseTutorEntries;
-                NSError *error;
-                [PFObject saveAll:@[[PFUser currentUser], courseObject] error:&error];
-                if (error) {
-                    [self showRegisterErrorAlert];
-                    return;
-                }
-                [[TPDBManager sharedInstance] updateLocalUser];
-                [[TPNetworkManager sharedInstance] refreshCoursesWithCallback:nil];
-                [[TPNetworkManager sharedInstance] refreshTutorEntriesForCourseId:self.course.objectId withCallback:nil];
-                self.tutorEntry = nil;
-                [self showRegisterSuccessAlert];
-            }
+            [self showUnregisterErrorAlert];
         }
-    }
+    }];
 }
 
 - (void)showRegisterErrorAlert {

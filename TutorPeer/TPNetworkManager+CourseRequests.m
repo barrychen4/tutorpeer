@@ -13,7 +13,7 @@
 
 @implementation TPNetworkManager (CourseRequests)
 
-- (BOOL)refreshCoursesWithCallback:(void (^)(NSError *))callback
+- (void)refreshCoursesWithCallback:(void (^)(NSError *))callback
 {
     PFQuery *query;
     query.limit = 1000;
@@ -55,7 +55,6 @@
         }
     }];
     
-    return YES;
 }
 
 

@@ -12,7 +12,7 @@
 
 @implementation TPNetworkManager (ContractRequests)
 
-- (BOOL)refreshContractsForUserId:(NSString *)userId withCallback:(void (^)(NSError *))callback
+- (void)refreshContractsForUserId:(NSString *)userId withCallback:(void (^)(NSError *))callback
 {
     PFQuery *query;
     NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"(tutor.objectId == %@) OR (tutee.objectId == %@)", userId, userId];
@@ -50,7 +50,6 @@
             }];
         }
     }];
-    return YES;
 
 }
 

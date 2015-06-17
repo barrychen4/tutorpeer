@@ -27,8 +27,8 @@
     user.username = email;
     user.password = password;
     user.email = email;
-    user[@"first_name"] = firstName;
-    user[@"last_name"] = lastName;
+    user[@"firstName"] = firstName;
+    user[@"lastName"] = lastName;
     user[@"defaultPrice"] = @(15);
     user[@"defaultBio"] = [NSString stringWithFormat:@"Hi, my name is %@! Please let me be your tutor.", firstName];
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

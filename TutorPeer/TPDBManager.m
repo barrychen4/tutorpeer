@@ -237,9 +237,11 @@
         currentUser = [self makeCurrentUserWithId:[PFUser currentUser].objectId];
     }
     
+    NSLog(@"Updating local user");
+    NSLog(@"Before: %@", currentUser.contracts);
     [self updateLocalObjectAttributes:currentUser withRemoteObject:[PFUser currentUser]];
     [self updateLocalObjectRelationships:currentUser withRemoteObject:[PFUser currentUser]];
-    
+    NSLog(@"After: %@", currentUser.contracts);
     NSError *error;
     [self.managedObjectContext save:&error];
     if (error) {

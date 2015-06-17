@@ -41,7 +41,7 @@
     UINavigationItem *navItem = self.navigationItem;
     navItem.title = @"Sign Up";
     
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:nil action:@selector(attemptSignUp)];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(attemptSignUp)];
     [rightBarButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue" size:16.0], NSFontAttributeName, nil] forState:UIControlStateNormal];
     navItem.rightBarButtonItem = rightBarButton;
     
@@ -131,6 +131,7 @@
 }
 
 - (void)attemptSignUp {
+    NSLog(@"got here");
     [[TPAuthenticationManager sharedInstance] signUpWithEmail:self.emailTextField.text password:self.passwordTextField.text firstName:self.firstNameTextField.text lastName:self.lastNameTextField.text callback:^(BOOL result) {
         if (result) {
             [[TPDBManager sharedInstance] updateLocalUser];
