@@ -158,7 +158,6 @@
 
 - (void)toggleRegistration {
     if (!self.contract) {
-        NSLog(@"No contract");
         [[TPNetworkManager sharedInstance] registerAsTutee:[PFUser currentUser].objectId withTutor:self.tutorEntry.tutor.objectId forCourse:self.tutorEntry.course.objectId withPrice:[self.tutorEntry.price integerValue] withCallback:^(NSError *error) {
             if (!error) {
                 [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:^(NSError *error) {
@@ -176,7 +175,6 @@
             }
         }];
     } else {
-        NSLog(@"Should unregister");
         [[TPNetworkManager sharedInstance] unregisterAsTuteeForCourse:self.tutorEntry.course.objectId forContract:self.contract.objectId withCallback:^(NSError *error) {
             if (!error) {
                 [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:nil];

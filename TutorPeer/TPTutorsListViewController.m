@@ -71,7 +71,6 @@
     TPContract *contractForTutorEntry;
     TPUser *currentUser = [[TPDBManager sharedInstance] currentUser];
     for (TPContract *contract in currentUser.contracts) {
-        NSLog(@"Current contract for current user: %@", contract.objectId);
         if ([contract.tutor.objectId isEqual:tutorEntry.tutor.objectId]) {
             contractForTutorEntry = contract;
             break;
@@ -121,7 +120,6 @@
     TPTutorEntry *tutorEntry = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     TPContract *contract = [self contractForTutorEntry:tutorEntry];
-    NSLog(@"Contract id: %@", contract.objectId);
     TPTutorEntryViewController *tutorEntryViewController = [[TPTutorEntryViewController alloc] initWithTutorEntry:tutorEntry contract:contract];
     [self.navigationController pushViewController:tutorEntryViewController animated:YES];
 }
