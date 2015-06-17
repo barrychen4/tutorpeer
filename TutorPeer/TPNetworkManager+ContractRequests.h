@@ -10,6 +10,6 @@
 
 @interface TPNetworkManager (ContractRequests)
 
-- (void)refreshContractsForUserId:(NSString *)userId withCallback:(void (^)(NSError *))callback;
+- (void)refreshContractsForUserId:(NSString *)userId withCallback:(void (^)(NSArray *, NSError *))callback;
 
 @end

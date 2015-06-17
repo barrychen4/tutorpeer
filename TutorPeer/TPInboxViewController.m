@@ -8,6 +8,8 @@
 
 #import "TPInboxViewController.h"
 #import "TPConversationViewController.h"
+#import "TPNetworkManager+ContractRequests.h"
+#import <Parse/Parse.h>
 
 @interface TPInboxViewController ()
 
@@ -26,6 +28,13 @@
     [_tableView setDataSource:self];
     [_tableView setDelegate:self];
     [self.view addSubview:_tableView];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:^(NSArray *objects, NSError *error) {
+        NSLog(@"%@", objects);
+    }];
 }
 
 #pragma mark - Table view data source methods

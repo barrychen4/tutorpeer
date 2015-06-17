@@ -12,7 +12,7 @@
 
 @implementation TPNetworkManager (ContractRequests)
 
-- (void)refreshContractsForUserId:(NSString *)userId withCallback:(void (^)(NSError *))callback
+- (void)refreshContractsForUserId:(NSString *)userId withCallback:(void (^)(NSArray *, NSError *))callback
 {
     PFQuery *query;
     NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"(tutor.objectId == %@) OR (tutee.objectId == %@)", userId, userId];
@@ -29,7 +29,7 @@
         if (error) {
             NSLog(@"Error getting Parse contracts: %@", error);
             if (callback) {
-                callback(error);
+                callback(nil, error);
             }
         } else {
             BOOL gotNewObjects = NO;
@@ -45,7 +45,7 @@
                     [[TPDBManager sharedInstance] removeLocalObjectsNotOnParseForDBClass:@"TPContract" parseObjectIDs:objectIDArray predicate:predicate4];
                 }
                 if (callback) {
-                    callback(nil);
+                    callback(objectIDArray, nil);
                 }
             }];
         }

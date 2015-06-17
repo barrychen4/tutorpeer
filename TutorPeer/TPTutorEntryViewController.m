@@ -160,7 +160,7 @@
     if (!self.contract) {
         [[TPNetworkManager sharedInstance] registerAsTutee:[PFUser currentUser].objectId withTutor:self.tutorEntry.tutor.objectId forCourse:self.tutorEntry.course.objectId withPrice:[self.tutorEntry.price integerValue] withCallback:^(NSError *error) {
             if (!error) {
-                [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:^(NSError *error) {
+                [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:^(NSArray *objects, NSError *error) {
                     TPUser *currentUser = [TPUser currentUser];
                     for (TPContract *contract in currentUser.contracts) {
                         if ([contract.tutor.objectId isEqual:self.tutorEntry.tutor.objectId]) {
