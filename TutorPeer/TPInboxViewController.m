@@ -9,6 +9,7 @@
 #import "TPInboxViewController.h"
 #import "TPConversationViewController.h"
 #import "TPNetworkManager+ContractRequests.h"
+#import "TPNetworkManager+ConversationRequests.h"
 #import <Parse/Parse.h>
 
 @interface TPInboxViewController ()
@@ -34,6 +35,12 @@
 {
     [[TPNetworkManager sharedInstance] refreshContractsForUserId:[PFUser currentUser].objectId withCallback:^(NSArray *objects, NSError *error) {
         NSLog(@"%@", objects);
+        for (NSString *contractId in objects) {
+            PFObject *contractPFObject = [PFQuery getObjectOfClass:@"Contract" objectId:contractId];
+            [[TPNetworkManager sharedInstance] createConversationForContract:contractId withTutor:contractPFObject[@"tutor"] withTutee:contractPFObject[@"tutee"] withCallback:^(NSError *error) {
+                
+            }];
+        }
     }];
 }
 
