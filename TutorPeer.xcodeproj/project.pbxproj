@@ -31,6 +31,7 @@
 		775658DA1AFFC78E004CA215 /* TPContract.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658D21AFFC78E004CA215 /* TPContract.m */; };
 		775658DC1AFFC78E004CA215 /* TPTutorEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658D61AFFC78E004CA215 /* TPTutorEntry.m */; };
 		775658E11AFFCEB3004CA215 /* TPNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 775658E01AFFCEB3004CA215 /* TPNetworkManager.m */; };
+		776F2D971B56A1600029ADD8 /* TPContractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 776F2D961B56A1600029ADD8 /* TPContractViewController.m */; };
 		77782B911AF69E8C0006723F /* TPModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77782B8F1AF69E8C0006723F /* TPModel.xcdatamodeld */; };
 		77782B9E1AF6A7880006723F /* TPDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 77782B9D1AF6A7880006723F /* TPDBManager.m */; };
 		77C65DF01B30C74100B06DAD /* TPNetworkManager+CourseRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C65DEF1B30C74100B06DAD /* TPNetworkManager+CourseRequests.m */; };
@@ -97,6 +98,8 @@
 		775658D61AFFC78E004CA215 /* TPTutorEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPTutorEntry.m; path = Model/TPTutorEntry.m; sourceTree = "<group>"; };
 		775658DF1AFFCEB3004CA215 /* TPNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNetworkManager.h; sourceTree = "<group>"; };
 		775658E01AFFCEB3004CA215 /* TPNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNetworkManager.m; sourceTree = "<group>"; };
+		776F2D951B56A1600029ADD8 /* TPContractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPContractViewController.h; sourceTree = "<group>"; };
+		776F2D961B56A1600029ADD8 /* TPContractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPContractViewController.m; sourceTree = "<group>"; };
 		77782B901AF69E8C0006723F /* TPModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TPModel.xcdatamodel; sourceTree = "<group>"; };
 		77782B9C1AF6A7880006723F /* TPDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDBManager.h; sourceTree = "<group>"; };
 		77782B9D1AF6A7880006723F /* TPDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDBManager.m; sourceTree = "<group>"; };
@@ -347,6 +350,8 @@
 				9F9DCF7D1AED64E50066CFF9 /* TPInboxViewController.m */,
 				9F9DCF911AED94220066CFF9 /* TPConversationViewController.h */,
 				9F9DCF921AED94220066CFF9 /* TPConversationViewController.m */,
+				776F2D951B56A1600029ADD8 /* TPContractViewController.h */,
+				776F2D961B56A1600029ADD8 /* TPContractViewController.m */,
 			);
 			name = Inbox;
 			sourceTree = "<group>";
@@ -527,6 +532,7 @@
 				7716316B1AE5DD0D000947FB /* TPSignUpViewController.m in Sources */,
 				77E3FF781AF8454B001E69F9 /* _TPConversation.m in Sources */,
 				9F59BEF71AE42324007DAD1C /* AppDelegate.m in Sources */,
+				776F2D971B56A1600029ADD8 /* TPContractViewController.m in Sources */,
 				77C65DF61B30C77F00B06DAD /* TPNetworkManager+ContractRequests.m in Sources */,
 				9F9DCF7E1AED64E50066CFF9 /* TPInboxViewController.m in Sources */,
 				771631681AE5DCFA000947FB /* TPSignInViewController.m in Sources */,

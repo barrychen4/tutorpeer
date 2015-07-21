@@ -23,6 +23,7 @@
 
 - (TPSyncEntity *)getLocalObjectForDBClass:(NSString *)dbClassName withRemoteId:(NSString *)objectId;
 - (NSArray *)getLocalObjectsForDBClass:(NSString *)dbClassName withRemoteIds:(NSArray *)objectIds;
+- (TPSyncEntity *)addLocalObjectForDBClass:(NSString *)dbClassName withRemoteObject:(PFObject *)parseObject;
 - (NSArray *)addLocalObjectsForDBClass:(NSString *)dbClassName withRemoteObjects:(NSArray *)parseObjects;
 - (NSDate *)latestDateForDBClass:(NSString *)dbClassName;
 - (NSDate *)latestDateForDBClass:(NSString *)dbClassName predicate:(NSPredicate *)predicate;

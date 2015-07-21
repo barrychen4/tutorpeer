@@ -7,9 +7,11 @@
 //
 
 #import "TPNetworkManager.h"
+#import "TPConversation.h"
 
 @interface TPNetworkManager (ConversationRequests)
 
+- (void)refreshConversationsForUserId:(NSString *)userId withCallback:(void (^)(NSError *error))callback;
 - (void)createConversationForContract:(NSString *)contractId withTutor:(NSString *)tutorId withTutee:(NSString *)tuteeId withCallback:(void (^)(NSError *))callback;
 
 @end

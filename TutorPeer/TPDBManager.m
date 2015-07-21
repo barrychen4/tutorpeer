@@ -85,6 +85,13 @@
         localObject = [NSEntityDescription insertNewObjectForEntityForName:dbClassName inManagedObjectContext:self.managedObjectContext];
         localObject.objectId = objectId;
     }
+    
+    NSError *error;
+    [self.managedObjectContext save:&error];
+    if (error) {
+        NSLog(@"Error adding object locally: %@", error);
+    }
+    
     return localObject;
 }
 
@@ -96,6 +103,13 @@
     }
     [self updateLocalObjectAttributes:localObject withRemoteObject:parseObject];
     [self updateLocalObjectRelationships:localObject withRemoteObject:parseObject];
+    
+    NSError *error;
+    [self.managedObjectContext save:&error];
+    if (error) {
+        NSLog(@"Error adding object locally: %@", error);
+    }
+    
     return localObject;
 }
 
@@ -104,11 +118,7 @@
     for (PFObject *parseObject in parseObjects) {
         [localObjects addObject:[self addLocalObjectForDBClass:dbClassName withRemoteObject:parseObject]];
     }
-    NSError *error;
-    [self.managedObjectContext save:&error];
-    if (error) {
-        NSLog(@"Error adding objects locally: %@", error);
-    }
+
     return localObjects;
 }
 
@@ -237,11 +247,9 @@
         currentUser = [self makeCurrentUserWithId:[PFUser currentUser].objectId];
     }
     
-    NSLog(@"Updating local user");
-    NSLog(@"Before: %@", currentUser.contracts);
     [self updateLocalObjectAttributes:currentUser withRemoteObject:[PFUser currentUser]];
     [self updateLocalObjectRelationships:currentUser withRemoteObject:[PFUser currentUser]];
-    NSLog(@"After: %@", currentUser.contracts);
+    
     NSError *error;
     [self.managedObjectContext save:&error];
     if (error) {

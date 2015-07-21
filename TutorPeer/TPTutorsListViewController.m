@@ -15,6 +15,7 @@
 #import "TPDBManager.h"
 #import "TPNetworkManager.h"
 #import "TPNetworkManager+TutorEntryRequests.h"
+#import "TPNetworkManager+ContractRequests.h"
 
 @interface TPTutorsListViewController ()
 

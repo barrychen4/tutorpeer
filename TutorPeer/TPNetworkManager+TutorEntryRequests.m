@@ -259,6 +259,7 @@
                             callback(saveError);
                         }
                     }
+                    
                     [[TPDBManager sharedInstance] updateLocalUser];
                     
                     if (callback) {

@@ -36,6 +36,7 @@
     if (self) {
         self.course = course;
     }
+    
     return self;
 }
 

@@ -7,10 +7,44 @@
 //
 
 #import "TPNetworkManager+ConversationRequests.h"
+#import "TPNetworkManager+ContractRequests.h"
 #import "TPDBManager.h"
+#import "TPConversation.h"
 #import <Parse/Parse.h>
 
 @implementation TPNetworkManager (ConversationRequests)
+
+- (void)refreshConversationsForUserId:(NSString *)userId withCallback:(void (^)(NSError *error))callback
+{
+    [[TPNetworkManager sharedInstance] refreshContractsForUserId:userId withCallback:^(NSArray *objects, NSError *error) {
+        NSLog(@"%@", objects);
+        for (NSString *contractId in objects) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(contract == %@)", contractId];
+            PFQuery *query = [PFQuery queryWithClassName:@"Conversation" predicate:predicate];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (!error) {
+                    if (!objects.count) {
+                        PFObject *contractPFObject = [PFQuery getObjectOfClass:@"Contract" objectId:contractId];
+                        [[TPNetworkManager sharedInstance] createConversationForContract:contractId withTutor:contractPFObject[@"tutor"] withTutee:contractPFObject[@"tutee"] withCallback:nil];
+                    } else {
+                        PFObject *conversationPFObject = objects[0];
+                        [[TPDBManager sharedInstance] addLocalObjectForDBClass:@"TPConversation" withRemoteObject:conversationPFObject];
+                        NSLog(@"Added conversation locally after finding pfobject");
+                    }
+                } else {
+                    if (callback) {
+                        callback(error);
+                    }
+                }
+            }];
+        }
+        
+        if (callback) {
+            callback(nil);
+        }
+    }];
+    
+}
 
 - (void)createConversationForContract:(NSString *)contractId withTutor:(NSString *)tutorId withTutee:(NSString *)tuteeId withCallback:(void (^)(NSError *))callback
 {
@@ -52,8 +86,9 @@
                             callback(saveError);
                         }
                     }
-                    
-                    [[TPDBManager sharedInstance] updateLocalUser];
+                
+                    [[TPDBManager sharedInstance] addLocalObjectForDBClass:@"TPConversation" withRemoteObject:conversationPFObject];
+                    NSLog(@"Added conversation locally after creating it");
                     
                 } else {
                     
